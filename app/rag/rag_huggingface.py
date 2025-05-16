@@ -1,12 +1,19 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+import os
 from langchain_chroma import Chroma
 from langchain.docstore.document import Document
+from RagMagistr.app.utils import get_embeddings_model, timing_decorator
+
+# Получаем абсолютный путь к директории текущего файла
+CURRENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Создаем абсолютный путь к файлу кеша модели
+CHROMA_CACHE_PATH = os.path.join(CURRENT_DIR, "chroma_db")
 
 
+@timing_decorator
 def rag_huggingface(question: str) -> list[Document]:
-    embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+    embedding = get_embeddings_model()
     vectorstore = Chroma(
-        persist_directory="E:\Kods\RagMagistr\\app\chroma_db",
+        persist_directory=CHROMA_CACHE_PATH,
         embedding_function=embedding
     )
     docs: list[Document] = vectorstore.similarity_search(question)
