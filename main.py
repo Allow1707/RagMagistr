@@ -1,7 +1,13 @@
-from app.rag.rag_huggingface import rag_huggingface
-from app.rag.rag_openai import rag_openai
+from RagMagistr.app.rag.rag_huggingface import rag_huggingface
 
 
-question = "Как разделяется область тонкой структуры в спектрах рентгеновского поглощения (XAFS) и чем отличаются XANES и EXAFS?"
+def init(query: str) -> list:
+    res = rag_huggingface(query)
+    return res
 
-print(rag_huggingface(question))
+# from RagMagistr.app.rag.rag_openai import rag_openai
+#
+#
+# def init(query: str) -> list:
+#     res = rag_openai(query)
+#     return res
