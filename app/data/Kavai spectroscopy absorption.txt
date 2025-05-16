@@ -1,0 +1,459 @@
+
+**Abstract**  
+X-ray absorbance depends on the wavelength of the X-rays, atomic number, chemical environment, and concentration of the analyte. X-ray absorption spectrometry is a technique for analyzing the chemical environment of an element in an unknown material. This method is closely related to photoelectron spectroscopy, Auger electron spectroscopy, and X-ray fluorescence spectroscopy. Chemical information in the chemical shift and line shape of XANES (X-ray absorption near-edge structure) spectra is described. The history and theory of EXAFS (extended X-ray absorption fine structure) are discussed in relation to other experimental techniques. Data analysis methods, databases, software packages, instrumentation, and synchrotron radiation facilities for X-ray absorption analysis are overviewed. Alternative methods such as electron energy loss spectroscopy (EELS), self-absorption effect, extended X-ray emission fine structure (EXEFS), X-ray Raman scattering, diffraction anomalous fine structure (DAFS), β-environment fine structure (BEFS), and inverse photoemission spectroscopy (IPES) are also described.
+
+## 1 Introduction
+X-rays are absorbed in matter and the energy of the X-rays is converted into the kinetic energy of photoelectrons, Auger electrons, secondary electrons, or fluorescent X-rays. The incident X-ray energy finally becomes the thermal energy of the absorber.
+
+The amount of energy absorbed by a matter is usually estimated by a transmission method, but can also be estimated by measuring secondary phenomena such as photoelectrons, Auger electrons, secondary electrons, fluorescent X-rays, thermal radiation, and drain electric currents. The X-ray intensity of wavelength l before \(I_0(l)\) and after \(I(l)\) the transmission of a thin film of thickness d is expressed by  
+\(I(l)/I_0(l) = \exp[-\mu_i(l)\,\rho_i\,d]\),  
+where \(\mu_i(l)\) and \(\rho_i\) are the mass absorption coefficient and mass density, respectively, of the \(i\)th element in the thin film (dimensions \([\mathrm{cm}^2/\mathrm{g}]\) and \([\mathrm{g}/\mathrm{cm}^3]\), respectively).\[^1–7\]  
+
+For a specimen containing \(n\) kinds of elements, the mass absorption coefficient is  
+\[
+\mu(l) = \mu_1(l)W_1 + \mu_2(l)W_2 + \cdots + \mu_n(l)W_n,
+\]  
+where \(W_1, W_2,\dots, W_n\) are the weight fractions of elements 1, 2, …, \(n\). Figure 1 shows \(\log \mu(l)\) plotted against \(\log l\) for V, Fe, and Zn, with data from Henke et al.\[^8\]
+The plot of mass absorption coefficients against incident X-ray energy or wavelength is called an X-ray absorption spectrum (XAS). Sharp increases (“edges”) appear at energies corresponding to electron shell binding energies (K, L₁, L₂, L₃, …). Figure 2 shows a platinum powder XAS\[^9\].
+
+
+K, L₁, L₂, and L₃ denote electron deficiency states from 1s, 2s, 2p₁/₂, and 2p₃/₂ orbitals, respectively. Recently, Arabic numerals (1, 2, 3, …) are used in subscripts instead of Roman numerals (I, II, III, …). The electron configuration for one-electron deficiency in the 2p orbital of Ar is 1s²2s²2p⁵3s²3p⁶, which splits into two levels with total angular momentum \(j = \tfrac12\) and \(\tfrac32\), written as 2p\(^{-1}_{1/2}\) and 2p\(^{-1}_{3/2}\), or [2p\_{1/2}] and [2p\_{3/2}]. The multiplicity of a state is \(2j+1\), roughly proportional to spectral intensity.
+
+Table 1 lists the correspondence between hole states and electron configurations.
+| Hole state | Electron configuration |
+|------------|------------------------|
+| K          | [1s]                   |
+| L₁         | [2s]                   |
+| L₂         | [2p₁/₂]                |
+| L₃         | [2p₃/₂]                |
+| M₁         | [3s]                   |
+| M₂         | [3p₁/₂]                |
+| M₃         | [3p₃/₂]                |
+| M₄         | [3d₃/₂]                |
+| M₅         | [3d₅/₂]                |
+
+The jump in absorption coefficient at an edge is highly correlated with the atomic number, similarly to Moseley’s law in X-ray emission spectra:
+\[
+\frac{1}{\lambda} = K\,(Z - s),
+\]
+where \(\lambda\) is the wavelength, \(Z\) the atomic number, and \(K\) and \(s\) constants for a given series. Away from the edges, \(\mu\propto Z^4\lambda^3\).
+
+The energy at which the jump occurs is called the threshold energy, corresponding to the transition from a core orbital to the lowest unoccupied orbital. The ionization limit lies a few eV above the edge energy.
+
+The mass per unit area is \(\rho d\). The linear absorption coefficient is \(\mu_l = \mu\,\rho\) \([\mathrm{cm}^{-1}]\). The X-ray attenuation length \(1/\mu_l\) is the distance over which intensity drops to \(1/e\). For Cu Kα₁ X-rays (8047.8 eV), \(1/\mu_l\) is 79 µm in Al, 4.2 µm in Fe, 24 µm in Cu, and 3.9 µm in Pb. For Al Kα X-rays (1486.7 eV), it is 9.2 µm in Al and 0.4 µm in Fe. Note that polychromatic X-rays (e.g., from an X-ray tube) are attenuated differently; a 2 mm Al shield reduces typical Cu-tube emission by half, but exact shielding requirements depend on the spectrum.
+The linear absorption coefficient can also be expressed as  
+\(\mu_l = \tfrac{4\pi b}{\lambda}\),  
+where \(b\) is the imaginary part of the complex refractive index and \(\lambda\) the X-ray wavelength.# Absorption Techniques in X-ray Spectrometry
+
+The refractive index is n = 1 − δ − i β. The atomic form factor, f = f₁ + i f₂, which is used in the analysis of X-ray diffraction, is related to the refractive index through
+δ = N r₀ λ² f₁ / 2π  
+β = N r₀ λ² f₂ / 2π
+where N is the number of atoms per unit volume and r₀ = e²/(m c²) = 2.818×10⁻¹³ cm is the classical electron radius (e the electron charge, m the mass, c the speed of light). The real part f₁ is the Fourier transform of the electron density distribution in an atom. The relation between the absorption coefficient and atomic form factor is used in DAFS (diffraction anomalous fine structure) described below.
+
+The mass absorption coefficient is the sum of two effects: photoelectric absorption and scattering of X-rays. Photoelectric absorption is the ionization of an inner-shell electron and can be calculated by the photoionization cross-section. The scattering part arises from Rayleigh (coherent) and Compton (inelastic) scattering of X-rays, but X-ray absorption spectra are often treated as if they represent only the photoelectric effect, even though the experimental spectra contain both effects.
+
+Mass absorption coefficients (or physically equivalent parameters) and the absorption edge energy or wavelength can be found in the literature. The value of the absorption edge energy is close to the electron binding energy used in electron spectroscopy (ESCA or XPS). The absorption edge jump is not exactly the same as the electron binding energy because the absorption edge energy corresponds to the excitation of core electrons into the lowest unoccupied molecular orbital (LUMO) in the molecular orbital picture, or a Rydberg state in the atomic orbital picture. The Rydberg-state and continuum-state thresholds are clear in rare-gas X-ray absorption spectra but not in condensed matter. The difference between the vacuum level and the Fermi energy, which defines the highest energy of electrons in a conduction band, is called the work function, Φ. This is another source of the difference between the electron binding energy observed in XPS and the absorption edge. Photoionization cross-sections and electron binding energies are tabulated in the literature. The relation between the electron photoionization cross-section (barns) and the mass absorption coefficient is simple when the angular dependence is averaged.
+
+Absorption techniques in X-ray spectrometry are used to measure X-ray absorption spectra by various methods and to analyze the resulting spectral line shapes to obtain information on element identity, oxidation state, concentration, atomic distance, coordination number, surface geometry, and surface reactions in solids, catalysts, or electrodes.
+
+## 2 Acronyms and a Brief History
+The mass absorption coefficient plotted against X-ray energy is called the XAS. The X-ray absorption spectra of condensed matter near the threshold energy exhibit fine structures. Structures observed at energies below the threshold are called pre-edge structures. These fine structures are known as XANES (X-ray absorption near-edge structure). The absorption fine structure extends up to about 1000 eV above the threshold and is called EXAFS (extended X-ray absorption fine structure). XANES is usually restricted to the threshold up to ~50 eV above (approximately corresponding to k R = 2π, where k is the ejected photoelectron momentum and R the nearest-neighbor atom distance). The photoelectron momentum is k = [2 m (E − E₀)]¹ᐟ² / ħ, where E is the electron kinetic energy, E₀ the threshold energy, m the electron mass, and ħ Planck’s constant. In a condensed system, the photoelectron matter wave propagates as a spherical wave and forms a standing wave.
+
+Recently, XANES has also been called NEXAFS (near-edge X-ray absorption fine structure). All fine structures, including NEXAFS and EXAFS, are grouped under XAFS (X-ray absorption fine structure).
+
+The history of XAFS development features early observations of the X-ray absorption edge by Barkla or de Broglie. While XANES was found for both solids and gases, EXAFS was first reported for condensed matter in 1920 by Fricke and theoretically interpreted by Kossel, who attributed the fine structure to excitation of inner-shell electrons to unoccupied levels (short-range order theory). Kronig later explained EXAFS as diffraction of photoelectrons in the conduction band when the electron wavelength satisfies a Bragg condition (long-range order theory). Subsequent improvements combined these views and introduced a Fourier transform method to obtain local structural information without directly solving the Schrödinger equation. The inelastic mean free path of a photoelectron is typically ~2 nm; when it is scattered inelastically, coherence is lost. The coherent length—the maximum path over which electron matter waves emitted from a single source can interfere—is crucial for EXAFS analysis. Including the inelastic mean free path in the long-range order theory makes it equivalent to the short-range order theory.# ABSORPTION TECHNIQUES IN X-RAY SPECTROMETRY
+
+## EXAFS and XANES
+The X-ray absorption fine structure (XAFS) represents the unoccupied electron density of states for atoms, molecules, solids, or liquids. One of the inner‐shell electrons, for example a 1s electron, is excited into a discrete or continuum unoccupied state by the incident X‐ray photon. The transition probability from the 1s to the unoccupied state equals the X‐ray absorption intensity (only the photoelectric part is considered here), and thus the plot of the intensity against the incident X‐ray energy is the X‐ray absorption spectrum (XAS) of a specimen.
+
+XANES (X‐ray absorption near‐edge structure) is chiefly due to the transition from the inner shell to unoccupied discrete levels, whereas EXAFS (extended X‐ray absorption fine structure) corresponds to transitions into the unoccupied continuum.
+
+Figure 6 illustrates X‐ray absorption and photoelectron excitation from the 1s to the unoccupied p state.
+
+## 3 X-RAY ABSORPTION NEAR-EDGE STRUCTURE
+### 3.1 Chemical Shift and Line Shape
+XANES spectra exhibit both line‐shape modifications and chemical shifts of the absorption edge or peak. Typical examples for the sulfur K edge in Na₂SO₄, Na₂SO₃, and Na₂S₂O₃ show a sharp and prominent absorption peak called the “white line.” In insulators this white line—corresponding to a 1s → p* electron transition (the asterisk denotes an unoccupied antibonding orbital)—is usually sharper than in metals, because the p* state is strongly localized. Metals, having a broad conduction band, show an edge jump but no distinct white line.
+
+Plotting white‐line energy against sulfur oxidation number reveals that chemical shifts arise from both unoccupied‐level shifts (ranging from the Fermi level up to the band‐gap energy) and core‐level shifts caused by screening of core electrons by valence electrons. A negatively charged atom shifts its core level to shallower binding energy; a positively charged atom shifts to deeper energy. This core‐level shift mechanism is analogous to ESCA chemical shifts.
+
+Another example of absorption‐edge chemical shift involves Al compounds: Al metal, AlN, and four‐ and six‐fold coordinated oxides. The Al–O distance in four‐fold coordination (0.17 nm) is shorter than in six‐fold coordination (0.19 nm), leading to stronger orbital hybridization—and thus more covalent character—in the four‐fold form. The six‐fold form is more ionic, with a larger effective positive charge on Al³⁺, and its absorption edge is shifted to higher energy. This shift correlates strongly with the Pauling electronegativity of neighboring atoms.
+
+Unoccupied discrete levels may be viewed as Rydberg states (atomic picture), p* and s* orbitals (molecular‐orbital picture), or conduction bands (crystals). The s* transition, formed in a potential well of neighboring atomic potentials, produces a broad, weak hump called a shape resonance. In atomic spectra, shape resonance arises when the excited or ionized state is momentarily trapped by a centrifugal‐force potential or surrounding potential, yielding a weak resonance feature above the edge.
+
+Pre‐edge structures are observed at the K edge of transition‐metal compounds with local T_d (tetrahedral) symmetry but not with O_h (octahedral) symmetry. Although one might ascribe these to electric‐quadrupole (1s → 3d) transitions, quadrupole probabilities are very small (see Table 2). Instead, strong pre‐edge peaks arise from electric‐dipole transitions: in T_d symmetry both p and d orbitals transform as the t₂ representation, allowing strong 1s → d‐band transitions via p–d hybridization.
+
+Table 2. Calculated transition probabilities for Cu (Dirac–Fock method)
+| Transition | Probability |
+|------------|-------------|
+| K–L₁       | 0.00000038  |
+| K–L₂       | 0.19        |
+| K–L₃       | 0.37        |
+| K–M₁       | 0.000000072 |
+| K–M₂       | 0.022       |
+| K–M₃       | 0.043       |
+| K–M₄       | 0.000025    |
+| K–M₅       | 0.000036    |
+
+Table 3. Part of the character table of T_d symmetry
+| Symmetry | p orbitals                        | d orbitals              |
+|----------|-----------------------------------|-------------------------|
+| a₁       | x² + y² + z²                      |                         |
+| a₂       |                                   |                         |
+| e        | (2z² − x² − y², x² − y²)           |                         |
+| t₁       | (x, y, z)                         |                         |
+| t₂       |                                   | (xy, xz, yz)           |# ABSORPTION TECHNIQUES IN X-RAY SPECTROMETRY
+
+## 1. Octahedral Symmetry and Pre-Edge Transitions
+Part of the character table of the octahedral group (O<sub>h</sub>) shows that p and d orbitals belong to different irreducible representations and hence do not mix under perfect O<sub>h</sub> symmetry:
+| Representation | p Orbital    | d Orbital                                    |
+| -------------- | ------------ | --------------------------------------------- |
+| a<sub>1g</sub> |              | x² + y² + z²                                 |
+| a<sub>2g</sub> |              |                                               |
+| e<sub>g</sub>  |              | 2z² − x² − y², x² − y²                        |
+| t<sub>1g</sub> |              |                                               |
+| t<sub>2g</sub> |              | xy, xz, yz                                   |
+| a<sub>1u</sub> |              |                                               |
+| a<sub>2u</sub> |              |                                               |
+| e<sub>u</sub>  |              |                                               |
+| t<sub>1u</sub> | x, y, z      |                                               |
+| t<sub>2u</sub> |              |                                               |
+
+In octahedral compounds the p → d transition appears at a different energy from the empty d band. The true electric quadrupole transition that gives rise to the pre-edge peak is very weak, but its observable strength results from hybridization of p character into the empty d band. The intensity and energy shift of this pre-edge peak are useful fingerprints of the chemical environment, especially in biological samples.
+
+Chemical shifts of reference samples are measured and plotted against electronegativity. From the absorption-edge shift of an unknown material, one can estimate the type of neighboring atom. After the discovery of high-temperature superconductors, studies of X-ray photoelectron spectroscopy (XPS) greatly improved our understanding of electron correlation effects in transition-metal and rare-earth compounds. These effects—how the hole left in the final state of photoionization interacts with d holes—substantially influence the XANES line shape of complex materials.
+
+Mixed-valence rare-earth compounds can be observed by XANES, but the intensity ratio of the components does not always directly represent the true valence distribution because of dynamic electron transfer (core-hole screening). Decomposing the XANES spectrum into Eu<sup>2+</sup> and Eu<sup>3+</sup> final-state components provides only a rough estimate of the mixed-valence state; the core hole rearranges valence electrons, so the observed peak intensities may not reflect the exact proportions present before X-ray absorption.
+
+## 2. Calculation Method for X-ray Absorption Near-Edge Structure (XANES)
+
+Photoelectrons with kinetic energies of a few to a few tens of electron-volts behave like conduction electrons in a conduction band. Therefore, multiple-scattering (MS) or Green’s-function methods—originally developed for conduction-electron band-structure calculations—are applicable to XANES.
+
+The line shape of a XANES spectrum represents the partial, local density of states at the absorbing atom. Besides MS theory, methods such as LCAO-MO (linear combination of atomic orbitals) and APW (augmented plane wave) can interpret near-edge fine structure. Among these, MS theory is particularly popular.
+
+In the MS approach, the solid is divided into non-overlapping spheres of radius r<sub>i</sub> centered on each atom. Each sphere contains a spherically symmetric “muffin-tin” potential V(r), which is zero or constant outside the spheres. The total wave function is expanded in spherical Bessel functions (radial part) times spherical harmonics (angular part).
+
+A photoionized-electron wave function y(r) is scattered repeatedly by the muffin-tin potentials. One can express it as
+y(r) = −1/(4π) ∫ exp[i k |r − r₀|]/|r − r₀| · V(r₀) y(r₀) dr₀,
+
+where k² = E (the photoelectron kinetic energy) and exp[i k |r − r₀|]/|r − r₀| is a spherically expanding wave. This formulation is known as the MS method, the Green’s-function method, or the Korringa–Kohn–Rostoker (KKR) method. The KKR approach assumes translational symmetry (periodic boundary conditions) and is exact for crystals. For lower-symmetry systems (clusters, molecules, amorphous solids, surfaces), a real-space cluster version called MS-Xα was developed, using Slater’s Xα exchange potential in place of the Hartree–Fock exchange integral. The MS-Xα method has evolved into local-density-approximation (LDA) implementations.
+
+Alternatively, the MS expansion can be seen as an infinite sum of incoming and outgoing spherical scattering waves, forming a standing wave in the continuum. This is formally similar to the APW method, but APW requires more basis functions. The LCAO-MO approach is another viable option for XANES calculations.
+
+Atomic multiplet calculations, including crystal-field splittings, can also reproduce experimental XAS spectra reasonably well. Simple Bragg reflections of electrons in a crystal can reproduce the rough features of XANES.
+
+## 3. Theory of Extended X-Ray Absorption Fine Structure (EXAFS)
+### 3.1 Single Scattering Theory
+At the higher photoelectron kinetic energies of the EXAFS region, single scattering from neighboring atoms is a good approximation, except in cases of very large scattering amplitudes or strong multiple scattering paths.# Absorption Techniques in X-ray Spectrometry
+
+The wave function \(f_k(r)\) of a photoelectron scattered by a single atom is asymptotically expressed by
+\(f_k(r)\approx e^{ikz} + f(\theta)\,\frac{e^{ikr}}{r}\) (5)
+where \(f(\theta)\) is the scattering amplitude and \(\theta\) is the scattering angle (\(\theta=0^\circ\) for forward scattering and \(\theta=180^\circ\) for backscattering).  
+
+The scattering amplitude of an electron of velocity \(v\) scattered by an atom of atomic number \(Z\), in the first Born approximation, is
+\[
+f(\theta)
+= \frac{e^2}{2 m v^2\,[\,Z - A(\theta)\,]}\;\frac{1}{\sin^2(\theta/2)}
+\tag{6}
+\]
+where \(e\) and \(m\) are the charge and mass of the electron, respectively, and \(A(\theta)\) is the atomic structure factor for X-rays:
+\[
+A(\theta)
+= \frac{4\pi}{Z}\int_0^\infty \frac{\sin(kr)}{k r}\,\rho(r)\,r^2\,dr
+\tag{7}
+\]
+Here \(k = \tfrac{4\pi m v}{\hbar}\sin(\theta/2)\) is the change in electron momentum and \(\rho(r)\) is the charge distribution in the atom.  
+
+For forward scattering,
+\[
+f(0^\circ)
+= \frac{1}{3}\int_0^\infty 4\pi\,\rho(r)\,r^4\,dr
+= \tfrac{1}{3}\,Z\langle r^2\rangle
+\tag{8}
+\]
+in atomic units, since
+\[
+Z = \int_0^\infty 4\pi\,r^2\,\rho(r)\,dr.
+\tag{9}
+\]
+
+The EXAFS (extended X-ray absorption fine structure) is given by
+\[
+\chi(k)
+= -\sum_j \frac{N_j}{k R_j^2}\,\bigl|f_j(k,\pi)\bigr|\,
+\exp\bigl(-2\sigma_j^2 k^2\bigr)\,
+\sin\bigl[\,2kR_j + \delta_j(k)\bigr]
+\tag{10}
+\]
+where  
+- \(k = \sqrt{2m(\,h\nu - E_0\,)}/\hbar\) is the photoelectron wave vector,  
+- \(N_j\) is the number of nearest neighbors at distance \(R_j\),  
+- \(f_j(k,\pi)\) is the backscattering amplitude,  
+- \(\sigma_j^2\) accounts for vibrational (Debye–Waller) and geometric disorder, and  
+- \(\delta_j(k)\) is the total phase shift.  
+
+The finite coherence length of the photoelectron can be included via an extra damping term \(\exp[-2R_j/\ell(k)]\). The oscillatory part, \(-\sin(2kR)/(kR)^2\), when plotted versus \(kR\), yields the characteristic EXAFS oscillation.
+
+The EXAFS oscillation amplitude increases with the atomic number of neighboring atoms. For example, the Si K-edge EXAFS oscillation of elemental Si is stronger than that of SiO\(_2\), because Si has a higher atomic number than O. Conversely, the white line of SiO\(_2\) is sharper and stronger than that of Si. Thus, neither EXAFS amplitude nor white-line intensity directly indicates analyte concentration. However, the edge jump (Δμ) is a reliable measure of concentration:
+| Zn (μg mg⁻¹ Cu solution) | Edge jump |
+|--------------------------|-----------|
+| 0.092                    | 0.0059    |
+| 0.049                    | 0.0035    |
+| 0.020                    | 0.0021    |
+| 0.000                    | 0.0010    |
+
+The effect of thermal vibration on the line shape of X-ray absorption spectra in the XANES region is to make the absorption edge asymmetric and to damp EXAFS oscillations. As atomic number increases, core-hole lifetimes shorten, broadening the inner-shell level energy (Heisenberg uncertainty) and further reducing EXAFS clarity in K-edge spectra compared with L-edges.
+
+The inelastic mean free path (IMFP) of photoelectrons in a material is a function of kinetic energy. For typical EXAFS energies, the IMFP is 1–2 nm, so the photoelectron probes local order within a few nanometers—usually up to next-nearest neighbors.
+
+## 4.2 Relation to Other Techniques
+- **X-ray Photoelectron Diffraction (XPD)** uses the anisotropy of photoelectron intensity versus emission angles to probe surface local structure via forward scattering by nearest-neighbor atoms.  
+- **Photoelectron Holography (PEH)** applies a Fourier transform to angular intensity distributions in single crystals to reconstruct local atomic arrangements; phase shifts complicate analysis.  
+- **X-ray Fluorescence Holography (XFH)** measures angular distributions of X-ray fluorescence and reconstructs bulk crystal images without phase-shift complications, but is bulk-sensitive.  
+- **Low-Energy Electron Diffraction (LEED)** employs electrons of a few hundred eV to obtain diffraction patterns from crystal surfaces; penetration depths of a few nanometers require surface periodicity of at least ~10 nm.
+
+## 5 Data Analysis and Software Packages for X-ray Absorption Fine Structure
+Measured X-ray absorption spectra (Figure 16a) are converted from energy \(E\) to photoelectron momentum \(k\), and a smooth background \(\mu_0(E)\)—the isolated-atom absorption coefficient—is subtracted to yield the EXAFS function \(\chi(k)\).# ABSORPTION TECHNIQUES IN X-RAY SPECTROMETRY
+
+Value µ(E) and normalized according to Equation (11):  
+c(k) = [µ(E) − µ₀(E)] / µ₀(E) (11)
+
+This is the EXAFS oscillation. If we want to enlarge the oscillation for a larger k region, we sometimes plot k³ c(k) or k² c(k) in place of c(k).
+
+Then this is Fourier transformed, and a radial distribution function is obtained. To obtain the coordination geometry, measurement of the polarization‐dependent EXAFS oscillation is important. An example of S K‐edge spectra of CS₂ on a Cu(111) surface is shown in Figure 18.
+
+A spline function or higher‐order polynomial determines the smooth background. Theoretically, the smooth background has a shape of tan⁻¹ q at the threshold, because the discrete absorption line shape is a Lorentzian function and its sum in a Rydberg series becomes tan⁻¹ q.
+
+An incident X-ray beam forms a standing wave in a large‐sized single crystal. In this case, additional fine structure (for example, the 1985 eV structure) depending on the incident angle of X-rays is observable. The standing‐wave profile is sensitive to the location of impurity atoms in a crystal, i.e. which site in the lattice. The use of standing waves is one of the surface‐analysis methods, but sometimes interferes with obtaining c(k).
+
+Another effect interfering with the observation of c(k) is the multiple‐ionization effect. The effect of one or two additional electrons ionized from outer shell(s) is not negligibly small. The double‐ionization probability is sometimes more than 30% of single K-shell ionization. This is a source of error in EXAFS analysis.
+
+EXAFS Fourier analysis is sometimes not easy when additional peaks such as multiple ionization, standing‐wave structure, and impurity peaks originating from the analyte, X-ray source, or X-ray optics emerge.
+
+Data‐analysis methods have been developed and several standard computer programs are now available.
+
+## 6.1 Laboratory Extended X-ray Absorption Fine Structure
+To measure X-ray absorption spectra, a strong X-ray source of continuous energy is required, such as white radiation from an X-ray tube or synchrotron radiation (SR). In a rotating-anode X-ray tube, a metallic wheel is rotated in vacuum with a high electric potential applied between the wheel and a filament. Thermal electrons emitted from the filament bombard the wheel target. Water flows inside the wheel to cool it; rotation prevents overheating. This rotating-anode tube produces one order of magnitude stronger X-rays than ordinary sealed tubes. Electron deceleration at the metal target converts kinetic energy into continuum and characteristic X-rays; the maximum energy equals the acceleration potential.
+
+The X-rays are monochromated by a crystal monochromator using the Bragg diffraction condition. The monochromatic beam is then incident on the specimen (Figure 20). Sometimes, to compensate for weak source intensity, a position-sensitive proportional counter is used (Figure 21). A very simple experimental set-up with an ionization chamber and a q–2q goniometer is also employed (Figure 22).
+
+## 6.2 Synchrotron Radiation Extended X-ray Absorption Fine Structure
+Synchrotron radiation (SR) is now frequently used as an X-ray source. A synchrotron accelerates electrons (or positrons) in an ultrahigh vacuum ring. Variable-frequency radio waves synchronized with the electron revolution increase their energy until they approach the speed of light. Relativistic effects cause emission of a sharp X-ray beam tangentially, known as SR. In a storage ring, electrons injected at high speed emit tangential radiation when bent by magnets; this bending-magnet SR is continuous over >1000 eV and several orders of magnitude stronger than rotating-anode tubes.
+
+Emittance (in m·rad) measures beam quality: smaller emittance means a more parallel, smaller beam with higher photon density. SR is monochromated by a single crystal. For stronger X-rays, insertion devices—undulators and wigglers—are used. An undulator forces the electron beam to oscillate, producing a coherent quasi-monochromatic beam with narrow harmonics; tuning the magnet gap controls peak energy. To scan over ~1000 eV, undulator gap and monochromator rotation must be synchronized. A wiggler, if its magnet-induced oscillations do not interfere coherently, yields a continuous spectrum easier for absorption experiments but less intense than an undulator. An example of a wiggler beam line set-up is shown in Figure 23.
+
+SR facilities are classified by generation. First-generation sources were parasitic to particle accelerators and unstable. Second-generation storage rings achieved emittances ~10⁻⁷ m·rad. Third-generation rings reach ~10⁻⁹ m·rad, requiring large-radius orbits and many magnets. Fourth-generation machines (e.g., free-electron lasers) remain under development.# ABSORPTION TECHNIQUES IN X-RAY SPECTROMETRY
+
+## 6.3 Secondary Yield Techniques and Applications
+The intensity of the monochromated X-rays is monitored by an ionization chamber. X-rays pass through the first chamber (I₀) and then through the specimen, and the transmitted intensity (I) is measured by a second chamber. The X-ray absorption spectrum (XAS) is obtained by plotting −log(I/I₀) against the X-ray energy. This transmission method is the most common way to record absorption spectra.
+
+When X-rays are strongly absorbed by the sample, secondary responses grow in intensity:  
+- Photoelectron emission  
+- Sample electric current (drain current)  
+- Secondary electron emission (electrons with kinetic energy < 50 eV)  
+- Auger electron emission  
+- X-ray fluorescence  
+
+Equivalent absorption spectra can be recorded by detecting any of these secondary phenomena, yielding methods such as the photoelectron yield, Auger electron yield, total electron yield (TEY), and X-ray fluorescence yield (XFY).
+
+The photoelectron yield from a single crystal exhibits angular anisotropy due to photoelectron diffraction. Averaging the yield over angle as the incident energy changes produces the XAS. Similarly, detecting Auger electrons yields the Auger electron yield spectrum, which is also angle-dependent. In both cases, various electrons (secondary, core photoelectrons, valence photoelectrons, Auger electrons) contribute, and because they have different kinetic energies they probe different depths. Consequently, electron-yield spectra represent a mixture of depths and emission processes, and the link between X-ray absorption and electron emission is complex.
+
+The sample drain current, typically ~10⁻⁹ A on a bending-magnet synchrotron beam line, is a measure of total electron emission and thus absorption (TEY method). Only electrons generated near the surface escape to contribute to this current. Detecting desorbed ions provides a signal from the topmost atomic layer. These surface-sensitive techniques are collectively known as surface extended X-ray absorption fine structure (SEXAFS).
+
+If the sample current is measured in air or helium, ejected electrons ionize O₂ or other gas molecules, producing ions whose current can be positive or negative depending on sample bias; this is the conversion electron yield (CEY) method.
+
+The X-ray fluorescence yield (XFY) method is bulk-sensitive because fluorescent X-rays originate from depths up to the attenuation length. However, combining XFY with grazing-incidence X-rays (where the beam is totally reflected and an evanescent wave penetrates only a few nanometers) enhances surface sensitivity. X-ray reflectivity itself also exhibits fine structure (XAFS).
+
+By reciprocity, one can also use a grazing exit angle for fluorescence detection. XFY offers elemental selectivity (an X-ray detector resolves fluorescence energies) and high signal-to-noise, enabling detection of minor surface adsorbates and very dilute analytes down to < 10¹² atoms cm⁻². Self-absorption effects, which distort spectra from deep layers, are mitigated in the grazing-incidence geometry.
+
+Some materials emit visible luminescence when irradiated with X-rays; the optical luminescence intensity can likewise track absorption fine structure.# Absorption Techniques in X-Ray Spectrometry
+
+## Photoabsorption and Total Electron Yield (TEY)
+Photoabsorption and electron production in a solid consisting of substrate atoms B and an adsorbed layer A lead to emission of electrons only from within an escape depth L (~50 Å) of the surface. Since the photon mean free path is much larger (1/μ > 1000 Å), only electrons generated within depth L contribute to the TEY signal.
+
+## Grazing-Exit-Angle Experiment for X-Ray Fluorescence Yield (XFY) and TEY
+A grazing-exit-angle setup for measuring both XFY and TEY uses a monochromated X-ray beam incident on the sample at a small angle θ. The emitted electrons (TEY) are collected by a surface-biased electrode, while the emitted photons (XFY) are detected by a proportional counter or solid-state detector.
+
+## Optical Luminescence
+When X-rays are absorbed, de-excitation can occur via optical luminescence. Three excitation pathways—from the 1s orbital to a continuum state (absorption coefficient μ₁) or to a bound state (μ₂), and from the 2s orbital to a continuum state (μ₃)—each yield luminescence with quantum yields η₁, η₂, and η₃. Optical luminescence is typically strong in rare-earth compounds; however, defects in crystal structure can enhance luminescence, while perfect single crystals of the same material may emit little or none.
+
+## Photoacoustic (PA) Effect
+Irradiation of a sample surface by a chopped photon beam produces heat that diffuses into the sample, generating acoustic waves detectable by a microphone or piezoelectric transducer. Discovered by Alexander Graham Bell, the PA effect converts all incident photon energy into thermal energy via nonradiative transitions. By varying the chopping frequency (from a few to several hundred hertz), one can control the probing depth—the lower the frequency, the deeper the heat diffusion. In the X-ray regime, chopping the incident beam permits thermal-yield X-ray absorption measurements on thick bulk samples that are optically opaque.
+
+## Photoconductivity Measurements in Liquid Cells
+Liquid samples are loaded into a cell with Mylar or Be windows and equipped with electrodes. Incident X-rays induce photoconductivity, and the resulting current is measured. Depending on concentration, the photoconductive spectrum may resemble or invert the transmission spectrum. This method allows in situ studies of electrode–solution interface reactions, especially when combined with total-reflection X-ray techniques.
+
+## X-Ray Fluorescence Microprobe
+Modern synchrotron-radiation beamlines can focus X-rays to micro- or nanometer spots. A solid-state detector (SSD) collects X-ray fluorescence (XFY) with an energy resolution of ~100 eV. Since absorption-edge shifts are only a few eV, tuning the incident energy between the edges of two chemical states (e.g., FeO vs. Fe₂O₃) enables state-specific emission and chemical-state mapping across a sample.
+
+## Quick XAFS with Energy-Dispersive Optics
+A bent-crystal monochromator can focus multiple X-ray energies onto a sample simultaneously. A position-sensitive photodiode array (PDA) records the transmitted spectrum at once, allowing acquisition of a full X-ray absorption fine-structure (XAFS) spectrum in milliseconds. This technique is known as quick-XAFS (Q-XAFS).
+
+## X-Ray Magnetic Circular Dichroism (XMCD)
+Circularly polarized X-rays are produced by passing linearly polarized X-rays through a diamond phase retarder at a specific angle. By small rotations and tilts of the diamond crystal, one controls the vertical and horizontal components of the X-ray electric field (helicity). Measuring absorption differences with reversed magnetic field directions on the sample yields XMCD spectra, sensitive to the sample’s magnetic properties.# Absorption Techniques in X-Ray Spectrometry
+
+## Magnetic Circular Dichroism (XMCD)
+In XMCD, the circularly rotating direction of the X-ray electric field is inverted and the difference in absorbance is measured. This technique is commonly used to measure dichroism in magnetic thin multilayers, which are important for information mass storage devices. The difference in the absorption coefficients for left and right circularly polarized X-rays is illustrated schematically in Figure 34. Details of magnetic circular dichroism are described in several books.
+
+## Spin-Selective X-Ray Fluorescence Yield (XFY) Spectra
+High-resolution X-ray fluorescence spectra of transition-metal compounds exhibit multiplet splitting due to exchange interaction between the unoccupied 3d level and the core X-ray hole. The XFY absorption spectrum of each multiplet line provides spin-selective absorption spectra (see Figure 35). This method measures spin-selective X-ray absorption without applying a magnetic field, which is useful for characterizing mixed-valence protein compounds.
+
+## Temperature-Dependent Phase Transition
+A phase transition induced by temperature change can be observed as a small change in bond distance and bond angle, leading to modifications of the electronic structure. Both XANES and EXAFS region spectra change their line shapes during the transition (Figure 36).
+
+## Grazing-Incidence XAFS of Liquid Monolayers
+The surface of water, where a liquid monolayer is present, can be analyzed by grazing-incidence X-ray reflection XAFS. When the monolayer absorbs metal ions from the solution, their concentration at the surface becomes slightly higher than in bulk water. The coordination structure around the surface-adsorbed metal ion is then analyzed by EXAFS.
+
+## Depth-Selective Chemical State Analysis of Fine Powders
+By measuring a powder on a substrate using both XFY and total-electron-yield (TEY) methods, depth-selective chemical state analysis of fine particles is possible. For example, fly ash particles mounted on aluminum foil are irradiated with monochromated X-rays. TEY spectra probe the surface chemical state, while XFY spectra probe deeper regions (micrometer scale). The chemical shift of the white line in the absorption spectrum indicates the oxidation state of the element within the particle.
+
+## Surface Catalyst Process by EXAFS
+Analysis of EXAFS spectra with incident X-ray polarization dependence is crucial for determining the geometry of adsorbed reactants on catalyst surfaces.  
+
+X-ray detectors for the XFY method have evolved from single detectors to multi-element arrays (e.g., 7-element, 19-element Ge detectors) and even up to 100-element arrays for more efficient fluorescence detection.
+
+## Beamline Techniques for Different Energy Ranges
+### Transition-Metal K-Edge XAFS (5–20 keV)
+The beamline uses beryllium and polymer films as windows to separate the vacuum system from the atmosphere.
+
+### Soft X-Ray XAFS (0.1–5 keV)
+Soft X-ray XAFS requires a windowless beamline under ultra-high vacuum (UHV) because any window would heavily absorb X-rays in this energy range. Samples are housed in a UHV chamber that can be baked up to 200 °C. Contaminants in X-ray windows and optics (carbon and oxygen) absorb strongly at 250–600 eV, so a windowless system is preferred. A vacuum of 10⁻² Pa is sufficient to avoid X-ray absorption in the beam path. Soft X-ray XAFS spectra are inherently surface sensitive and exhibit large profile changes with chemical state—similar to XPS or ESCA—but with a lower detection limit when synchrotron radiation is available.
+
+### High-Energy XAFS (>20 keV)
+High-energy XAFS experiments require specialized techniques and are less common due to limited high-energy X-ray sources outside third-generation synchrotron facilities. Instead of K-edge XAFS in this range, L-edge XAFS (5–20 keV) is often measured, but L₁, L₂ and L₃ edge jumps can interfere. The K edge is preferred to avoid this interference, although the lifetime of the K-hole state in high-Z elements is shorter, leading to broader features by the Heisenberg uncertainty principle.# ABSORPTION TECHNIQUES IN X-RAY SPECTROMETRY
+
+The line widths of the absorption spectral components are as large as 100 eV. Both the EXAFS oscillation and XANES lose fine structure owing to this lifetime broadening. High-energy XAFS has recently been measured with the development of third-generation synchrotron radiation facilities, because numerical analysis can overcome the short lifetime effect.
+
+## 7 Sources and Databases
+Academic societies and e-mail lists discuss the standardization of X-ray absorption spectrometry. As XAFS is used in many areas of research, standardization has been required. To achieve this, the International XAFS Society (IXS) was established in the 1990s. The purpose of the IXS is stated as follows:
+> The International XAFS Society represents all those working on the fine structure associated with inner-shell excitation (near-edge and extended) by various probes (e.g. X-rays and electrons), and related techniques for which the data are interpreted on the same physical basis.  
+> The purpose of the IXS is to oversee activities which benefit the community as a whole, to establish operational committees, to provide for education in the field, to disseminate relevant information, to work with other related regional, national and professional organizations in promoting and developing XAS and related disciplines, and to act as representative for the community to other professional organizations.
+
+This society has a close relation to the International Union of Crystallography (IUCr). The IXS website (hosted by Illinois Institute of Technology) provides access to a large number of XAFS databases and links to related pages:
+
+National societies and working groups in many countries are active, and information on these activities is available at the international XAFS conferences. The first conference was held at Daresbury, UK, in 1981.
+### Table 8. International XAFS Conferences
+| Conf. No. | Date         | Location   |
+|-----------|--------------|------------|
+| 1st       | March 1981   | Daresbury  |
+| 2nd       | September 1982 | Frascati   |
+| 3rd       | July 1984    | Stanford   |
+| 4th       | July 1986    | Fontevraud |
+| 5th       | August 1988  | Seattle    |
+| 6th       | August 1990  | York       |
+| 7th       | August 1992  | Kobe       |
+| 8th       | August 1994  | Berlin     |
+| 9th       | August 1996  | Grenoble   |
+| 10th      | August 1998  | Chicago    |
+| 11th      | August 2000  | Ako        |
+
+### Table 9. Journal Sources
+- Advances in X-ray Analysis  
+- Analytical Chemistry, Fundamental Reviews (even years)  
+- Journal of X-ray Science and Technology  
+- Journal of Electron Spectroscopy and Related Phenomena  
+- Journal of Synchrotron Radiation  
+- Physical Review B  
+- Surface Science  
+- Synchrotron Radiation News  
+- X-ray Spectrometry  
+
+Other useful sources include activity reports from synchrotron radiation facilities and books on X-ray techniques and absorption.
+
+## 8 Alternative Methods
+### 8.1 Electron Energy Loss Spectroscopy
+An electron beam (from a few hundred eV to a few hundred keV) impinges on a sample and loses kinetic energy. For bulk materials, reflected electron energy is measured; for thin films (a few micrometers to tens of nanometers), transmitted electron energy is measured. This is called EELS and is usually combined with transmission electron microscopy (TEM). The electron energy loss structure is similar to XAFS. The EXAFS region in EELS is called extended electron energy loss fine structure (EXELFS). Forward-scattered (0°) spectra from thin films are approximately equivalent to optical spectra (electric-dipole selection rule). Large-angle scattering may include optically forbidden transitions. TEM-based EELS offers very high spatial resolution, enabling chemical state imaging via absorption edge shifts. However, high energy and spatial resolution are rarely achieved simultaneously. EELS is particularly sensitive to low-Z elements such as boron and carbon, which are difficult to study by soft-XAFS at synchrotron facilities.
+
+### 8.2 Self-absorption
+For soft X-rays, characteristic emission lines can be very close in energy to absorption edges of the same element (e.g., transition-metal Lα,β emission and L₂,₃ absorption edges). Emission from deep within a solid is reabsorbed on exit, producing dips in the emission spectrum that mimic absorption features. By comparing spectra excited at different electron energies (e.g., 3 keV vs. 16 keV) or by varying the sample tilt relative to the detector or beam, one can extract absorption information from self-absorption effects.
+
+### 8.3 Extended X-ray Emission Fine Structure
+The radiative Auger effect (RAE) accompanies characteristic X-ray lines, producing energy-loss satellites in emission spectra. The shaken-up second electron carries information analogous to XAFS; this is called extended X-ray emission fine structure (EXEFS). It is especially useful for low-Z elements (Na, Mg, Al, Si), where RAE satellite intensity is strong. With wavelength-dispersive EPMA, EXEFS allows XAFS-like spectra from areas as small as 1 µm in diameter.
+
+### 8.4 X-ray Raman Scattering
+X-ray Raman scattering is an inelastic scattering process by core electrons (distinct from Compton scattering by valence electrons). It enables measurement of soft-X-ray absorption edges (e.g., C K-edge) using hard-X-ray spectrometers (a few keV), operable in air. An incident hard X-ray loses energy equal to the soft-X absorption edge (around a few hundred eV), revealing the absorption fine structure without requiring UHV conditions.# Absorption Techniques in X-ray Spectrometry
+
+## 8.5 Diffraction Anomalous Fine Structure
+DAFS was proposed by Stragier et al. XAFS usually measures the wavelength dependence of _f₂_, the imaginary part of the atomic structure factor; DAFS measures _f₁_. The wavelength dependence of _f₁_ and _f₂_ has a close relation through the Kramers–Kronig transformation.
+
+In the DAFS experiment, the intensity of a diffraction peak of a specimen is measured by changing the incident X-ray energy. The sample and detector angles (θ–2θ) are recorded as the incident energy varies, or powder X-ray diffraction patterns are measured by scanning the energy. This method can measure site-selective XAFS of the same element, because each diffraction peak corresponds to a different site in the crystal. If the diffraction peaks originating from surface and bulk phases are separated, space-selective EXAFS-like spectra become obtainable.
+
+## 8.6 b-Environment Fine Structure
+The β-electron emission process in a nuclear conversion suffers interference by the crystal structure for the same reason as EXAFS. This method is called BEFS.
+
+## 8.7 Inverse Photoemission Spectroscopy
+Inverse Photoemission Spectroscopy (IPES) measures the unoccupied electronic structure by irradiating electrons and detecting emitted photons. This technique is also called Bremsstrahlung Isochromat Spectroscopy (BIS). Extended structure analogous to EXAFS is observable in BIS and is termed Extended X-ray Bremsstrahlung Isochromat Fine Structure (EXBIFS). BIS is usually combined with an ESCA instrument, allowing simultaneous measurement of occupied and unoccupied electronic structures (similar to XANES).
+
+## 9 Conclusion
+X-ray absorption spectroscopy is chiefly used for electronic structure studies and structural analysis of new materials, surfaces, and catalysts. The spectra measured can be surface sensitive or bulk sensitive depending on the detection method. Chemical shifts and profile changes are observable, making spectral analysis a powerful tool for materials characterization. This method is also effective for analyzing mixed chemical states in industrial, environmental, and biological samples. The development of synchrotron radiation facilities will enable measurements of nanometer-sized samples in milliseconds.
+
+## Abbreviations and Acronyms
+- APW: Augmented Plane Wave  
+- BEFS: b-Environment Fine Structure  
+- BIS: Bremsstrahlung Isochromat Spectroscopy  
+- CEY: Conversion Electron Yield  
+- DAFS: Diffraction Anomalous Fine Structure  
+- EELS: Electron Energy Loss Spectroscopy  
+- EPMA: Electron Probe Microanalysis  
+- ESCA: Electron Spectroscopy for Chemical Analysis  
+- EXAFS: Extended X-ray Absorption Fine Structure  
+- EXBIFS: Extended X-ray Bremsstrahlung Isochromat Fine Structure  
+- EXEFS: Extended X-ray Emission Fine Structure  
+- EXELFS: Extended Electron Energy Loss Fine Structure  
+- HF: Hartree–Fock  
+- HFS: Hartree–Fock–Slater  
+- IMFP: Inelastic Mean Free Path  
+- IPES: Inverse Photoemission Spectroscopy  
+- IUCr: International Union of Crystallography  
+- IXS: International XAFS Society  
+- KKR: Korringa–Kohn–Rostker  
+- LCAO-MO: Linear Combination of Atomic Orbitals–Molecular Orbital  
+- LDA: Local Density Approximation  
+- LEED: Low-energy Electron Diffraction  
+- LRO: Long-range Order  
+- LUMO: Lowest Unoccupied Molecular Orbital  
+- MS: Multiple Scattering  
+- MS-Xα: Multiple Scattering Xα  
+- MT: Muffin-tin  
+- NEXAFS: Near-edge X-ray Absorption Fine Structure  
+- PA: Photoacoustic  
+- PDA: Photodiode Array  
+- PEH: Photoelectron Holography  
+- Q-XAFS: Quick X-ray Absorption Fine Structure  
+- RAE: Radiative Auger Effect  
+- SEXAFS: Surface Extended X-ray Absorption Fine Structure  
+- SR: Synchrotron Radiation  
+- SRO: Short-range Order  
+- SSD: Solid-state Detector  
+- TEM: Transmission Electron Microscopy  
+- TEY: Total Electron Yield  
+- UHV: Ultrahigh Vacuum  
+- XAFS: X-ray Absorption Fine Structure  
+- XANES: X-ray Absorption Near-edge Structure  
+- XAS: X-ray Absorption Spectrum  
+- XFH: X-ray Fluorescence Holography  
+- XFY: X-ray Fluorescence Yield  
+- XMCD: X-ray Magnetic Circular Dichroism  
+- XPD: X-ray Photoelectron Diffraction  
+- XPS: X-ray Photoelectron Spectroscopy  
+
+## Related Articles
+**Environment: Water and Waste (Volume 4)**  
+- X-ray Fluorescence Spectroscopic Analysis of Liquid Environmental Samples
+
+**Surfaces (Volume 10)**  
+- Auger Electron Spectroscopy in Analysis of Surfaces  
+- Soft X-ray Photoelectron Spectroscopy in Analysis of Surfaces  
+- X-ray Photoelectron Spectroscopy in Analysis of Surfaces
+
+**Electroanalytical Methods (Volume 11)**  
+- X-ray Methods for the Study of Electrode Interaction  
+- X-ray Photoelectron Spectroscopy and Auger Electron Spectroscopy (Volume 15)  
+- X-ray Photoelectron and Auger Electron Spectroscopy  
+- X-ray Photoelectron Spectroscopy and Auger Electron Spectroscopy: Introduction
+
+**X-ray Spectrometry (Volume 15)**  
+- Energy Dispersive, X-ray Fluorescence Analysis  
+- Structure Determination, X-ray Diffraction for  
+- Total Reflection X-ray Fluorescence  
+- Wavelength-dispersive X-ray Fluorescence Analysis  
+- X-ray Techniques: Overview# ABSORPTION TECHNIQUES IN X-RAY SPECTROMETRY

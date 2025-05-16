@@ -1,0 +1,608 @@
+# Theoretical approaches to x-ray absorption fine structure  
+**J. J. Rehr**  
+Department of Physics, University of Washington, Seattle, Washington 98195  
+
+**R. C. Albers**  
+Theoretical Division, Los Alamos National Laboratory, Los Alamos, New Mexico 87545  
+
+## Abstract  
+Dramatic advances in the understanding of x-ray absorption fine structure (XAFS) have been made over the past few decades, which have led ultimately to a highly quantitative theory. This review covers these developments from a unified multiple-scattering viewpoint. The authors focus on extended x-ray absorption fine structure (EXAFS) well above an x-ray edge, and, to a lesser extent, on x-ray absorption near-edge structure (XANES) closer to an edge. The discussion includes both formal considerations, derived from a many-electron formulation, and practical computational methods based on independent-electron models, with many-body effects lumped into various inelastic losses and energy shifts. The main conceptual issues in XAFS theory are identified and their relative importance is assessed; these include the convergence of the multiple-scattering expansion, curved-wave effects, the scattering potential, inelastic losses, self-energy shifts, and vibrations and structural disorder. The advantages and limitations of current computational approaches are addressed, with particular regard to quantitative experimental comparisons.
+
+## I. Introduction  
+X-ray absorption fine structure (XAFS) refers to the oscillatory structure in the x-ray absorption coefficient just above an x-ray absorption edge. This turns out to be a unique signature of a given material; it also depends on the detailed atomic structure and electronic and vibrational properties of the material. For this reason, XAFS is a very important probe of materials, since knowledge of local atomic structure, i.e., the species of atoms present and their locations, is essential to progress in many scientific fields—whether for biology, chemistry, electronics, geophysics, metallurgy, or materials science. However, extracting this information with precision in the often complicated, aperiodic materials of importance in modern science and technology is not easy, even with the subtle and refined experimental techniques currently available.
+
+Over the past three decades the technique of XAFS has made great strides toward the goal of providing such information. The existence of intense new synchrotron x-ray sources alone was not enough to achieve this goal, even though such facilities spurred considerable progress. In addition, the full success of the XAFS technique must be attributed in large part to advances in theory, which have led ultimately to a highly quantitative understanding of the phenomena. The purpose of this article is to review these advances, many of which have taken place only within the last decade. We focus primarily on extended XAFS (EXAFS), the fine structure in the absorption well above an x-ray edge, which is now largely understood in terms of a high-order multiple-scattering theory. To a lesser extent, we also discuss progress in understanding the fine structure close to an edge, i.e., the x-ray absorption near-edge structure (XANES), from the same unified one-particle, multiple-scattering viewpoint. However, the theory of XANES is not yet fully quantitative and requires different physical considerations. Although this field is the subject of many current investigations, a complete understanding remains elusive. Therefore this review is generally restricted to the regime where the multiple-scattering expansion can be assumed to be convergent and the theory is well established. This region typically begins several eV or more above an absorption edge. Earlier reviews of the field are given, for example, by Lee et al. (1981) and in Koningsberger and Prins (1988). We begin with a summary of the fundamental physics of x-ray absorption and a brief historical review of the theory in this field. We then summarize the key ideas and outline the content of the remainder of this review.
+
+### A. X-ray absorption  
+X-ray absorption spectroscopy measures the absorption of x rays as a function of x-ray energy $E=\hbar\omega$. More specifically, the x-ray absorption coefficient $\mu(E)=2\,d\ln I/dx$ is determined from the decay in the x-ray beam intensity $I$ with distance $x$ (Fig. 1). If the absorption coefficient is plotted as a function of $E$ (Fig. 2), the experimental data show three general features: (1) an overall decrease in x-ray absorption with increasing energy; (2) the presence of a sharp rise at certain energies called edges, which roughly resembles step-function increases in the absorption; and (3) above the edges, a series of wiggles or oscillatory structure that modulate the absorption, typically by a few percent of the overall absorption cross section.
+
+The first feature is illustrative of the well-understood quantum-mechanical phenomenon of x-ray absorption by atoms, as described, for example, by Fermi’s “golden rule” in standard texts (e.g., Messiah, 1966). The energy position of the second feature is unique to a given absorption atom and reflects the excitation energy of inner-shell electrons. The third feature is the XAFS that is of primary interest in this review. When interpreted correctly, this feature contains detailed structural information, such as interatomic distances and coordination numbers. The XAFS spectrum $\chi$ is defined phenomenologically as the normalized, oscillatory part of the x-ray absorption above a given absorption edge, i.e., $\chi(E)=[\mu(E)-\mu_{0}(E)]/\Delta\mu_{0}$, where $\mu_{0}(E)$ is the smoothly varying atomic-like background absorption (including contributions, if any, from other edges), and $\Delta\mu_{0}$ is a normalization factor that arises from the net increase in the total atomic background absorption at the edge in question. In practice, this normalization factor is often approximated by the magnitude of the jump in absorption at the edge. The error in this approximation can be accounted for by a small (typically about 10%) correction to the XAFS Debye–Waller factor, which is called the McMaster correction (see Sayers and Bunker, 1988).
+
+Each absorption edge is related to a specific atom present in the material and, more specifically, to a quantum-mechanical transition that excites a particular atomic core-orbital electron to the free or unoccupied continuum levels (ionization of the core orbital). The nomenclature for x-ray absorption reflects this origin in the core orbital (Fig. 3). For example, K edges refer to transitions that excite the innermost 1s electron. The transition is always to unoccupied states, i.e., to states with a photoelectron above the Fermi energy, which leaves behind a core hole. The resulting excited electron is often referred to as a photoelectron and in a solid generally has enough kinetic energy to move freely through the material. This occurs even in insulators.Since the excited states are almost always extended states (quasifree states in molecules and conduction-band states in solids), the energies of the edges (or ionization energies) are unique to the type of atom that absorbs the x-ray, and hence themselves are signatures of the atomic species present in a material.
+
+The generally weak oscillatory wiggles beyond about 30 eV above the absorption edge were eventually termed EXAFS (extended x-ray absorption fine structure) by Prins and Lytle (Lytle, 1965). This fine structure contains precise information about the local atomic structure around the atom that absorbed the x-ray. In contrast, the region closer to an edge—dominated by strong scattering processes and local atomic resonances—is often not as readily interpreted as EXAFS. This region of strong scattering is referred to as XANES (x-ray absorption near-edge structure) and typically lies within the first 30 eV of the edge position. The more general term XAFS was introduced by Rehr et al. (1986) to refer to the fine structure in both XANES and EXAFS, following the recognition that they both have a common origin, namely, the scattering of a photoelectron by its environment.
+
+## B. Early history of XAFS
+Roughly 70 years have elapsed since the phenomenon of EXAFS was first observed, and it has taken nearly that long to realize that accurate, detailed, structural information could be extracted from it and to develop a quantitative theory. Early progress was impeded by experimental limitations of the then-available x-ray sources. Moreover, the theoretical interpretation was also not clear cut at that time—understandable, since a full treatment depends on many complicated details of atomic and molecular structure, high-energy electron-atom scattering, many-electron processes, vibrational structure, and disorder. Much of this physics has only been unraveled within the past 30 years, and a fully quantitative theory was not developed until the present decade. Remarkably, many of the developments needed to explain EXAFS are complementary to advances in our understanding of ground-state electronic structure—e.g., the development of the density-functional formalism (Kohn and Sham, 1965) for band-structure calculations or low-energy excited states. Unfortunately, however, many modern electronic-structure codes (such as the linear muffin-tin orbital code of Andersen, 1975, or full-potential linear augmented plane-wave codes) are not completely applicable at the high energies typically encountered in XAFS without additional modifications, such as hugely expanded basis sets and an energy-dependent exchange-correlation potential.
+
+In the early years, the precise origin of EXAFS was controversial. From general principles of quantum-mechanical transition rates, x-ray absorption should be governed by the Fermi “golden rule” in terms of a squared transition matrix element times a density of states for available energy levels. Kronig (1931) originally interpreted the XAFS oscillations in crystals as a density-of-states effect, due to the strong diffraction of electrons by the crystal lattice—the so-called long-range-order theory. However, the very fine structure present in the density of states due to long-range Bragg scattering (e.g., the sharp van Hove–type peaks observed in band-structure calculations) is generally much too detailed to explain the observed EXAFS, and attempts to match EXAFS peaks with predictions of long-range-order theories proved unsatisfactory.
+
+Shortly thereafter, Kronig (1932) presented an alternative theory for small molecules, attributing the oscillatory structure in EXAFS to the influence of neighboring atoms on the transition matrix element in the golden rule—a short-range-order effect. This type of theory is most often used today to explain the origin of XAFS, although, as we shall see later, both long- and short-range-order theories can be reconciled when appropriate broadening is introduced.
+
+The short-range-order theory reflects the quantum-mechanical wavelike nature of the final, excited, photoelectron state. The dominant wiggles in the XAFS spectrum are interpreted as a quantum-interference phenomenon. The outgoing photoelectron can be viewed as a quantum wave that spreads out over the solid, much as a rock thrown in a pond creates an expanding spherical wave in water. Other atoms then reflect parts of this electron wave back toward the original atom; the amplitude of all the reflected waves adds constructively or destructively to the outgoing wave, modulating the transition matrix element (and hence the absorption) as a function of the photoelectron energy (since the de Broglie wavelength λ varies inversely with the wave vector k).
+
+The modern resolution to the controversy between short- and long-range-order approaches lies in the energy-dependent competition between scattering strength and inelastic losses. A high-energy, excited photoelectron state is not infinitely long lived; it decays as it traverses the material, primarily through inelastic (“extrinsic”) losses—interactions that excite other electrons or create collective excitations (e.g., plasmons). In addition, the intrinsic lifetime of the core-hole state (“intrinsic” losses) must be considered. Through the uncertainty principle, a state with finite lifetime has a finite energy width. Phenomenologically, the outgoing photoelectron wave dies away as it moves further from the absorbing atom, and reflected waves suffer the same extinction. The net effect is that XAFS measures local atomic structure over a range limited by the effective mean free path of the photoelectron—typically on the order of tens of ångströms, corresponding to an inverse lifetime of a few eV.
+
+The long-range-order theory emphasizes the density of states of the extended excited states of the entire material, which can be important at low energies or for strong scattering. However, if one properly broadens the results of such an approach to include inelastic losses and lifetime effects, the fine structure in the spectra due to long-range order is washed out, recovering the short-range-order results at sufficiently high energies. The finite lifetime of the core hole (as higher-lying electrons fill it radiatively or via nonradiative Auger transitions) leads to an additional Lorentzian broadening of the spectrum, further limiting the range of observable structure.## C. Structural information in XAFS
+
+It was only in the early 1970s, following the pioneering work of Sayers, Stern, and Lytle (1971), that it was widely recognized that the interference patterns or “wiggles” in the XAFS spectra could be used to obtain quantitative information about the local structure near an absorbing atom from a short-range-order theory. This wiggly structure contains information about near-neighbor distances, coordination numbers, and fluctuations in bond distances. The main obstacle to extracting this information is the necessity of an accurate theoretical model (or an experimental reference compound) to calibrate the measurements. Theoretical models are actually preferable, since experimental references are not generally useful beyond the first coordination shell and often are not readily available. Fortunately, such theoretical models for XAFS are now comparable in accuracy to experimental reference materials, and they are available throughout the periodic table. Their development was due to many theoretical advances (for reviews, see Lee et al., 1981, and Koningsberger and Prins, 1988) that have been fostered and tested by precision experiments over the past three decades using modern high-intensity synchrotron-radiation sources.
+
+In particular, an accurate, general, theoretical treatment has emerged during the past several years. Thus it now appears that the phenomenon of XAFS in the extended regime (EXAFS)—beyond about 20–30 eV from an edge—is generally well understood (Rehr et al., 1992; Zabinsky et al., 1995; see also Binsted et al., 1987, and Filipponi et al., 1995), albeit within acceptable tolerances. This degree of knowledge is sufficient to make the XAFS technique reliable for experimental structure determinations accurate to about 0.02 Å or better.
+
+The needed theoretical developments did not all come at once, but through a series of continual refinements that were incorporated one by one. To give an overview of these developments, it is useful to review the heuristic treatment of XAFS, starting with the more precise, semi-phenomenological treatment of Stern et al. (1975), which led to the now–standard EXAFS formula.
+
+First, we summarize the main physical quantities of interest. The x-ray absorption coefficient μ(E), which is the attenuation of the x-ray beam per unit distance, is a strong function of x-ray energy E = ℏω and exhibits abrupt jumps at “absorption edges,” i.e., the thresholds ℏω = E_c for photoexcitation of electrons from deep atomic core levels E_c. If the x-ray photon has an energy higher than the threshold energy E_c, the extra energy is taken up by the excited photoelectron as kinetic energy.  
+
+In order to separate the structural information from the energy dependence of the absorption cross sections, the normalized XAFS spectrum χ is usually defined as the normalized oscillatory part of μ (see Fig. 4). Conventionally, χ is often defined with respect to the “photoelectron momentum index”  
+k = √[ℏ²ω² – E_c²],  
+as measured from threshold—that is, one defines χ(k) rather than χ(E) on an absolute energy scale. Note that this definition of k differs from the physical momentum p in a solid, which reduces to the Fermi momentum k_F at threshold. Often the normalization constant Δμ₀ is taken to be the jump in absorption μ₀ at the edge (edge-jump normalization), but more precisely it should be considered as a function of energy in order to make contact with theory, as discussed below. The quantity μ₀ is the relatively smooth, atomic-like, background absorption of an “embedded atom,” in the absence of neighboring scatterers. This is the absorption that would, in principle, be measured from a modified atom, as it exists in a condensed material, if one could turn off all the interference by the reflected waves from the neighboring atoms; it thus differs from that of a free atom.
+
+According to the Fermi golden rule, the x-ray absorption coefficient μ is proportional to a transition matrix element squared. For highly localized core electrons, the transition matrix element is proportional to the probability |ψ_k(r)|² that the photoelectron is found at the atom where the photon is absorbed. (Typically, the core orbitals are of size 1/Z in Bohr units, where Z is the atomic number. Throughout this paper we generally use atomic units e = ℏ = m = 1 in theoretical formulas; however, experimental distances will generally be given in Å and energies in eV.) The total wave ψ_k can be expressed in terms of an outgoing wave emitted at the absorbing atom plus incoming waves that are scattered back by neighboring atoms. For a wave reflected straight back by a neighboring shell of atoms, the phase difference between these components is approximately 2 kR, where R is the distance to the shell of atoms and k ∼ 1/λ is the photoelectron wave number (λ being the de Broglie wavelength). Thus λ decreases with increasing energy, and the modulation in μ arises from the alternating constructive and destructive interference between these components as the photon energy is varied. The amount of interference also depends on the strength of the reflection from the neighboring atoms (the backscattering amplitude) and the number of scatterers.
+
+The validity of the Kronig short-range-order theory was largely substantiated by Sayers et al. (1971), who developed a quantitative parametrization of EXAFS that has become the standard for much current work. In its most widely used form, the standard EXAFS formula is
+χ(k) = Σ_R S₀² N_R |f(k)|  
+           ──────────  · sin[2kR + δ_c + Φ(k)] · e^(–2R/λ(k)) · e^(–2σ² k²)  
+             k R²  
+Here the structural parameters are:
+• R: interatomic distance  
+• N_R: coordination number (number of equivalent scatterers)  
+• σ²: temperature-dependent rms fluctuation in bond length (including effects due to structural disorder)  
+Other quantities are:
+• f(k) = |f(k)| e^{i Φ(k)}: backscattering amplitude  
+• δ_c: central-atom partial-wave phase shift of the final state  
+• λ(k): energy-dependent XAFS mean free path (not to be confused with the de Broglie wavelength)  
+• S₀²: overall amplitude factor (a many-body effect due to the relaxation of the system in the presence of the core hole)
+
+Although the overall amplitude factor S₀² did not appear in the original formula, it can be obtained from a more detailed many-body theory (Sec. II.C), provided the terms are appropriately renormalized. Moreover, although the original EXAFS formula referred only to single-scattering contributions from neighboring shells of atoms, the same formula can be generalized (Rehr and Albers, 1990) to represent the contribution from multiple-scattering paths of length 2R.
+
+In this transparent and simple form, the formula contains all key elements that a correct theory must have and provides a convenient parametrization for fitting the local atomic structure around the absorbing atom to the experimental EXAFS data:
+- The dependence on interatomic distance R and energy k is given by sin(2kR).  
+- The decay of the wave due to the mean free path or finite lifetime (including core-hole lifetime) of the photoelectron is captured by e^(–2R/λ(k)), which limits the EXAFS range to a few tens of Å.  
+- The strength of the reflected waves depends on the backscattering amplitude |f(k)| and the number of neighboring atoms N_R.  
+- The factors 1/(kR²) and the mean-free-path term are secondary but important for quantitative amplitude behavior.  
+- The phase Φ(k) = arg f(k) reflects the quantum-mechanical nature of the backscattering, and δ_c accounts for the phase shift at the absorber. These phase shifts cause the measured interatomic distances to differ from the geometrical ones by a few tenths of an Å and must be corrected by either a theoretical or an experimental reference standard.  
+- The Debye–Waller factor e^(–2σ² k²) accounts for thermal vibrations and structural disorder, which smear the interference pattern. This factor becomes significant when σ² k² approaches unity (typically around k ∼ 10 Å⁻¹), effectively truncating the EXAFS at high k. Since σ² generally increases with temperature, the EXAFS signal “melts” at high temperatures. The Debye–Waller effect is essential in EXAFS but often negligible in XANES, where σ² k² ≪ 1.response to the creation of the core hole. Although $S_0^2$ is weakly energy dependent, it is usually approximated by a constant. A fully quantitative theory has yet to be developed.
+
+The inclusion of inelastic losses and Debye–Waller factors was crucial to the success of the modern short-range-order theory of XAFS. Moreover, using the representation of EXAFS given by Eq. (2), Sayers et al. (1971) showed that a Fourier transform of the XAFS with respect to $k$ corresponds to an effective radial distribution function, with peaks near the first few near-neighbor distances. This important observation paved the way for using EXAFS as a general probe of microscopic structural information in molecules and solids. The technique is especially important in noncrystalline materials, where lattice methods like x-ray diffraction can be inapplicable. Conversely, the validity of the long-range-order theory depends on the absence or weakness of these decay factors.
+
+A key development has been the development of an accurate treatment of scattering by taking curved-wave effects into account. A simplification made in early work is the approximate treatment of the shape of the electron waves. At large distances from the center of a wave, the curvature of a spherical wave front lessens, and it becomes more and more plane-wave–like. The mathematics of the scattering of plane waves is considerably simpler than that of curved waves and can be treated by a plane-wave scattering amplitude $f(k)$. This approximation, which is sometimes called the plane-wave approximation, was originally used to derive the simple result of Eq. (2). A more precise treatment of the plane-wave approximation was later given by Lee and Pendry (1975), which identified two contributions. One is the “small-atom” or “point-scattering approximation,” namely, the use of plane-wave scattering amplitudes, and the second is the “small-wavelength approximation,” which approximates the Hankel-function behavior of the outgoing spherical wave as simple exponentials. At low energies or short distances, where the curvature is more pronounced, it is especially important to remove the second approximation. This is fairly easy to do at the single-scattering level. Indeed, some early work (Sayers et al., 1971) was based on the “point-scattering approximation,” although that alone is insufficient to correct the theory. Subsequently, fast and accurate single-scattering, curved-wave theories were developed (Müller and Schaich, 1983), but at the expense of a somewhat more complex mathematical treatment. Later it was shown (Rehr et al., 1986; Rehr and Albers, 1990) that the entire theory, including multiple-scattering terms, can be recast exactly as in the standard EXAFS equation, but with an effective scattering amplitude $f_{\mathrm{eff}}(k,R)$ replacing the plane-wave scattering amplitude. A similar result is implicit in the formulation of Lee and Pendry (1975) in terms of a scattering factor $Z$. Moreover, a simplified but accurate, asymptotic, spherical wave approximation for $f_{\mathrm{eff}}$ was developed (Rehr et al., 1986), which explains the physical origin of curved-wave effects in terms of an additional phase shift in each partial wave of $\exp[-l(l+1)/(2kR^2)]$. Tables of curved-wave phases and amplitudes were also calculated and made available (McKale et al., 1986; Rehr et al., 1991), thus improving on the plane-wave phases and amplitudes (Teo and Lee, 1979).
+
+D. Multiple scattering
+
+Another key development in the theory is that of an accurate treatment of multiple-scattering effects. One obvious weakness of the phenomenological EXAFS theory is that it takes into account only the simplest, but usually the most dominant, form of scattering, i.e., reflections by neighboring atoms directly back to the absorbing atom (this type of scattering is often called “backscattering” or “single scattering”). More generally, atoms can reflect the electron wave onto other atoms that then reflect off of still other atoms. Such multiple scattering is now known to be essential for accurate calculations of the absorption coefficient in most materials. In particular, multiple scattering by atoms along a linear path, the so-called focusing or shadowing effect, can exceed the backscattering contributions in magnitude (Lee and Pendry, 1975). The beauty of the formulation of Sayers et al. (1971) is that a Fourier transform made it possible to filter the contributions to the absorption by a path-length criterion. For example, if the scattering observed in the transform involved the shortest path length (twice the nearest-neighbor distance), backscattering was the only possible type of scattering that contributed significantly, and hence Eq. (2) was essentially correct in this respect, except for small corrections due to the leakage of longer-distance contributions into the first-shell signal. However, in order to reliably extract more general atomic-structure information beyond nearest-neighbor bond distances, it has proved crucial to include multiple-scattering effects, as we discuss below.
+
+The formal multiple-scattering theory (Beeby, 1964) of XAFS has been derived based on both the Green’s-function method (Schaich, 1973; Ashley and Doniach, 1975) and the wave-function approach (Lee and Pendry, 1975). The pioneering EXAFS theory paper by Lee and Pendry (1975) showed that the two approaches were equivalent and gave the first quantitative treatment of both backscattering and multiple-scattering effects. It was also found that the much simpler plane-wave approximation for the backscattering terms, together with an ad hoc inner potential shift, could be a fairly good approximation at high energies (Lee et al., 1981). However, Rehr et al. (1986) showed that curved-wave corrections are actually important at all energies and introduced an asymptotic spherical wave approximation, which largely accounted for the main curved-wave effects in backscattering. The plane-wave approximation also simplifies multiple-scattering calculations, as shown by Lee and Pendry (1975), but the results generally contain significant errors both in phase and in amplitude. While somewhat better, the spherical wave approximation also proved to be unsatisfactory in a fully quantitative theory. Unfortunately, since Clebsch–Gordan coefficients proliferate for higher-order scattering, an exact treatment of curved-wave contributions based on angular momentum algebra (Messiah, 1966) is computationally demanding and was a major bottleneck in the development of precise theoretical calculations. Despite these difficulties, analytical curved-wave theories were subsequently developed for up to third-order multiple scattering (i.e., four-leg paths; Gurman et al., 1986). Iterative methods for going to even higher order were developed by Natoli and collaborators (Brouder et al., 1989). However, these methods are all generally limited to small clusters or low energies due to the large angular momenta and consequent complexity of the calculations. Moreover, the inclusion of thermal vibrations and disorder in such “exact” methods is nontrivial without approximations such as an average only over the exponential dependence $\langle e^{i k R}\rangle$ for a given path length $R$. For these reasons, neither the plane-wave approximation, the spherical wave approximation, nor exact methods provide practicable schemes for accurate multiple-scattering calculations of EXAFS much beyond the first coordination shell.
+
+A strategy that overcomes all of these computational problems was developed by the present authors (Rehr and Albers, 1990). This method is based on a rapidly convergent separable representation of the electron propagator, which permits fast, accurate calculations of any multiple-scattering path. However, the calculations were then limited by a second problem, the exponential proliferation of multiple-scattering paths of increasing length. Fortunately, the overwhelming majority of such paths turn out to have negligible amplitude and can be eliminated with efficient multiple-scattering path filters and a fast path-generation and sorting algorithm developed by Zabinsky et al. (1995). The implementation of these algorithms into the ab initio EXAFS codes known as FEFF—named after the effective scattering amplitude $f_{\mathrm{eff}}$ in the theory—now makes accurate, high-order, multiple-scattering calculations of XAFS in general materials feasible.## E. Other improvements
+
+Yet another key improvement to early EXAFS theories came with the replacement of the phenomenological mean-free-path term by *ab initio* theoretical calculations of inelastic losses (Lee and Beni, 1977). This treatment was based on the complex, energy-dependent, electron-gas self-energy of Hedin and Lundqvist (1971) in the local-density approximation. It also replaced the ground-state exchange models by an energy-dependent exchange potential more appropriate for excited states. The use of a complex, energy-dependent self-energy provides a more accurate, system-dependent description of the damping of the electronic waves in a material. However, it also complicates the theory, since the one-electron Hamiltonian is then non-Hermitian and requires complex phase shifts.
+
+Although the Hedin–Lundqvist model usually leads to excessive loss in the XANES regime, it is generally quite reliable for EXAFS. Tables of atomic EXAFS phase shifts and plane-wave scattering amplitudes based on this model of inelastic losses (Teo and Lee, 1979) served as the original theoretical XAFS standards for many years and remain the most widely used self-energy for XAFS calculations.
+
+Perhaps the most pervasive and important influence of all these improvements was the development of fast *ab initio* computer codes for EXAFS, together with the ready availability of faster computers. Such codes replace the need for tables and give a more accurate treatment of the local environment than free-atom approximations. Most now include multiple-scattering effects, important for treating EXAFS beyond the first coordination shell. For example, the earliest such code, EXCURV (Binsted et al., 1987, 1991), incorporated fast algorithms for precise calculations of curved-wave single, double, and triple scattering effects and also included EXAFS analysis tools.
+
+A significantly improved set of theoretical standards is based on an automated *ab initio* code FEFF3 (Rehr et al., 1991; Mustre de Leon et al., 1991). This implementation includes both inelastic losses (neglected by McKale et al., 1986) and curved-wave effects (neglected in the Teo–Lee tables), together with an *ab initio* treatment of the molecular potential based on overlapped atomic densities. With these ingredients, the theoretical XAFS calculations give quantitative agreement with experiment for a wide range of materials, typically yielding distance determinations to better than 0.02 Å and coordination numbers to within ±1. As a result, many discrepancies between EXAFS and other techniques have been eliminated (Dagg et al., 1993). Omitting one or the other ingredient, as in earlier approaches, usually leads to significant errors.
+
+The accurate parametrization of the Hedin–Lundqvist self-energy made calculations of inelastic losses much easier to implement and greatly sped up *ab initio* computations. Yet another *ab initio* multiple-scattering EXAFS code is GNXAS (Filipponi and DiCicco, 1995; Filipponi et al., 1995), which is based on an efficient grouping of multiple-scattering paths for structural analysis.
+
+## F. Outline
+In the remainder of this paper, we review in more detail the modern theoretical approaches to XAFS calculations. We focus primarily on the conceptual ideas needed for an accurate theory of the XAFS spectra χ. For example, because the photoelectron’s kinetic energy is large compared to chemical energies, the physical considerations in XAFS theory differ from those in ground-state electronic-structure calculations or in XANES. We also focus especially on deep-core-level absorption, which greatly simplifies the treatment of the initial state. Shallow core absorption and optical absorption often require quite different theories (e.g., the time-dependent local-density approximation). This review is not intended to fully address XANES, where the multiple-scattering expansion fails, nor do we discuss XAFS data analysis; developments in that area have followed advances in theory. Because the fine structure in both EXAFS and XANES involves similar quantum-interference effects, we discuss them from a unified viewpoint under the acronym XAFS, although the synthesis is not yet entirely successful. Atomic, chemical, and many-body corrections remain important in XANES, making its quantitative treatment a challenging and generally unsolved problem.
+
+The outline for the rest of the paper is as follows:
+- **Sec. II**: Physical processes in x-ray absorption and their inclusion in modern XAFS theories.  
+- **Sec. III**: Detailed solution of the multiple-scattering theory, key to structural information extraction.  
+- **Secs. IV–V**: Additional complications due to thermal disorder, comparison of theory and experiment, and summary of the state of XAFS theory. Finally, we mention connections between XAFS and related spectroscopies.
+
+## II. Key approximations
+### A. One-electron golden-rule approximation
+The dominant mechanism for the absorption of hard (∼10 keV) x rays by matter is photoexcitation of electrons. Compton scattering is negligible for thin samples and pair production in this energy range is forbidden. Moreover, the electromagnetic field is weak enough that only first-order processes matter. Consequently, the x-ray absorption coefficient μ is proportional to the transition rate given by Fermi’s golden rule:
+m ∝ |⟨ψ_f | p·A(r) | ψ_i⟩|^2 δ(E_f − E_i − ℏω).
+
+Here we use atomic units (e = ℏ = m = 1) in the formalism; for comparison with experiment, energies are given in eV and distances in Å. The one-electron approximation reduces the many-body problem to transitions between an initial state ψ_i and a final state ψ_f of effective one-electron Hamiltonians H and H′, respectively, with energies E_i and E_f. These states are generally calculated with different self-consistent potentials in a discrete-space configuration-field (DSCF) approximation. Using the final-state one-particle Hamiltonian to calculate ψ_f is equivalent to the “final-state rule.” The operator p is momentum, and A(r) is the vector potential of the incident electromagnetic field, which can be taken as a classical wave with polarization ê and wavevector k, A(r,t) ≈ ê A_0 e^{i k·r}.
+
+For deep-core excitations, the spatial dependence of A(r) can usually be neglected (dipole approximation), e^{i k·r} ≈ 1. Quadrupole corrections are of order (Zα)^2, where Z is the core electron’s nuclear charge and α ≈ 1/137 is the fine-structure constant. Local-field effects are also negligible for deep-core excitations. Several equivalent forms of the dipole operator exist. Using [H, r] = p/m, the momentum form p·ê can be replaced by the position form 
+ê·p ↔ (ℏω/m) ê·r.
+For numerical and physical considerations, the position form is generally preferred for XAFS and deep-core absorption.
+
+### B. Scattering potential
+The oscillatory structure in XAFS arises from interference between contributions to the photoelectron wavefunction from various scattering paths off neighboring atoms. In an effective one-electron theory, the excited electron behaves as a quasiparticle moving in an effective complex-valued “optical potential,” which accounts for both scattering and damping. This potential V(E) appears in the non-Hermitian one-particle Dyson equation,
+[−½∇² + V(E)] ψ = E ψ,
+where 
+V(E) = V_coul + Σ(E).
+
+Here V_coul is the net Coulomb potential felt by the photoelectron, and Σ(E) is the self-energy analogous to the ground-state exchange–correlation potential. The functional form of Σ(E) depends on the chosen approximation, but treating it as local is generally adequate at high photoelectron energies, owing in part to the decreasing de Broglie wavelength.## Muffin-Tin Approximation
+
+It is crucial that the energy dependence of the exchange–correlation potential S(E) be taken into account. Indeed, S(E) typically varies by about 10 eV over the experimental energy range of EXAFS, corresponding physically to the gradual turning off of exchange interactions with increasing energy. The optical potential also depends on the particular N-particle final state—hence on both the core-hole state and the atomic/molecular configuration of the system (Natoli et al., 1990). For practical considerations, a spherical muffin-tin geometry without corrections is usually adequate for modern EXAFS calculations. While muffin-tin potentials may be of questionable validity near an x-ray edge or for total-energy ground-state calculations, nonspherical corrections generally diminish rapidly with increasing energy and can be neglected in the EXAFS regime. However, muffin-tin jumps can lead to oscillatory behavior of the phase shifts (Loeffen and Pettifer, 1996) and can also appear in the calculated background absorption μ₀ (Holland et al., 1978; Rehr et al., 1994).
+
+### 1. Muffin-Tin Geometry
+Almost all practical XAFS calculations rely on a muffin-tin geometry, which consists of:
+- A spherical scattering potential centered on each atom.
+- A constant potential in the interstitial region between atoms.
+
+This geometry allows the use of extensive spherical-symmetry mathematical machinery in an efficient way. In the multiple-scattering approach, the muffin-tins provide atomic scattering centers described completely by atomic phase shifts, calculated from spherically symmetric potentials inside the muffin-tins. Green’s-function propagators then connect these scattering centers. Accurate calculations depend on good potentials, since they determine the strength of scattering at each site.
+
+The actual potential in a material is more complicated:
+- **Near the nucleus**: The atomic core charge density dominates, making the potential atomic-like and the spherical approximation accurate.
+- **In outer regions and interstitials**: Bonding properties determine an anisotropic potential. The degree of anisotropy depends on the bonding type (ionic, covalent, metallic) and the structure (close-packed metals tend to be more isotropic).
+
+In EXAFS spectroscopy, the excited electron has high kinetic energy and is less sensitive to potential details at the outer edges of atoms and in interstitial regions. It is mainly scattered by the inner parts of the atomic potential and moves freely in the flat interstitial potential—hence the success of the spherical muffin-tin approximation. In the near-edge (XANES) region and for ground-state total-energy calculations, however, details of the interatomic potential shape become more important.
+
+Holland et al. (1978) proposed that the potential in the outer parts of an embedded atom can give rise to additional weak backscattering, leading to extra oscillations in the absorption (so-called “atomic XAFS”) with an effective distance roughly half the near-neighbor distance. Subsequent work (Rehr et al., 1995; Wende et al., 1997; Koningsberger et al., 1999; Ramaker and O’Grady, 1999) supports this effect, but a definitive theory will require corrections to the muffin-tin approximation. Multielectron excitations on the atomic background may also be important (Filipponi and Di Cicco, 1996), though typically smaller in magnitude.
+
+### 1.a Charge Density and Potential
+The muffin-tin potential depends on the local charge density, and accurately determining the energy reference requires overall charge neutrality. Most of the charge density inside a muffin tin is due to the central atom, with small spills from neighboring atoms. A full-potential self-consistent electronic-structure calculation (e.g., Blaha et al., 1997) would give the best charge density, making no shape approximations and including bonding effects. To be consistent with the final-state rule, this potential should include the core hole left by the excited photoelectron.
+
+Full-potential calculations are time-consuming and not readily available for many complex XAFS systems. Fortunately, since scattering off the atomic core dominates, simpler prescriptions often suffice. The most common approach is to superpose neutral atomic charge densities (Mattheiss, 1964). One places the charge density from a neutral-atom calculation on each atomic center and adds them to obtain the total ground-state charge distribution. The resulting nonspherical charge distribution at the muffin-tin edges can be treated by solving coupled differential equations for different angular momenta, though these corrections are often neglected in EXAFS and the charge density is spherically averaged (e.g., via the Loucks, 1967 algorithm).
+
+Neutral atomic charge densities can be obtained from:
+- Hartree–Fock or local-density-approximation (LDA) atomic codes.
+- Tables such as Herman and Skillman (1963) and Clementi and Roetti (1974).
+- Relativistic (Dirac-based) calculations for heavy atoms (Desclaux, 1975; Ankudinov and Rehr, 1996).
+
+For computational efficiency, LDA versions with various exchange-correlation potentials (e.g., von Barth and Grossmann, 1982) are commonly used. In standard electronic-structure calculations, a ground-state LDA exchange-correlation potential is typical for solids, while Hartree–Fock exchange may be used for molecules. XAFS applications require accounting for the energy dependence of the exchange-correlation potential, reflecting the quasiparticle character of the excited electron and the diminishing importance of the Pauli principle with energy (see Sec. II.C.2.a).
+
+### 1.b Atomic Configurations
+When determining the muffin-tin scattering potential, one must choose between:
+1. **Initial-state rule**: Use the ground-state charge density.
+2. **Final-state rule**: Use the charge density including the core hole.
+
+The final-state rule is most commonly used. For the absorbing atom, a reasonable approximation is a neutral atomic configuration of a free atom with atomic number Z+1 and a missing electron in the relevant core level, corresponding to the fully relaxed “primary channel” (Rehr et al., 1978). This choice is appropriate for low-energy XAFS and ensures consistency with the core-hole potential in the final state.# Potentials for XAFS
+
+Channel‐model (“frozen potential”) usually dominates the XAFS and is also an adequate approximation at high energies.  Alternatively, one can choose the same configuration as in the initial state with an appropriate core hole and an extra electron in the lowest unoccupied state.  Ionic configurations are appropriate only for highly ionized materials, but due to charge‐transfer effects the net charge on an atom is usually much smaller than its chemical valence.  Another choice appropriate for high energies (e.g., Lee and Beni, 1977) is a completely unrelaxed potential.  In practice, XAFS calculated with a neutral, fully relaxed potential gives very good agreement with experiment.  However, self‐consistent potentials with a better treatment of many‐body effects would be desirable in the future to avoid these ambiguities.
+
+## 2. Interstitial potential
+The interstitial region causes more complications for XAFS than for typical ground‐state electronic‐structure calculations or for XANES.  These complications are:
+
+1. The most efficient multiple‐scattering treatments assume that the interstitial potential is constant, which is not generally true.
+2. For excited‐state calculations the interstitial region is lossy and energy dependent.
+3. The critical parameter for structural information (the photoelectron wave number *k*) depends on the choice of the average potential in the interstitial region.
+
+### a. Muffin‐tin corrections: warping
+The actual electronic charge density is more complex than the muffin‐tin approximation implies: inside muffin tins the density is not perfectly spherical, and in the interstitial region it is not constant.  Bonding leads to a buildup of charge between neighboring atoms.  In electronic‐structure theory this spatial variation is often called “warping” of the potential or charge density, and methods that include it are called full‐potential techniques.
+
+For EXAFS, warping is less important because:
+- The photoelectron kinetic energy is typically much larger than the size of the warping potential.
+- In the muffin‐tin approximation spatial variations in the interstitial region are reduced by subtracting the average interstitial potential, greatly reducing the perturbation on the photoelectron.
+
+Warping becomes potentially serious only in XANES, and then only within a few eV of the edge.  In band‐structure approaches, one expands periodic functions in plane waves to treat warping.  However, most XAFS methods do not assume periodicity, so including warping in XAFS formalisms is difficult.  Scattering formalisms by Natoli et al. (1986) and discrete‐basis approaches in XANES (Ellis and Goodman, 1984; Joly et al., 1999) exist but are hard to extend to EXAFS energies.
+
+### b. Excited‐state effects
+The photoelectron (quasiparticle) spectrum moving in the optical potential *V* defined by Eq. (5) is found by solving an electron–atom scattering problem.  One takes a uniform (lossy) optical potential, conventionally the average value  
+V<sub>int</sub>(E)=⟨V(E)⟩ in the interstitial region, as an energy reference.  In general this potential is energy‐dependent and complex, so the concept of a fixed “inner potential” is not well defined.  Inelastic loss is mostly accounted for by a uniform mean‐free‐path term calculated at the interstitial density.  The scattering perturbation is then  
+v=V(E)–V<sub>int</sub>=∑<sub>j</sub>v<sub>j</sub>(r–R<sub>j</sub>)  
+relative to atomic sites R<sub>j</sub>.  Since there is virtually no inelastic loss in the high‐density core region, v(r,E) amplifies the core region, increasing backscattering amplitudes and phases compared to those defined relative to the vacuum level (Ekardt and Thoai, 1981).
+
+### c. Energy reference
+The variation of V<sub>int</sub>(E) over XAFS energies is on the order of the ground‐state exchange hole, V<sub>xc</sub>≈–2k<sub>F</sub>/π (∼10 eV).  To avoid ambiguity in comparing theoretical XAFS to experiment, one defines a fixed energy reference E₀, the photoabsorption threshold.  Experimentally, E₀ is the energy at the onset of an absorption edge (not necessarily the midpoint of the main‐edge step).  Self‐consistent calculations (Ankudinov et al., 1998) are needed to determine E₀ precisely, but estimates from the chemical potential μ of a homogeneous electron gas at the average interstitial‐charge density are typically within a few eV (Müller et al., 1982; Mustre de León et al., 1991; Tyson et al., 1992; Ankudinov et al., 1998).
+
+## 3. Relativistic effects
+Relativistic and spin‐dependent effects are usually negligible in XAFS except when spin‐independent contributions cancel, as in x‐ray magnetic circular dichroism (Brouder et al., 1996; Ebert, 1996; Ankudinov and Rehr, 1997).  In atomic theory, relativity is important only for very heavy atoms, where large kinetic energies near the nucleus require corrections that modify wave functions, energy eigenvalues, and the self‐consistent potential.  At large distances, outer‐electron kinetic energies and photoelectron propagation are nonrelativistic.
+
+- Relativity strongly affects photoelectron production and the atomic background μ₀ via dipole matrix elements, but has weak effects on propagation (Loucks, 1967).
+- Multiple scattering requires the photoelectron propagators and scattering *t* matrices, which depend on phase shifts at the muffin‐tin radius.  Propagators ∼exp(ikR) are nonrelativistic, so only phase shifts are affected by relativity.
+- Standard practice uses fully relativistic solutions for core electrons to obtain correct charge densities (within the local‐density approximation) with little computational overhead.
+- For phase shifts, a semirelativistic approach averages the spin‐orbit term over *j* components for each *l*, allowing matching onto nonrelativistic forms (Andersen, 1975; Koelling and Harmon, 1977).  This is accurate for most XAFS calculations (Mustre de León et al., 1991).
+- For very heavy atoms (5d, 4f, 5f), spin‐orbit splitting of valence electrons can be significant, so one may retain relativistic labels and use relativistic phase shifts (Tyson, 1994).  The nonrelativistic Green’s‐function propagators can be combined via Clebsch–Gordan coefficients to yield correct relativistic symmetry (Ankudinov and Rehr, 1997).
+Multiple‐scattering theory can thus be generalized from the nonrelativistic treatment (Gonis, 1992).## C. Many-body effects
+
+### 1. Inelastic losses
+As we have stressed, the inclusion of damping due to inelastic losses is a key ingredient in the modern short-range-order theory of XAFS. These losses give the final photoelectron state a finite lifetime and hence lead effectively to a broadened one-electron spectrum. It is traditional to differentiate two types of inelastic losses in the photoabsorption, namely, intrinsic and extrinsic processes. Extrinsic effects refer to losses in propagation of the photoelectron and include excitations such as plasmons, electron–hole pairs, and inelastic scattering in which the photoelectron loses energy. Many of these processes are the same as for an electron beam as it traverses a solid (Quinn, 1962; Sevier, 1972; Powell, 1974; Seah and Dench, 1979; Wagner et al., 1980). These losses lead to a decay of the final state, which has been accounted for phenomenologically by an energy-dependent mean-free-path $l(k)$, i.e. a path-dependent decay factor $\exp(-2R/l(k))$ of EXAFS amplitudes. However, such extrinsic losses are more precisely described in terms of a complex, energy-dependent self-energy $S(E)$, which gives both a real energy shift and a decay. Intrinsic losses, on the other hand, refer to excitations in response to creation of the core hole. These losses are traditionally accounted for phenomenologically by a constant many-body amplitude-reduction factor $S_0^2$. However, more precisely, the amplitude reduction is energy dependent and must be described by a complex, path-dependent constant given by a “phasor sum.” We now summarize the commonly used approximations for these quantities.
+
+### 2. Extrinsic losses
+#### a. Self-energy
+The extrinsic losses and associated energy shifts can be described in terms of a self-energy operator $S(E)$. This operator is complex valued and energy dependent and arises from the dynamically screened exchange interaction between the photoelectron and the system. This interaction is the analog of the real-valued exchange–correlation potential $V_{xc}(\mathbf{r})$ of ground-state calculations. The real part of $S(E)$ accounts for the energy dependence of the exchange and causes systematic shifts of the EXAFS peaks relative to ground-state positions, while the imaginary part gives rise to the mean free path. As in conventional electronic-structure theory, the many-body interactions can be approximated within a local-density approximation $S(E,\mathbf{r})$. The energy dependence of the screened exchange is of order several eV and decays slowly with energy, typically over a few hundred eV, but this is crucial for quantitative XAFS. Ultimately, the exchange interaction vanishes, and the photoelectron can be treated as a classical particle.
+
+An appropriate generalization of the local-density approximation for excited states is based on a uniform electron-gas model, e.g. the Hedin–Lundqvist GW/plasmon-pole self-energy $S_{HL}(E,\mathbf{r})$ (Hedin and Lundqvist, 1969; Lundqvist, 1977). Here GW refers to an approximation for the electron self-energy which neglects vertex corrections, where G is the Green’s-function operator and W is the screened Coulomb interaction. This model was introduced into XAFS theory by Lee and Beni (1977). Full calculations within this model are computationally time consuming, so in practice one uses accurate analytic representations in both energy and density (Lu et al., 1989; Mustre de Leon et al., 1991) of $S_{HL}$. Although there is some evidence for positive corrections to the Hedin–Lundqvist self-energy (Horsch, von der Linden, and Lukas, 1989; Mustre de Leon et al., 1991), the model appears accurate to within a few eV at XAFS energies. To avoid a discontinuity at the Fermi energy, it is convenient to shift the self-energy by a constant, i.e.
+$S(E,\mathbf{r}) = S_{HL}(E,\mathbf{r}) - S_{HL}(E_F,\mathbf{r}) + V_{xc}(\mathbf{r}).$
+The excited-state potential is therefore
+$V(E,\mathbf{r}) = V(\mathbf{r}) + V_{xc}(\mathbf{r}) + S_{HL}(E,\mathbf{r}) - S_{HL}(E_F,\mathbf{r}).$
+This formulation represents extrinsic losses accurately via $\Im S(E,\mathbf{r})$. A disadvantage is that the plasmon-pole approximation introduces a weak, unphysical cusp at the onset of plasmon excitations in the near-edge region. More sophisticated self-energy approaches have been suggested (Fujikawa and Hedin, 1989; Fujikawa et al., 1995) but are not yet widely implemented.
+
+#### b. Mean free path
+The imaginary part of the self-energy produces a Lorentzian broadening of the XAFS spectrum with half-width $\Im S$ (Schaich, 1973) and accounts for extrinsic losses. The Hedin–Lundqvist self-energy $S_{HL}(E)$ yields a good approximation for EXAFS losses (Mustre de Leon et al., 1991) and generally agrees with experimental mean-free-path values $l\approx k/|\Im S(E)|$ (Penn, 1987). This relation follows from expanding, in atomic units, 
+$(1/2)k^2=(1/2)(k+i/l)^2=E-S(E).$
+The quantity $l$ also matches the “universal” mean-free-path curve (Lindau and Spicer, 1974; Seah and Dench, 1979) up to a factor 2, since that curve measures decay in beam intensity while XAFS measures decay in wave amplitude. Despite good EXAFS agreement, at low energies the plasmon-pole model tends to overestimate loss and shows an unphysical jump at the plasmon onset. This can be corrected by an ad hoc position-averaged approximation (Penn, 1987; Roy and Gurman, 1999), though it destroys local $l(\mathbf{r})$ behavior. A better treatment is desirable.
+
+#### c. Energy shifts
+Comparison of XAFS peak energies from ground-state band-structure theory with experiment reveals a systematic low-energy shift that can be represented by linear scaling,  
+$E_{\rm exp}=E_{\rm th}(1+\alpha)$,  
+where $\alpha\approx0.05$ (Materlik et al., 1983). Such scaling is consistent with a real energy-dependent self-energy or exchange interaction (Mustre de Leon et al., 1991). Although ignored in phenomenological XAFS theories (e.g. with only a mean-free-path term), one could anticipate it—dispersion relations for the self-energy demand a real energy shift accompany a finite mean free path.
+
+### 3. Intrinsic losses and the initial- and final-state rules
+#### a. Amplitude-reduction factor $S_0^2$
+Intrinsic losses correspond to excitations arising from creation of a core hole in the photoabsorption process. Although XAFS theory is often presented in a one-electron picture—one electron transitions from a core orbital to an excited state—the process is truly many-body, and other electrons are generally excited (shakeup and shakeoff processes). These secondary emissions arise from relaxation of the $N-1$ electron Fermi sea in response to the core hole. Because these processes share final states, their quantum amplitudes can interfere and their rates cannot be simply added. Rehr et al. (1978) treated intrinsic effects by neglecting interference near the edge—adequate for current EXAFS calculations, though a fully satisfactory theory is still lacking.
+
+To derive intrinsic effects one examines the full many-body x-ray absorption spectrum,
+$\displaystyle \mu(\omega)\propto \sum_f \bigl|\langle C_f^N|\sum_{j=1}^N\mathbf{p}_j\!\cdot\!\mathbf{A}(\mathbf{r}_j)|C_i^N\rangle\bigr|^2\,\delta(E_f-E_i-\hbar\omega).$
+In Hartree–Fock or density-functional approximations the initial and final states are Slater determinants computed with different self-consistent potentials (Bagus, 1965). The initial potential is that of the ground state; the final includes the core hole and photoelectron. The calculation simplifies if one assumes the final state factors, i.e. $|C_f^N\rangle=|F^0_{N-1}\rangle\,|f\rangle$, which is a …## b. Excitations
+
+Because of these relaxation effects, the observed EXAFS amplitudes are reduced from their one-electron values by a phenomenological factor, usually taken as a constant. To see this, consider contributions from multielectron transitions (Natoli _et al._, 1990). If \(S_0^2\neq1\), there must be contributions from channels in which the \((N\!-\!1)\)-electron “ion” is left in an excited state \(\lvert\Psi_n^{N-1}\rangle\) with excitation energy \(E_n\). The net absorption is then  
+\[
+m \;=\;\sum_n m_n \;=\;\sum_n \bigl\lvert\langle f_n'|\hat\varepsilon\!\cdot\!r|f_c\rangle\bigr\rvert^2\,S_n^2\,,  
+\]
+where  
+\[
+S_n \;=\;\langle\Psi_n^{N-1}|\Psi_0^{N-1}\rangle  
+\]
+is the many-body overlap integral, and the photoelectron energy is reduced by \(E_n\). In the absence of relaxation, orthogonality would force \(S_n=0\) for \(n\neq0\).  
+
+Because the \(\{S_n^2\}\) sum to unity by completeness, the total spectrum can be written as a convolution of a one-electron spectrum \(\tilde m(\nu)\) with an excitation spectrum \(A(\nu)\):  
+\[
+m(\nu) \;=\;\int_0^\nu d\nu'\;\tilde m(\nu-\nu')\,A(\nu')\,,  
+\]
+where  
+\[
+A(\nu) \;=\;\sum_n S_n^2\,\delta(\nu - E_n)\,.  
+\]
+Including extrinsic losses corresponds to using a complex optical potential in the one-electron calculation. Similar convolution results arise in the GW approach (Hedin, 1989) and multichannel multiple-scattering theory (Natoli, 1990).  
+
+Physically, \(S_n^2\) is the probability that the ion ends in the \(n\)th excited state. The centroid of \(A(\nu)\) satisfies Koopman’s theorem (Manne and Åberg, 1970), and its difference from the absorption onset is the relaxation energy. If \(A(\nu)\) were a delta function, one would recover the initial-state rule (photoelectron calculated without a core hole).  
+- **Near threshold**: only the primary channel (\(n=0\)) contributes, consistent with the final-state rule (fully relaxed core hole).  
+- **High energy**: all channels are active; the spectrum is a smeared delta function, yielding results equivalent to the initial-state rule.  
+
+Interference between extrinsic and intrinsic processes can be important near threshold, leading to “replacement terms” and the x-ray edge singularity (Friedel, 1969). Formal treatments including interference and the crossover between initial and final-state rules are given by Bardyszewski and Hedin (1985) and applied to XAFS by Hedin (1989). Near threshold, extrinsic and intrinsic losses tend to cancel (Inglesfield, 1983; Bardyszewski and Hedin, 1985; Fujikawa, 1993), suppressing shakeup and shakeoff excitations.
+
+## c. Phasor sum
+
+For a scattering path of length \(2R\), intrinsic excitations enter through a phasor sum similar to the convolution above:  
+\[
+S_2(\nu,R) \;=\;\int_0^\nu d\nu'\,\tilde A(\nu')\;e^{-i\bigl[k(\nu)-k'(\nu')\bigr]R}\,,
+\]
+where  
+\[
+k(\nu)=\sqrt{\nu},\quad k'(\nu')=\sqrt{\nu-\nu'},\quad 
+\tilde A(\nu')=\frac{A(\nu')}{\int_0^\nu d\nu''\,A(\nu'')} .
+\]
+At intermediate EXAFS energies, \(\tilde A\) is normalized to unity, and \(S_2\) is dominated by \(S_0^2\). At low or very high energies, \(S_2\to1\). In general, the one-electron XAFS signal \(\chi\) must be multiplied by a complex, weakly energy- and path-dependent amplitude-reduction factor \(S_2(E,R)\), which acts like a small additional contribution to the mean free path.
+
+# III. Curved-Wave Multiple-Scattering Theory
+## A. Multiple-scattering expansion
+Curved-wave multiple-scattering theory provides a unified treatment of EXAFS and XANES and shows formal equivalence between the full multiple-scattering expansion and exact treatments (Fonda, 1992). Convergence requires sufficiently high orders of scattering and their configurational average (Zabinsky _et al._, 1995). The main computational challenges are:  
+1. Large angular-momentum basis at high energies.  
+2. Exponential growth of multiple-scattering paths.  
+3. Inclusion of multiple-scattering Debye–Waller factors.  
+
+As an example, high-order paths are important in Cu metal XAFS (Rehr _et al._, 1978).
+Starting from the absorption expressed via the one-particle Green’s function  
+\[
+G(\mathbf r,\mathbf r';E)=\sum_f\frac{\psi_f(\mathbf r)\,\psi_f^*(\mathbf r')}{E-E_f+i\Gamma}\,,
+\]
+the absorption from core level \(c\) is  
+\[
+\mu = -\frac1\pi\;\mathrm{Im}\,\langle c|\hat\varepsilon\!\cdot\!r\;G(E)\;\hat\varepsilon\!\cdot\!r|c\rangle\,,
+\]
+where \(\Gamma\) includes extrinsic and intrinsic losses, and the Hamiltonian includes a screened core hole via an optical potential \(V+iS\).
+
+Separating the Green’s function into a central-atom part \(G_c\) and a scattering part \(G_{sc}\), one finds in a local angular-momentum basis (\(L=(l,m)\)):  
+\[
+G_c(\mathbf r,\mathbf r';E)
+=-2k\sum_L R_L(r_<)\,H_L(r_>)\,,  
+\]
+\[
+G_{sc}(\mathbf r,\mathbf r';E)
+=-2k\sum_{L,L'}R_L(r)\,G^{{sc}}_{LL'}(E)\,R_{L'}(r')\,.
+\]
+Here \(R_L(r)=i^l\,R_l(r)\,Y_{L}(\hat r)\) is the regular solution, \(H_L=R_L-iN_L\) the outgoing solution, and \(G^{{sc}}=(1-G^0 t)^{-1}G^0\) with the free propagator \(G^0\) and scattering \(t\)-matrices.
+
+A key result is factorization of \(\mu\) into an atomic background \(\mu_0\) and an XAFS modulation \(\chi\):  
+\[
+\mu=\mu_0\bigl(1+\chi_\ell\bigr),\qquad
+\mu_0=\bigl|\langle c|\hat\varepsilon\!\cdot\!r|R_\ell\rangle\bigr|^2,
+\]
+\[
+\chi_\ell=\mathrm{Im}\,\langle S_m\,[(1-G^0 t)^{-1}G^0]_{\ell m,\ell m}\rangle.
+\]
+This separates the embedded-atom cross section \(\mu_0\) (central potential) from multiple-scattering contributions, and cleanly links EXAFS and XANES analyses.Here we continue the discussion of XANES and XAFS in terms of multiple‐scattering and band‐structure approaches.
+
+Because of the similarity between μℓ(E) (the “properly screened core‐hole” spectrum) and the projected density of states ρℓ(E), it is often assumed that XANES essentially measures the ground‐state angular‐momentum–projected density of states. In fact, one can write  
+μℓ(E) = μℓ⁰(E) [1 + χℓ(E)] (18)  
+where μℓ⁰ is the atomic (embedded‐atom) contribution and χℓ is the fine‐structure term. However, this interpretation must be used with caution, since final‐state effects (core‐hole potentials, lifetime broadening, energy shifts) can significantly modify the edge shape. Moreover, the strict factorization into atomic and fine‐structure parts holds only for real potentials; complex potentials introduce cusp singularities in the central‐atom Green’s function that lead to small background corrections near the Fermi energy but do not affect the XAFS χℓ.
+
+Schaich (1973) showed that the real‐space inverse‐matrix formulation of XAFS is directly analogous to the Korringa–Kohn–Rostoker band‐structure approach and thus unifies long‐ and short‐range‐order theories within muffin‐tin multiple‐scattering theory. By expanding the inverse matrix as a geometric series,  
+G = G₀ + G₀ t G₀ + G₀ t G₀ t G₀ + …,  
+one sees that the full matrix inverse (the exact result) is equivalent to summing over all multiple‐scattering paths, provided the series converges. Labeling each path by an index Γ, one can write the fine structure as a sum over paths,  
+χℓ = ∑Γ χΓ, (19)  
+where χΓ involves the product of t-matrices along path Γ, phase shifts at the absorber, and a thermal/configurational average. The short‐range‐order theory of XAFS then corresponds to truncating this series to a finite number of scattering events and including Debye‐Waller factors and inelastic losses.
+
+Convergence of the multiple‐scattering series is governed by factors such as the photoelectron mean free path, the spherical‐wave decay (1/kR) for each leg of length R, the scattering strength, and an exponential damping exp(−2R/λ(k)). Thermal and configurational averages introduce Debye‐Waller factors that further suppress long paths; for an n‐leg path they give exp(−2n²σ²k²), which often dominates the mean‐free‐path damping exp(−2n⟨R⟩/λ). Such damping is crucial in describing “shape resonances” in the near‐edge XAFS of low‐Z molecules.
+
+## B. Full multiple‐scattering methods
+In principle, one can sum the multiple‐scattering expansion to infinite order by switching to a Hamiltonian formulation and solving via exact diagonalization or by directly inverting the scattering matrix (Eq. 17). Modern full‐potential electronic‐structure methods (Albers, 1989) offer three major advantages:
+1. They compute self‐consistent, nonspherical charge densities and potentials appropriate to the crystalline or molecular environment.  
+2. They yield accurate Fermi energies relative to the unoccupied states.  
+3. They treat curved‐wave effects and multiple scattering to all orders.
+
+For these reasons, definitive XANES calculations have often been based on band‐structure methods (Müller et al., 1982; Albers et al., 1985). Using a local‐density‐approximation (LDA) and typically a simplified GW self‐energy (Mustre de León et al., 1991), such calculations can incorporate excited‐state effects more realistically than pure LDA eigenvalues. Lifetime and many‐body broadening effects are then included by Lorentzian convolution.
+
+Despite these strengths, full‐potential band‐structure approaches have drawbacks for EXAFS:
+- They do not naturally include Debye‐Waller factors, core‐hole potentials, or inelastic losses, which are essential beyond ∼50–100 eV above an edge.  
+- They are computationally demanding, providing far more electronic‐structure detail (many eigenstates, van Hove singularities) than is resolved in experiment.  
+- The required basis‐set size grows rapidly with energy above the edge (higher angular momenta, more extended states), making high‐energy EXAFS impractical.
+
+Thus XANES and EXAFS require different algorithms: full‐potential methods excel for near‐edge calculations, while finite multiple‐scattering approaches remain the methods of choice for the extended region, where path‐by‐path interpretation yields bond‐length and bond‐angle information.
+
+### 1. Band‐structure and exact diagonalization methods
+Exact diagonalization methods trace their origins to early band‐structure techniques under the muffin‐tin approximation, notably the augmented plane‐wave (APW) and Korringa–Kohn–Rostoker (KKR) methods. These approaches are formally equivalent: APW employs an augmented‐plane‐wave basis, while KKR is grounded in multiple‐scattering theory. For a periodic crystal without a core hole, KKR exactly solves the infinite multiple‐scattering expansion used in XAFS.
+
+One can include the core hole in a band‐structure framework via the supercell technique: a large unit cell containing a missing core state is periodically repeated, and self‐consistency is reached by increasing the supercell size to minimize defect–defect interactions. However, the diagonalization cost (scaling roughly as N³ for N basis functions) makes this approach expensive.
+
+Going beyond LDA eigenvalues to true quasiparticle energies requires many‐body techniques such as the GW approximation (Hedin and Lundqvist, 1969; Hybertsen and Louie, 1985; Aryasetiawan and Gunnarsson, 1998; Aulbur et al., 2000). While a full GW treatment has yet to be applied to XAFS, simplified LDA+GW schemes are common. Lifetime broadening, omitted in static diagonalization, is typically added phenomenologically by Lorentzian convolution (Rehr et al., 1978; Müller et al., 1982).
+
+Modern full‐potential methods yield excellent ground‐state charge densities and potentials, which improve near‐edge (XANES) calculations for open, covalent materials. Far above the edge (EXAFS), however, the photoelectron’s kinetic energy dominates, and non‐muffin‐tin corrections become negligible.
+
+The primary limitation of basis‐set methods lies in the explosion of required functions at higher energies (higher orbital angular momenta, more extended radial states) and the proliferation of eigenvalues in the conduction region. This growth typically confines band‐structure and cluster techniques to within ∼100 eV above the edge.## 2. Full multiple-scattering cluster methods
+
+The full multiple-scattering cluster approach is intermediate between band-structure and path-by-path techniques (Johnson, 1973; Dehmer and Dill, 1976; Kutzler et al., 1980). Like band-structure methods, it typically involves setting up a basis for expanding the system’s wave functions and then diagonalizing a Hamiltonian to solve variationally for the best set. Alternatively, in the cluster Green’s-function approach a multiple-scattering matrix must be inverted (Durham et al., 1982; Ankudinov et al., 1998). As in the path-by-path approach, these methods rely on a mean-free-path cutoff for convergence with respect to cluster size and to suppress surface effects.
+
+It is perhaps easiest to discuss the main idea of the cluster approach from a path-like analysis. The main XAFS structure arises from quantum interference as the excited photoelectron scatters off nearby atoms. Since the photoelectron has a finite mean free path, one only needs to know the electronic structure for a cluster of atoms around the absorbing site whose size is of the order of the mean free path. Thus, whether one is investigating a periodic solid or a molecule, an electronic-structure calculation for a sufficiently large cluster should provide all the information needed to understand an XAFS experiment.
+
+In practice there are additional issues:
+- **Cluster size.** The chosen cluster must be large enough so that boundary conditions imposed by cutting off the cluster do not significantly affect the electronic structure in the region sampled by the excited photoelectron.  
+- **Diagonalization costs.** As in band-structure methods, the basis set needed to handle highly excited photoelectrons must be drastically expanded. This usually restricts cluster calculations to the first ~100 eV above the absorption edge.
+
+Despite this limitation, full multiple-scattering cluster calculations have important advantages for XANES in complex systems. For example, multiple scattering within the cluster is treated to all orders, and Debye–Waller factors—though neglected—are relatively unimportant near the edge. Moreover, many biological systems have no periodicity and complex, asymmetric geometries that are difficult to treat with conventional band-structure methods.
+
+As in band-structure calculations, one must address the construction of the potentials seen by the photoelectron—whether mufftin-tin or full-potential LDA approaches. It is well known that LDA can exhibit serious errors for excited states, so Hartree–Fock or other excited-state methods may be required, including energy dependence of exchange–correlation effects.
+
+The muffin-tin approximation can be dangerous for optimized structures of small molecules, since occupied-electron wave functions spill into the interstitial region, where the potential deviates from a constant. However, the high kinetic energy of the photoexcited electron is not particularly sensitive to these perturbations, so mufftin-tin approaches can be adequate for XAFS even when they fail for ground-state properties. This raises the question of whether non-self-consistent potentials (e.g., overlapping atomic charge densities) may be preferable to self-consistent muffin-tin potentials, since self-consistency could drive the potential into a less accurate regime.
+
+Many basis sets and approaches are possible. A commonly used method is the Xα scattered-wave approach (Johnson, 1973; Kutzler et al., 1980). Tyson et al. (1992) discuss full and low-order multiple scattering. Drawbacks of full methods include the muffin-tin approximation and limitation to low energies. Corrections to the muffin-tin approximation have been treated by Natoli et al. (1986). The discrete variational method of Ellis and Goodman (1984) uses a local basis to avoid muffin-tin approximations but is also limited to low energies, as is the discrete-point finite-difference method of Joly et al. (1999). Durham et al. (1982) developed a cluster-based method that includes multiple scattering to all orders within a coordination shell but only a limited number of intershell scatterings; this was refined by Vvedensky et al. (1986) and Della Longa et al. (1995) and used extensively for XANES, though limited to low energies and small clusters. The continued-fraction method (Filipponi, 1991; Filipponi and DiCicco, 1995; Filipponi et al., 1995) sums the multiple-scattering series exactly for paths or clusters and can be faster, but also becomes time consuming at high energies. Recently, the cluster Green’s-function multiple-scattering method was extended to permit self-consistent calculations (Ankudinov et al., 1998), yielding projected electronic densities of states and x-ray absorption spectra with an approximate treatment of Debye–Waller factors.
+
+## C. Path-by-path methods
+The path-by-path multiple-scattering approach is the most useful general method for analyzing EXAFS experiments. Its main advantages are computational efficiency and accuracy, and it provides a geometrical parametrization ideal for extracting interatomic distances and structural quantities. Fourier transforms of XAFS show that near neighbors generally give dominant contributions, but multiple-scattering contributions from more distant paths eventually dominate the signal. Although enumerating multiple-scattering paths can become a computational bottleneck—since the number of paths grows exponentially with path length—this can be circumvented as discussed below.
+
+### 1. Exact path methods
+Pioneered by Lee and Pendry (1975), exact multiple-scattering formulas were originally too time consuming for more than single-scattering paths and a few low-order multiple-scattering paths. The plane-wave approximation allowed higher orders but works well only at high energies with an ad hoc inner-potential shift. Müller and Schaich (1983) showed that exact single-scattering curved-wave calculations could be obtained in closed form, and Gurman et al. (1986) extended this to fast, exact calculations of low-order multiple-scattering paths. While accurate for EXAFS, the method becomes too time consuming at high energies, effectively limiting it to triple-scattering paths. Brouder et al. (1989) derived a recursive method for higher orders.
+
+### 2. Small-atom approximations
+Variants of the small-atom approximation (Rehr et al., 1986) improve on the plane-wave approximation by including curved-wave corrections. These introduce a significant phase shift of order ℓ(ℓ+1)/(kR) into each partial wave, important throughout the XAFS regime. Methods based on this approximation yield good accuracy for single-scattering extended XAFS but lose precision at low energy and for noncollinear paths. They have been largely supplanted by more accurate numerical methods, but still provide quick estimates of high-order multiple-scattering contributions, useful as path filters (Zabinsky, 1995).
+
+### 3. Separable approximation
+A major advance is the separable representation of Green’s-function propagators developed by Rehr and Albers (1990), addressing three difficulties: (1) large angular-momentum basis, (2) proliferation of multiple-scattering paths, and (3) the need for correlated multiple-scattering Debye–Waller factors. First, rotation matrices are used to align successive bonds in a path along the z axis, reducing the problem to “z-axis propagators,” which separate angular and energy dependence and permit an expansion in the angular quantum number m (Barton and Shirley, 1985). Although these propagators alone improve high-energy accuracy, they still couple high angular momenta.
+
+The second step is an exact, separable representation of the z-axis propagators, inspired by a low-energy approximation of Barton and Shirley (1985). This yields an exact matrix factorization of the full propagator of the form  
+`G_{L R,L' R'} = ∑ (e^{i k R'} / (k R')) S_{l} Y_{L,l} Ỹ_{l,L'}`,  
+where `R' = R_8 − R`. The generalized spherical-harmonic expansion coefficients `Y_{L,l}` and `Ỹ_{l,L'}` converge rapidly. Practical and stable recursive procedures for this separable representation have been developed (Manar and Brouder, 1995; Sebilleau, 1995), and convergence is discussed by Chen et al. (1998).## C. Separable Representation (Rehr–Albers Approach)
+
+At lowest order or high energies the result becomes equivalent to the small‐atom approximation discussed above. The advantage of the separable representation is that it permits one to combine and then sum all the factors involving L at a given site into a scattering matrix  
+$$F_{l',l}(L)=\langle L'\!\mid \tilde Y\,t\,\tilde Y\!\mid L\rangle,$$  
+which is the analog of the scattering amplitude. Moreover, the method gives an accurate curved‐wave XAFS formula directly analogous to that with the plane‐wave approximation, but with the usual scattering amplitudes f( u ) replaced by low‐order (typically 6×6) matrices F. The method can naturally be generalized to include off‐diagonal t matrices with muffin‐tin corrections.
+
+The efficiency of the Rehr–Albers approach is due to this truncated separable representation, since one can quickly multiply any number of 6×6 matrices. Thus, for an N‐leg path G with scatterers at  
+$$R_1,R_2,\dots,R_N\equiv R_0,$$  
+the result for the XAFS amplitude is  
+$$
+\chi_G(p)=\Im\Bigl[S_0^2\,\frac{e^{\,i\,(r_1+r_2+\cdots+r_{N+1}+2\delta_l)}}{r_1\,r_2\cdots r_N}\;e^{-s_G^2p^2/2}\;\mathrm{Tr}\bigl[M_l\,F_N\cdots F_1\bigr]\Bigr]\,,
+\tag{21}
+$$  
+where  
+- $r_i = p\,|R_i-R_{i-1}|$,  
+- $p=\sqrt{E- V_{\rm mt}}$ is the photoelectron momentum measured with respect to the muffin‐tin zero (in Rydberg atomic units),  
+- $F_i$ is the scattering matrix at site $i$,  
+- $M_l$ is the termination matrix for the final state of angular momentum $l$,  
+- $S_0^2$ is a many‐body reduction factor, and  
+- $s_G^2$ is the mean‐square variation in total path length.
+
+The adequacy of 6×6 matrices was verified by using the exact z‐axis propagators (Rehr and Albers, 1990), which are slower by one or more orders of magnitude.
+
+Finally, when one substitutes $k=\sqrt{p^2+\,k_F^2}$ and redefines terms appropriately, the result for χ_G can be recast exactly in terms of the standard XAFS formula, but with an effective scattering amplitude $f_{\rm eff}$,  
+$$
+\chi_G(k)=S_0^2\,\Im\Bigl[f_{\rm eff}\;\frac{e^{\,i\,(kR+2\delta_l)}}{kR^2}\;e^{-2R/\lambda(k)}\;e^{-2s^2k^2}\Bigr]\,.
+\tag{22}
+$$  
+The second difficulty mentioned above is the path‐proliferation problem. Fast multiple‐scattering calculations of a given path are not enough to calculate XAFS for a material, due to exponential path proliferation. Fortunately, most multiple‐scattering paths are of small amplitude and largely cancel. Thus one can introduce “filters” in the path enumeration scheme to restrict the number of paths under consideration (Zabinsky et al., 1995).  
+
+To automate this procedure, the contribution of a given multiple‐scattering path can be estimated using the plane‐wave or spherical‐wave approximation, and only those paths whose amplitude exceeds a given cutoff are retained. This is done with a constructive “heap algorithm” that only retains the subset of paths less than a given path‐length cutoff and likely to be important. To deal with degeneracies, physically equivalent paths are hash‐sorted, and only those with amplitudes above a second cutoff are retained. Each path is assigned a unique 32‐bit number or hash key based on its geometry, independent of orientation, which makes sorting easy. With these filters, only a few percent of the multiple‐scattering paths within a given cluster need to be calculated to yield XAFS accurate to a few percent—typically around 100 paths.
+
+Finally, to address the third difficulty, Debye–Waller factors are easily added, usually by the average $\langle e^{2ikR}\rangle$ and ignoring the distance variation of all other terms (see Sec. IV). In the XANES region, Farges et al. (1997) found that smaller values of the path cutoffs and typically 1000 or more paths are needed to simulate the spectra when the multiple‐scattering expansion converges.
+
+## D. Alternative Methods and Extensions
+Various alternatives to the path‐by‐path method have been discussed:
+- **Group n or GNXAS method** (Filipponi and Di Cicco, 1995; Filipponi et al., 1995) systematically combines all the multiple‐scattering contributions for a given set of n sites within a cluster. This has conceptual simplicity since the multiple‐scattering series contains far fewer distinct terms than path‐by‐path methods. Grouping in this way overcomes the path‐proliferation problem and leads to faster convergence of the multiple‐scattering series. However, each such term then contains contributions at a number of distinct path lengths, complicating the treatment of vibrational and structural disorder and requiring a numerical configurational average.
+- **Repartitioning methods** (Fujikawa, 1993) sum exactly certain strong multiple‐scattering terms (such as those from near neighbors) while treating the remaining terms with a path‐by‐path expansion.
+- **Iterative multiple‐scattering schemes** (Huasheng and Tong, 1999).
+Efficient approaches of this kind are important for tackling the still intractable problem of XANES calculations in large clusters.
+
+## E. Example of Multiple‐Scattering Approaches
+The Rehr–Albers approach (Rehr and Albers, 1990) has proved powerful for XAFS calculations in general materials. In many cases where the multiple‐scattering expansion converges, it also yields good results for XANES. One of the first examples was the calculation of shape resonances in small molecules, which dominate the fine structure in XANES (“near‐edge XAFS”) (Stöhr, 1992). For these systems, the Rehr–Albers approach showed good agreement with ab initio calculations (Stöhr and Bauchspeiss, 1991) and demonstrated the importance of multiple‐scattering Debye–Waller factors (Zabinsky et al., 1995).
+
+Another stringent test is fcc Cu. Because of its close‐packed structure and strong scattering potentials, there are on the order of 10^6 paths of length less than the typical mean free path (~20 Å). Early calculations that demonstrated convergence of the multiple‐scattering series to band‐structure accuracy required several CRAY CPU hours. However, with path filters set to 4% of the first‐shell amplitude—roughly corresponding to experimental noise—only 54 of the 17 134 paths out to the eighth shell survive. Of these, paths with more than four legs were collinear scatterings, which are important due to the large forward‐scattering focusing effect of an intermediate atom. Surprisingly, triangular paths can be comparable in importance to focusing paths, especially for short bond lengths; higher‐order noncollinear paths tend to be negligible since they involve a product of scattering amplitudes that become small at higher energy.
+
+Highly automated methods based on the Rehr–Albers approach now provide the main algorithm for much of current XAFS analysis work (e.g., Newville et al., 1995).
+
+Farges et al. (1997) have shown the convergence of the finite multiple‐scattering path expansion in the near‐edge region of complex minerals (Ba₂TiO₄, K₂TiO₅), reproducing all XANES features—including pre‐edge peaks—by these calculations.
+
+## IV. Debye–Waller Factors and Disorder
+### A. Introduction
+The XAFS Debye–Waller factor arises naturally from fluctuations in interatomic distances. At…## Finite-Temperature Effects and the Debye–Waller Factor
+
+At finite temperatures, as the atoms vibrate around their equilibrium lattice sites, they slightly alter the interference pattern for a given path. The net signal results from an average of ⟨e2ikR⟩ over many paths, which tends to smudge details of the XAFS amplitude at higher values of k (shorter wavelength). This factor is analogous to that encountered in x-ray diffraction and generally adds an exponential decay factor to the XAFS amplitude (Crozier et al., 1988). Because of its near-Gaussian form, e2W′ ≈ exp(–2σ^2k^2), this factor is largely responsible for the exponential decay of XAFS with increasing energy (or k) and for its temperature dependence (see Fig. 8). Its crucial importance in quantitative XAFS theory was recognized early by Schmidt (1961, 1963) and is one of the key ingredients in the modern XAFS equation (Sayers et al., 1971).
+
+Such factors are generally ignored in most ground-state electronic-structure and quantum-chemistry calculations, since σ^2k^2 ≪ 1 at sufficiently low energies. Additionally, there are anharmonic corrections that are necessary for understanding the effects of thermal expansion on XAFS (Eisenberger and Brown, 1979). Currently the standard treatment of such vibrational and configurational disorder is based on phenomenological models, such as the correlated Einstein (Sevillano et al., 1979) and correlated Debye (Beni and Platzman, 1976) models. However, these models are only marginally satisfactory in current XAFS theory. In the future, it would be desirable to calculate these factors from an ab initio approach, which is quite difficult at present (Dimakis and Bunker, 1998; Poiarkova and Rehr, 1999). The summary below is not intended to be exhaustive, but to highlight the most important aspects of this topic. For additional discussion, the reader is referred to various reviews (e.g., Crozier et al., 1988; Dalba and Fornasini, 1997).
+
+---
+
+### B. Formal Properties
+The XAFS Debye–Waller factor can be viewed as a result of averaging the contribution to the XAFS signal from a given scattering path over all thermally accessible configurations of the atoms in that path. It is not necessary to distinguish between single- and multiple-scattering paths, since both are parametrized similarly in terms of an effective scattering amplitude f_eff in the standard curved-wave XAFS formula (Poiarkova and Rehr, 1998).
+
+To a very good approximation one can ignore (or lump into the distribution function) the weak configurational dependence of the scattering factor, f_eff / (kR^2), so that the multiple-scattering Debye–Waller exp(–2W_G) for a path G comes only from the average over the oscillatory factor in the XAFS equation, i.e.,
+⟨e2ik r⟩ = e2ik R e–2W_G(k),
+where R = R_tot / 2 denotes the mean half-total path length for a multiple-scattering path of total length R_tot and instantaneous half-length r. In the remainder of this section we shall ignore the path-index subscript G, unless it is needed explicitly.
+
+The thermal part of the average can be calculated from statistical-mechanical methods and a lattice Hamiltonian H (or dynamical matrix D):
+⟨e i 2k r⟩ =  
+Tr [e–βH e i 2k r]  
+Tr [e–βH] ,
+where β = 1 / (k_BT). In addition, there may also be static disorder, which is obtained by a further configurational average. To the extent that thermal and configurational disorder are independent, their contributions to the net Debye–Waller factor are simply additive.
+
+---
+
+## Table I
+
+| Path | R_eff (Å) | C_cw (%) | Label | Degeneracy | Legs | Comment          |
+|------|-----------:|---------:|:-----|-----------:|-----:|:-----------------|
+| 1    | 2.56       | 100.00   | 11   | 12         | 2    | ss, 1st shell    |
+| 2    | 3.61       | 20.23    | 22   | 6          | 2    | ss, 2nd shell    |
+| 3    | 3.83       | 12.28    | 111  | 48         | 3    | triangle         |
+| 4    | 4.36       | 8.96     | 211  | 48         | 3    | triangle         |
+| 5    | 4.43       | 44.77    | 33   | 24         | 2    | ss, 3rd shell    |
+| 6    | 4.77       | 13.47    | 311  | 96         | 3    | triangle         |
+| 7    | 4.77       | 6.99     | 131  | 48         | 3    | triangle         |
+| 8    | 5.11       | 14.32    | 44   | 12         | 2    | ss, 4th shell    |
+| 9    | 5.11       | 32.63    | 411  | 24         | 3    | shadow           |
+| 10   | 5.11       | 7.17     | 141  | 12         | 3    | linear           |
+| 11   | 5.11       | 4.04     | 1111 | 48         | 4    | dogleg           |
+| 12   | 5.11       | 24.16    | 1111 | 12         | 4    | shadow           |
+| 13   | 5.11       | 8.74     | 1111 | 12         | 4    | linear           |
+| 14   | 5.30       | 4.02     | 321  | 48         | 3    | triangle         |
+| 15   | 5.30       | 4.55     | 312  | 48         | 3    | triangle         |
+| 16   | 5.71       | 6.15     | 313  | 48         | 3    | triangle         |
+| 17   | 5.72       | 19.93    | 55   | 24         | 2    | ss, 5th shell    |
+| 18   | 5.94       | 4.83     | 512  | 48         | 3    | triangle         |
+| 19   | 5.94       | 5.31     | 251  | 48         | 3    | triangle         |
+| 20   | 6.05       | 4.83     | 431  | 96         | 3    | triangle         |
+
+---
+
+## Table II
+
+| Path type                 | Number | Importance (%) |
+|---------------------------|-------:|---------------:|
+| single scattering         |     15 |          46.19 |
+| shadow                    |     15 |          24.23 |
+| linear                    |      4 |           4.40 |
+| triangle                  |     17 |          20.67 |
+| triangle, shadow leg      |      2 |           2.28 |
+| dogleg                    |      2 |           1.48 |
+| quadrilateral             |      1 |           0.73 |
+| all other paths (1,159)   |   1,159|           9.50 |
+
+## Displacement Correlations and Effective Path Length
+The main difference between the Debye–Waller factors in XAFS and those in x-ray diffraction is the dependence of the XAFS Debye–Waller factor on displacement correlations. Only those displacements that change the total path length affect the interference pattern. Let *u*ᵢ be the displacement from equilibrium of the ion at site *i*, so that, neglecting terms of order *u*ᵢ², the effective path length for a scattering path with *n* legs is
+`r = ∑ᵢ₌₁ⁿ Rᵢ + ½ ∑ᵢ₌₁ⁿ (uᵢ – uᵢ₋₁)·R̂_{ii₋₁}`,
+where *i*–1 ≡ *i*+1 mod(*n*), *R*ᵢ = |R_{ii₋₁}|/2 is the equilibrium half-path length, and R_{ii₋₁} is the equilibrium vector between atoms *i* and *i*–1.
+
+From the Born–Oppenheimer approximation, the ion motion can be regarded as stationary during the photoexcitation process. Hence the thermal averages are to be carried out in the ground state prior to the x-ray absorption. For any harmonic Hamiltonian or Gaussian disorder one has the exact result (Maradudin et al., 1971):
+`⟨e^{i2k∑ (uᵢ – uᵢ₋₁)·R̂_{ii₋₁}}⟩ = e^{-2k²σ²}`,
+where σ² denotes the mean-square fluctuation in the effective path length *r*,
+`σ² = ¼ ⟨[∑ (uᵢ – uᵢ₋₁)·R̂_{ii₋₁}]²⟩`.
+
+For example, in the single-scattering case with two atoms at sites 0 and *R*,
+`σ_R² = ⟨[(u_R – u_0)·R̂]²⟩
+         = ⟨(u_R·R̂)²⟩ + ⟨(u_0·R̂)²⟩ – 2⟨(u_R·R̂)(u_0·R̂)⟩.`
+
+The displacement correlations decay algebraically with distance, and the scalar products ensure that only modes contributing to motion along a bond path are important. Therefore the XAFS Debye–Waller factor provides a measure of the displacement–displacement correlation function.
+
+## Temperature Dependence in the Harmonic Approximation
+
+As discussed by Sevillano et al. (1979), the temperature dependence of σ² in the harmonic approximation can be calculated in terms of a projected local vibrational density of states ρ_G(ν) and is therefore determined by the local vibrational structure in the vicinity of the path of interest:
+`σ²(T) = (ℏ² / 2m_G) ∫₀^{ν_max} [ρ_G(ν)/ν] coth(βℏν/2) dν`,
+where *m*_G is an appropriate reduced mass for the scattering path *G*, and ν_max is the maximum frequency of the lattice motion. For example, for single scattering the projected density of modes is
+`ρ_SS(ν) = ∑_ℓ [(√(m_R/M_R) e_R(ℓ) – √(m_R/M_0) e_0(ℓ))·R̂_G]² δ(ν – ν_ℓ)`,
+
+where ν_ℓ are the eigenfrequencies of the dynamical matrix *D*, and *e*_R(ℓ) the normalized eigenvectors. Equation-of-motion approaches for efficient calculations of ρ_G(ν) and σ², including quantum effects, have recently been discussed by Poiarkova and Rehr (1998).
+
+## Phenomenological Models
+
+Unfortunately, the dynamical matrix or even the local spring constants are not known in most cases of interest, and hence in practice one must often rely on simpler, phenomenological approximations. Two such methods are the correlated Debye and correlated Einstein models, which have been modified from the conventional Debye and Einstein models to approximately account for displacement–displacement correlations.
+
+### 1. Correlated Debye Model
+
+The correlated Debye model was introduced in XAFS theory by Beni and Platzman (1976). As in the original Debye model (Ashcroft and Mermin, 1976), the model assumes a homogeneous system with a constant speed of sound and a maximum phonon frequency ν_D and gives a Debye integral for the displacement–displacement correlation function. Equivalently, the model gives a spherical approximation to σ² with a projected vibrational density of states for an atomic bond (0,*R*) of the form:
+`ρ_R(ν) = (3ν²/ν_D³) [1 – sin(νR/c)/(νR/c)]`,
+where ν_D = k_B u_D/ℏ is the Debye frequency, *u*_D is the Debye temperature, *c* = ν_D/k_D is the speed of sound, *k*_D = (6π²N/V)¹ᐟ³, and *N*/V is the atomic number density. The second term in brackets accounts for correlations and depends on bond length.
+
+### 2. Correlated Einstein Model
+
+The correlated Einstein model approximates the projected vibrational density of states with a single delta function centered at the effective vibrational frequency ν_E^G for a given multiple-scattering path *G*:
+`ρ_j(ν) = δ(ν – ν_E^G)`.
+
+The appropriate Einstein frequency ν_E^G can be interpreted (Frenkel and Rehr, 1993; Hung and Rehr, 1997) in terms of the local potential energy in a normalized lattice state corresponding to path *G*. For example, in the single-scattering case, ν_E is related to the local effective bond-stretching force constant *k*_R = *m*_R ν_E²(*R*). This value of ν_E(*R*) is equivalent to the natural vibrational frequency of the bond (0,*R*) together with all attached neighboring bonds, regarding all other masses as fixed. Similarly, the potential energy ½ *k* σ² of a stretched path with path-length fluctuation σ is equal to that of a single-spring model with reduced mass *m* and spring constant *k* = *m* ν_E². Although the Debye model is often better than the Einstein approximation for systems with acoustic modes, neither is usually adequate for heterogeneous systems. One can also obtain an estimate of ν_E^G by scaling the Debye temperature (Sevillano et al., 1979; Lottici, 1987).
+
+## Radial Distribution Function
+
+The configurational and thermal average ⟨…⟩ can be defined in terms of a radial distribution function appropriate to a given path. For weak disorder, the distribution function can be approximated by a Gaussian with width σ². Anharmonic corrections and any skew in the radial distribution generally lead to corrections to the Gaussian form of the Debye–Waller factor. Due to the limited data range of the XAFS (generally between about 2 and 20 Å⁻¹), the precise nature of the radial distribution function cannot generally be determined. It is often useful, however, to parametrize this distribution function, particularly in disordered systems. Alternatively, one can define the XAFS entirely in terms of the contributions from the various irreducible *n*-atom distribution functions, as in the GNXAS approach (Filipponi and DiCicco, 1995; Filipponi et al., 1995). However, such *n*-atom distributions are considerably more complicated than two-atom distributions and have weaker XAFS contributions, so this can be difficult to achieve in practice.### E. Cumulant expansion
+
+The cumulant moments (Kubo, 1962) of the distribution (or cumulants) are more stably determined and have a more natural interpretation.  The use of cumulants for XAFS was introduced by Rehr (1979), who showed that the XAFS Debye–Waller factor is generally complex and has a natural cumulant expansion in powers of $k$ of the form  
+$\langle e^{i2k(r-R)}\rangle = \exp\bigl(\sum_{n=0}^\infty \frac{(2ik)^n}{n!}\,s^{(n)}\bigr) = e^{-W + iF},$ (32)  
+where $s^{(n)}$ denotes the $n$th cumulant average.  The leading cumulants (with respect to the mean) are given by (see Crozier et al., 1988):  
+- $s^{(1)} = \langle r - R\rangle,$ (33)  
+- $s^{(2)} = \langle (r - R)^2\rangle \equiv s_2(T),$ (34)  
+- $s^{(3)} = \langle (r - R)^3\rangle,$ (35)  
+- $s^{(4)} = \langle (r - R)^4\rangle - 3\,[s^{(2)}]^2.$ (36)  
+
+Explicit examples of such cumulants are discussed by Bunker (1983).  Thus, neglecting small contributions from the mean free path (which implies a complex $k$), the amplitude of the XAFS Debye–Waller factor $\exp(-W)$ contains only even moments,  
+$W(k) = \tfrac12\,s_2\,k^2 - \tfrac{2}{3}\,s^{(4)}\,k^4 + \dots,$  
+whereas odd moments contribute to the XAFS phase  
+$F(k) = -2k\,s^{(1)} - \tfrac{4}{3}\,s^{(3)}\,k^3 + \dots.$  
+
+The $k^3$ behavior is particularly important for large disorder.  If not corrected for, the term with the third cumulant gives rise to an apparent contraction of distances extracted from XAFS experiment with increasing temperature (Eisenberger and Brown, 1979).  This anharmonic effect on the XAFS phase is illustrated in Fig. 8, which shows the XAFS for Ag at various temperatures.
+
+Recently, it has been found that these anharmonic corrections can be roughly accounted for by taking advantage of certain algebraic relations between the cumulants.  These relations have been derived by making use of an effective cubic anharmonic pair potential $V(x)=\tfrac12\,k\,x^2 + k_3\,x^3$ for a given path, where $x = r - R$.  The effective coupling constants in these relations are those for an anharmonic correlated Einstein model that takes into account the interatomic potentials as well as contributions from neighboring springs (Frenkel and Rehr, 1993; Hung and Rehr, 1997).  For example, it was found (Stern et al., 1990; Wenzel et al., 1990) that in the classical limit the cumulant ratio $s^{(3)}/[s^{(1)}\,s_2(T)] = 2$.  This relation breaks down at low temperatures $T\ll T_D$, but has been generalized (Frenkel and Rehr, 1993) to yield relations for $s^{(1)}$ and $s^{(3)}$ in terms of $s_2(T)$ and the net thermal expansion, for example  
+$$
+s^{(1)} = -\frac{3\,k_3}{k}\;s_2(T).
+\tag{37}
+$$  
+Thus calculations of $s_2(T)$ alone suffice to determine the anharmonic corrections up to an overall constant.  Moreover, Hung and Rehr (1997) show that the cumulant ratio, including quantum corrections, can be expressed as  
+$$
+\frac{s_j^{(3)}}{s_j^{(1)}\,s_j^2(T)}
+= 2 \;-\;\frac{4}{3}\,\Bigl(\frac{s_{0j}^2}{s_j^2(T)}\Bigr)^2,
+\tag{38}
+$$  
+where $s_{0j}^2 = \hbar^2/\bigl(2m\,\nu_E(R)\bigr)$ is the zero-point contribution to $s_2(T)$.
+
+There are a host of corrections to these results (Dalba and Fornasini, 1999).  Most are relatively small and generally negligible compared to uncertainties in the Debye–Waller factors, which are typically of the order of 10–20%.  For example, there are small corrections from the distance dependence of the spherical-wave factors $1/R^2$ in the XAFS formula.  These can be lumped into an effective distribution function with a slightly different peak position, leading to a correction $s^{(1)}\to s^{(1)} + 4k\,s_2/R$.  In addition, there are Debye–Waller spherical-wave corrections in the effective scattering amplitude, which can be estimated using the spherical-wave approximation (Rehr et al., 1986).  This yields an additional energy-independent amplitude factor for each partial wave $l$,  
+$$
+t_l \;\to\; t_l\,e^{-W_l},
+\quad
+W_l \approx 2\,s_2\,\frac{l(l+1)}{R^2}
+\tag{Fujikawa et al., 1999}
+$$  
+that tends to reduce the Debye–Waller factor.  In addition, because of thermal expansion, all the microscopic force constants are expected to vary with temperature and pressure.  This yields an additional weak, linear, anharmonic temperature dependence in $s_2(T)$ at high temperatures, i.e.,  
+$$
+s_2(T)\to s_2(T)\,\bigl(1 + c\,T\bigr),
+$$  
+where $c$ is proportional to $k_3$ and the Grüneisen parameter.  Quartic and higher-order cubic ($\sim k_3^2$) terms in the effective potential also lead to corrections that are linear in $T$.
+
+## V. Conclusions
+
+A series of remarkable advances in the theory of x-ray absorption spectroscopy has been made over the past few decades, spurred in part by the availability of modern synchrotron‐radiation x-ray sources.  As a result, the theory of extended x-ray absorption fine structure is now in a very mature state that provides a qualitative understanding of all the physical processes involved, as well as a detailed quantitative agreement with experiment.  The key ingredients in the theory differ from those needed in conventional ground‐state electronic‐structure calculations and include high‐angular‐momentum scattering processes in a non‐Hermitian optical potential and Debye–Waller factors to account for vibrations and disorder.  Automated computer codes that implement the theory are now available for general materials.  The success of the modern theory represents one of the few cases in which theoretical efforts have explicitly focused on the quantitative treatment of an experimental technique and shows what can be achieved with such a focus.
+
+A large factor in this success is the tractability of the physics in the regime in which it operates.  In this case, the accuracy of the many approximations made is due largely to the high kinetic energy of the excited photoelectron, which dominates much of the physics.  This also explains why EXAFS is such an excellent tool for probing local structure, since path‐interference effects at large wave numbers dominate other competing physics.  Moreover, at high energies the one‐electron theory is a good approximation, and many‐body effects can be incorporated in an energy‐dependent self‐energy that can be well approximated by the local‐density approximation.  Also, at high energy, scattering is relatively weak and can be treated to an excellent approximation by a finite, albeit high‐order, multiple‐scattering expansion in the short‐range order theory.  Indeed, the essential difference between EXAFS and XANES is found to lie in the strength of the scattering, with the crossover energy being typically about 30 eV or less.  Interestingly, curved‐wave corrections are important at all energies, and simpler approximations such as the plane‐wave or spherical‐wave approximations are inadequate even at high energies.  In addition, it suffices to use spherical approximations for the scattering potentials at high energies, e.g., the muffin‐tin model, and to ignore self‐consistency.  Debye–Waller factors that account for displacement–displacement correlations and disorder are especially important in achieving the correct amplitudes.  Finally, an account of anharmonicity is important in order to achieve a proper understanding of the temperature dependence of the XAFS phase.  Remarkably, the standard EXAFS equation of Sayers et al. (1971) turns out to be a robust parametrization of the modern theory, provided that all quantities in the equation are appropriately redefined.
+
+Although most of the physical quantities needed in the theory can be determined by _ab initio_ calculations, a few must still be determined phenomenologically.  These remaining, poorly known quantities mainly affect the EXAFS amplitudes.  For example, the correlated Debye model, with the Debye temperature $T_D$ as a single fitting parameter, is often a reasonable approximation, although improvements are desirable in anisotropic systems.  Moreover, it would be useful to have a fully _ab initio_ procedure for the Debye–Waller factors and anharmonic corrections; this generalization would require total‐energy calculations, which is presently impractical in general systems.  Secondly, various many‐body effects that determine the magnitude of the amplitude‐reduction factor $S_0^2$ are not quantitatively understood.  Similarly, the behavior of the self‐energy is currently based on rather simple electron‐gas models and should be improved to achieve more accurate determinations of the mean free path and self‐energy shifts.  Thus, although the XAFS technique probes electronic excited states of the materials under investigation, the excited states themselves play a secondary role in modifying the basic interference fingerprint of the underlying fine structure.  Nevertheless, such amplitudes and phases are critical to the application of the EXAFS technique to extract accurate distances and coordination numbers from experiment.  While much work still needs to be done to refine various aspects of the theory and to make the tool more useful in extracting subtle structural details of complicated materials, the major pieces of physics are now well in hand.
+
+The most troubling and difficult aspects of x-ray absorption occur in the near‐edge region.  There, the present theories are at best only in semiquantitative agreement with experiment.  This is precisely where the dominance of the large kinetic energy of the excited photoelectron breaks down, and scattering and bonding effects are important.  In this regime, the details of the spatially complex potential‐energy surface between atoms become significant, and the complications of excited‐state physics (e.g., intra‐atomic excitations such as shakeup and shakeoff, exciton excitations, and resonance structures) make the theory much less tractable and general.  However, the factorization of XANES into an atomic background and XAFS contributions, i.e., $\mu = \mu_0\,(1 + \chi)$, can still be used to separate out the atomic and scattering contributions.  The scattering contributions to the XANES appear in $\chi$ and must be treated with a full multiple‐scattering approach when the multiple‐scattering expansion breaks down.  Moreover, much of the underlying near‐edge phenomenon depends not just on the atomic structure of the material, but much more significantly on the details of the electronic structure (e.g., whether the system is a metal, insulator, or semiconductor).  For example, the screening of the core hole appears to be system dependent and can dramatically affect the behavior of $\mu_0$.  Similarly, there can be local‐field corrections to the dipole operator and hence the atomic cross section can become important for shallow‐core excitations.  Thus the accurate calculation of the atomic background is an important challenge for future theories and is of critical importance to an accurate interpretation of XANES.  It is for these reasons that this review has focused primarily on the fine structure in the higher‐energy x-ray absorption.
+
+The success of EXAFS theory as a structural probe suggests the fruitfulness of extending the theory to related experimental probes such as electron energy‐loss fine structure (Denboer et al., 1994; Rez et al., 1998), diffraction anomalous fine structure (Cross et al., 1998), x-ray magnetic circular dichroism (Thole et al., 1992; Ebert and Schütz, 1996), and photoelectron diffraction (Fadley, 1991; Kaduwela et al., 1991).  The basic physics in all of these techniques involves similar high‐order electron–atom multiple‐scattering processes, which can all be treated with similar theoretical tools.  Indeed, much work along these lines is currently in progress.# Appendix: Muffin-Tin Radii
+
+In a muffin-tin approach, an important consideration is the choice made for the size of the muffin tins. Since this is rarely, if ever, discussed in the literature, here we collect the conventional wisdom about how such a choice may be rationally made and the pros and cons of different choices.
+
+Within a muffin-tin approximation it is important to optimize the calculation by adjusting the size of the muffin tins surrounding each atom (both the central atom whose core electron is being excited and neighboring atoms). Ideally, one would use a full-potential method for XAFS that takes into account the full spatial dependence of the charge density. In the absence of such a method, one must make a reasonable choice for the muffin-tin radii of all the different atoms. Like all approximations, such a choice is based on intuition and experience. For XAFS, one can try ideas derived from the early history of electronic-structure calculations, when muffin-tin calculations were extensively employed.
+
+Muffin-tin approximations fall into two general classes: overlapping and nonoverlapping. The nonoverlapping case usually tries to maximize the radii so that the muffin tins touch or nearly touch—minimizing the interstitial region, where the potential is treated less accurately than inside the tins. The overlapping case requires criteria for how large to make the muffin tins; this and related issues are discussed below. Either case involves some choice of relative size for different types of atoms and how to scale them.
+
+Three different approaches to choosing relative radii are often employed:
+
+1. **Empirical radii.**  
+   Based on experimental considerations of diverse phenomena (Pauling, covalent, metallic, or other radii), these can be used to scale the relative size of different atomic muffin tins.
+
+2. **Equal-potential boundary condition (Johnson, 1973).**  
+   The muffin tins are adjusted until the ground-state potentials (including Coulomb and exchange-correlation) at the boundary of neighboring atoms are approximately equal. This is based on the intuitive idea that the potential should not jump discontinuously across boundaries and is often applied when muffin tins nearly touch. It can be an unrealizable condition for systems with three or more types of atoms that touch at different places.
+
+3. **Norm-conserving radii (Norman, 1976).**  
+   Atomic charge densities are overlapped, and the radii around the atoms are chosen so that the spherically averaged charge within each radius equals that of the neutral atom—analogous to the Seitz radius \(r_s\) used in solid-state physics. This prescription is reliable, easily automated, and is the standard approach in most XAFS calculations. For strongly ionic systems, it is sometimes modified to account for charge transfer (i.e., integrating out to include a few extra or fewer electrons, corresponding to an anion or cation). For molecular complexes that carry a charge, an outer shell of charge (a “Watson sphere”) is often added to simulate global charge neutrality; different suggestions exist for the placement of the Watson sphere (Johnson, 1973; Vaughan et al., 1974).
+
+Conventional multiple-scattering theory involves nonoverlapping muffin-tin spheres. More recently, some electronic-structure methods have analytically continued this approach to larger, overlapping radii (e.g., Andersen, 1975; Skriver, 1984). Here, the formalism derived for nonoverlapping spheres is used with overlapping spheres to reduce the interstitial volume and the associated potential inhomogeneity. In crystalline solids, overlapping sphere sizes are often scaled so that the total muffin-tin volume equals the unit cell volume—these are then called Wigner–Seitz radii. Although the overlap partially compensates for non-muffin-tin variations in the charge density and often yields more accurate results than nonoverlapping spheres, for noncrystalline solids the scaling of overlapping radii is less clear. Fortunately, for XAFS, overlapping muffin tins and ionized atoms have often been found to have little effect on calculated spectra, since electron–atom scattering is dominated by the nearly spherical potential deep within a muffin tin; however, this approximation becomes less accurate in the XANES region.
+
+Whether spheres overlap or not, it is necessary to choose the zero of energy in the interstitial region—where the effective potential is treated as constant—since this determines the kinetic energy \(k\) of the excited electron. In close-packed crystalline solids, a well-established procedure for nonoverlapping muffin-tin calculations involves averaging the charge between the muffin-tin radius and the Wigner–Seitz radius (Loucks, 1967). This method generalizes to noncrystalline materials in terms of the Norman radius. Overlapping spheres have also been proposed for molecular calculations (e.g., Herman, 1977) and compared with nonoverlapping spheres (Rosch et al., 1973; Batra and Robaux, 1974; Norman, 1974). Results are mixed—better in some cases with overlap and worse in others. In our experience, overlapping spheres can improve calculated XAFS spectra in the near-edge region but otherwise have little effect.

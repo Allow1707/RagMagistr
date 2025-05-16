@@ -1,0 +1,319 @@
+## Abstract
+We present a rigorous derivation of a real-space full-potential multiple-scattering theory (FP-MST), valid both for continuum and bound states, that is free from the drawbacks that up to now have impaired its development, in particular the need to use cell shape functions and rectangular matrices. In this connection we give a new scheme to generate local basis functions for the truncated potential cells that is simple, fast, efficient, valid for any shape of the cell and reduces to the minimum the number of spherical harmonics in the expansion of the scattering wavefunction. This approach provides a straightforward extension of MST in the muffin-tin (MT) approximation, with only one truncation parameter given by the classical relation l<sub>max</sub> = kR<sub>b</sub>, where k is the photo-electron wavevector and R<sub>b</sub> the radius of the bounding sphere of the scattering cell. Some numerical applications of the theory are presented, both for continuum and bound states.  
+*(Some figures in this article are in colour only in the electronic version.)*
+
+## 1. Introduction
+Multiple-scattering theory (MST) is a technique for solving a linear partial differential equation over a region of space with certain boundary conditions. It is implemented by dividing the space into non-overlapping domains (cells), solving the differential equation separately in each cell and then assembling the partial solutions into a global solution that is continuous and smooth across the whole region and satisfies the given boundary conditions.
+
+MST has been applied to many problems in classical and quantum physics, ranging from membranes and electromagnetism to the quantum-mechanical wave equation. In quantum mechanics it is used to solve the Schrödinger equation (SE) or the associated Lippmann–Schwinger equation (LSE) for scattering and bound states. It was proposed originally by Korringa and by Kohn and Rostoker (KKR) as a convenient method for electronic structure of solids [1,2] and later extended to polyatomic molecules by Slater and Johnson [3].
+
+A characteristic feature of the method is the complete separation between the potential aspect of the material, embodied in the cell scattering power, and the structural aspect, reflecting the geometrical position of the atoms.
+
+Applications of KKR were first made within the muffin-tin (MT) approximation, where the potential is confined within non-overlapping spheres (spherically symmetrized inside each sphere) and constant in the interstitial region. Although spherical symmetry is not formally necessary, the requirement that the bounding spheres do not overlap was thought essential for validity. Despite its simplicity the MT method is numerically demanding and was superseded by linearized methods such as LMTO [4] and LAPW [5]. Full-potential versions of these band methods have also been introduced, but none match the power and versatility of a full-potential method based on MST, especially for constructing the Green’s function.
+
+In the last two decades the KKR method has experienced a revival within the Green’s function framework (KKR-GF). With complex energy integration it became competitive for ground-state calculations, handling problems from impurities to disordered alloys in CPA. However, MT was inadequate for reduced-symmetry systems or calculating forces and relaxations. Full-potential KKR-GF methods were developed [6,7], achieving GGA results comparable to FLAPW for total energies, forces and relaxations.
+
+In these developments authors often took an empirical stance on fundamental FP-MST issues, such as l-convergence and internal sums from reexpansion of the free Green’s function, which introduce rectangular matrices [8]. They truncated l to 3 or 4 and used square matrices for G<sub>nn′</sub><sup>LL′</sup>(E), obtaining FLAPW-level accuracy.
+
+However, FP-MST was initially developed only for periodic systems and states below the Fermi level. Its extension to polyatomic molecules, real-space applications for continuum and bound states, has been slow. Generating local solutions of the SE with truncated cells has required expanding the cell shape function in spherical harmonics, which can cause convergence issues. FP-MST has sparked debate for over thirty years [9]; Gonis and Butler’s book [10] reviews the state of the art (see chapter 6). Yet questions on l-convergence and the use of square matrices remain open.
+
+Applications to states above the Fermi energy (e.g. x-ray spectroscopies) have been scarce. This paper presents a rigorous derivation of real-space FP-MST, valid for both continuum and bound states, avoiding cell shape functions and rectangular matrices. We introduce a simple, fast and efficient scheme to generate local basis functions for truncated potential cells of any shape, minimizing spherical harmonics in the scattering wavefunction expansion. Finally, we address l-convergence, giving a positive answer (a preliminary account is in [11]).
+
+## 2. Local basis functions for single truncated potential cells
+A key feature of MST is that it does not rely on a finite basis set for the global wavefunction inside each cell, unlike other electronic-structure methods. Instead it expands the global solution in terms of local solutions of the SE at the energy of interest, effectively an optimally small energy-adapted basis set. Thus it is essential to devise an efficient numerical method to generate these local solutions.
+
+We consider Williams–Morgan (WM) basis functions φ<sub>L</sub>(r) [12], which inside each cell solve the SE and behave as J<sub>L</sub>(r) for r→0. We use real spherical harmonics and write:
+• J<sub>L</sub>(r; k) ≡ j<sub>l</sub>(kr) Y<sub>L</sub>(r̂)  
+• N<sub>L</sub>(r; k) ≡ n<sub>l</sub>(kr) Y<sub>L</sub>(r̂)  
+• Ĥ<sup>+</sup><sub>L</sub>(r; k) ≡ −i k h<sup>+</sup><sub>l</sub>(kr) Y<sub>L</sub>(r̂)
+where j<sub>l</sub>, n<sub>l</sub>, h<sup>+</sup><sub>l</sub> are spherical Bessel, Neumann and Hankel functions. The truncated cell potential V(r, r̂) equals the full potential inside the cell and zero (or a constant) outside. We avoid expanding the truncated cell shape function in spherical harmonics due to convergence issues. However, even with a step in V, the wavefunction and its first derivative are continuous, so its angular-momentum expansion converges uniformly in r̂ [13]. Thus we write φ<sub>L</sub>(r) = ∑<sub>L′</sub> R<sub>L′L</sub>(r) Y<sub>L′</sub>(r̂) and interchange summation and integration safely.
+
+### 2.1 Three-dimensional Numerov method
+To generate the basis functions we write the SE in polar coordinates for P<sub>L</sub>(r, r̂) = r φ<sub>L</sub>(r, r̂) as
+(d²/dr² + E − V(r, r̂)) P<sub>L</sub>(r, r̂) = (1/r²) L̃² P<sub>L</sub>(r, r̂) (1)
+where L̃² is the angular momentum operator. We then apply a three-dimensional Numerov integration...   (continued)where $\tilde L^2$ is the angular momentum operator, whose action on $P_L(r,\hat r)$ can be calculated as  
+$\tilde L^2P_L(r,\hat r)=\sum_{L'}l'(l'+1)\,r\,R_{L'L}(r)\,Y_{L'}(\hat r)$ (2).  
+Equation (1) in the variable $r$ looks like a second‐order equation with an inhomogeneous term. Accordingly we use Numerov’s method to solve it.
+
+As is well known, putting $f^L_{i,j}=P_L(r_i,\hat r_j)$ and dropping for simplicity the index $L$, the associated three‐point recursion relation is  
+$A_{i+1,j}\,f_{i+1,j}-B_{i,j}\,f_{i,j}+A_{i-1,j}\,f_{i-1,j}=g_{i,j}-\tfrac{h^6}{240}f^{(v)}_{i,j}$,  
+where  
+- $A_{i,j}=1-\tfrac{h^2}{12}v_{i,j}$  
+- $B_{i,j}=2+\tfrac{5h^2}{6}v_{i,j}=12-10A_{i,j}$  
+- $v_{i,j}=V(r_i,\hat r_j)-E$  
+- $g_{i,j}=\tfrac{h^2}{12}\bigl(q_{i+1,j}+10q_{i,j}+q_{i-1,j}\bigr)$  
+- $q_{i,j}=r_i^{-2}\sum_{L'}l'(l'+1)\,r_i\,R_{L'L}(r_i)\,Y_{L'}(\hat r_j)\,$.  
+
+Here $i$ is an index of the radial mesh and $j$ of the angular points on a Lebedev surface grid. Obviously  
+$r_iR_{L'L}(r_i)=\sum_jw_j\,P_L(r_i,\hat r_j)\,Y_{L'}(\hat r_j)$,  
+where $w_j$ is the weight function for angular integration associated with the chosen grid. The number of surface points $N_{\rm Leb}\approx(2l_{\max}+1)^2/3$ as a function of the maximum angular momentum used, taking into account that one integrates the product of two spherical harmonics.
+
+Only the inhomogeneous term $q_{i+1,j}$ in the recurrence relation, containing the still unknown $f_{i+1,j}$, prevents us from solving the equation by direct iteration from the knowledge of $f_{i,j}$ and $f_{i-1,j}$ at all angular points. This difficulty is easily overcome by introducing the backward second‐derivative formula  
+$q''_{i,j}=\frac{q_{i,j}-2q_{i-1,j}+q_{i-2,j}}{h^2}+h\,q'''_{i,j}-\frac{7h^2}{12}q''''_{i,j}$ (3),  
+so that one obtains  
+$g_{i,j}=\frac{h^2}{12}\Bigl[\frac{q_{i+1,j}-2q_{i,j}+q_{i-1,j}}{h^2}+12\,q_{i,j}\Bigr]\sim\frac{h^2}{12}\Bigl[\,q''_{i,j}+\frac{h^2}{12}q''''_{i,j}\Bigr]-\frac{h^6}{24}q_{i,j}v_{i,j}$ (4).  
+
+The appearance of the third $r$‐derivative $q'''_{i,j}$, which is strictly infinite at the step point, does not cause practical problems. Although not necessary, one can always assume a smoothing of the potential at the cell boundary “à la Becke,” reducing at the same time the mesh $h$ so that the error at that particular step point is negligible.
+
+In this way, at the cost of a small error $O(h^5)$ and the introduction of a further backward point (now involving $f_{i,j}$, $f_{i-1,j}$ and $f_{i-2,j}$), the three‐dimensional discretized equation can be solved along the radial direction for all angles in an onion‐like way, provided the expansion (2) is performed at each new radial mesh point. We use a log‐linear mesh $\rho=\alpha r+\beta\ln r$ to reduce numerical errors around the origin and the bounding sphere. This modified Numerov method is much faster and requires a smaller memory space than the corresponding cell methods based on the shape or phase functions to generate the local solutions $P_L(r)$.
+
+Figure 1 shows the comparison between the analytical solution and the numerical one for certain directions in the special case of the potential  
+$V(x,y,z)=-0.05\,\theta(|x|-R_c)-0.1\,\theta(|y|-R_c)-0.15\,\theta(|z|-R_c)$,  
+where $V$ is in Ryd, $\theta$ is the step function, $R_c=3.78\,$au$=2.0\,$Å, the energy $E=0.3\,$Ryd, $l_{\max}=7$ and the number of surface points on a Lebedev grid is 266.
+
+It is easy to convince oneself that the above method for generating basis functions can also be used to solve the Poisson equation for the Coulomb potential, starting from a given charge‐density distribution partitioned on the same system of space‐filling cells as the potential.
+
+### 3. Multiple‐scattering equation: scattering and bound states
+#### 3.1. Scattering states
+We begin by presenting the derivation of the MSE for scattering states. In this case we seek a solution of the Schrödinger equation continuous in the whole space with its first derivatives, satisfying the asymptotic boundary condition  
+$\psi(r;k)\simeq\bigl(\tfrac{k}{16\pi^3}\bigr)^{1/2}\Bigl[e^{i k\cdot r}+\frac{f(\hat r;k)\,e^{i k r}}{r}\Bigr]$ (5),  
+where $k$ is the photo‐electron wavevector and $f(\hat r;k)$ is the scattering amplitude. The factor $(k/16\pi^3)^{1/2}$ ensures normalization to one state per Rydberg.
+
+In the spirit of MST we partition space into non‐overlapping space‐filling cells $\bigcup_j C_j$ with surfaces $S_j$ and centers at $R_j$. Accordingly we partition the overall potential $V(r)$ into cell potentials $v_j(r_j)$, where $v_j(r_j)=V(r)$ inside cell $j$ and vanishes elsewhere. Here $r_j=r-R_j$. The partition is chosen so that the shortest inter‐cell vector $R_{ij}=R_i-R_j$ between nearest‐neighbor cells is larger than any intra‐cell vector $r_i$ or $r_j$ when $r$ lies inside the corresponding cell. If necessary, empty cells can be introduced to satisfy this requirement. We also assume that there exists a finite neighborhood around the origin of each cell lying entirely within that cell.
+
+We start from the following identity involving surface integrals (denoting $d\hat r\equiv d\sigma$):  
+$\sum_{j=1}^N\int_{S_j}\bigl[G^+_0(r'-r;k)\,\nabla\psi(r;k)-\psi(r;k)\,\nabla G^+_0(r'-r;k)\bigr]\cdot n_j\,d\sigma_j = \int_{S_0}\bigl[G^+_0(r'-r;k)\,\nabla\psi(r;k)-\psi(r;k)\,\nabla G^+_0(r'-r;k)\bigr]\cdot n_0\,d\sigma_0$ (6),  
+where $G^+_0(r'-r;k)$ is the free outgoing Green’s function satisfying $(\nabla^2+k^2)G^+_0(r'-r;k)=\delta(r'-r)$ and $S_0$ is a surface around the origin.
+
+For the convenience of the reader we recall the well‐known expansions  
+$e^{i k\cdot r}=4\pi\sum_L i^lY_L(\hat k)\,J_L(r;k)$ (7),  
+$G^+_0(r'_i-r_i;k)=\sum_L J_L(r'_i;k)\,\tilde H^+_L(r_i;k)\quad(r'_i<r_i)$ (8),  
+$G^+_0(r'_i-r_i;k)=\sum_L J_L(r_i;k)\,\tilde H^+_L(r'_i;k)\quad(r'_i>r_i)$ (9).  
+
+The heart of MST is the introduction of functions $\Phi_L(r_j;k)$ which, inside cell $j$, are local solutions of the Schrödinger equation with potential $v_j(r_j)$ and behave as $J_L(r_j;k)$ for $r_j\to0$. They form a complete set of basis functions such that the global scattering wavefunction can be locally expanded as  
+$\psi(r_j;k)=\sum_LA^j_L(k)\,\Phi_L(r_j;k)$ (10).  
+
+To find the asymptotic behavior in the outer region $C_0$, we introduce the scattering functions  
+$\psi_L(r_0;k)=J_L(r_0;k)+\int G^+_0(r_0-r'_0;k)\,V(r'_0)\,\psi_L(r'_0;k)\,d^3r'_0$ (11).  
+Letting $r_0\to\infty$ under the assumption of short‐range potentials and using expansion (9), one finds  
+$\psi(r_0;k)=\sum_L\tilde A^0_L(k)\Bigl[J_L(r_0;k)+\sum_{L'}\tilde H^+_{L'}(r_0;k)\,T^0_{L'L}\Bigr]$ (12),  
+where to impose the asymptotic behavior (5) one sets $\tilde A^0_L=i^lY_L(\hat k)(k/\pi)^{1/2}$ and $T^0_{LL'}$ is the T‐matrix for the whole cluster.J. Phys.: Condens. Matter 21 (2009) 104206  
+K Hatada et al.
+
+In general for short‐range potentials decaying slowly, the asymptotic behavior in equation (12) is reached only at a great distance from the origin of the coordinates (usually at the center of the atomic cluster under study). In order to limit the number of cells, so that the surface $S_{o}$ just surrounds the cluster, we introduce the local solution  
+$\phi_{L}(r_{o};k)=\sum_{L'}R^{o}_{L'L}(r_{o})\,Y_{L'}(\hat r_{o})$ (13)  
+in the outer region $C_{o}$, which can be obtained by inward integration of the SE starting from the appropriate asymptotic value $\tilde H^{+}_{L'}(r_{o};k)$. Therefore we take here  
+$\psi(r_{o};k)=\sum_{L}\bigl[\tilde A^{o}_{L}(k)\,J_{L}(r_{o};k)+\phi_{L}(r_{o};k)\,A^{o}_{L}(k)\bigr]$ (14).
+
+Notice that the function $\phi_{L}(r_{o};k)$ in (13) (and consequently $R^{o}_{L'L}(r_{o})$) is complex, unlike the functions $\phi_{L}(r_{i};k)$ that can be taken real if the potential is real. If the potential has a Coulomb tail, the spherical Bessel and Hankel functions should be replaced by the corresponding regular and irregular solutions $F_{L}(r_{o};k)$ and $G_{L}(r_{o};k)$ of the radial SE with a Coulomb potential.
+
+Insertion of the expressions (10) and (14) into the identity (6) provides a set of algebraic equations (known as MSE) that determine the expansion coefficients $A^{j}_{L}(k)$ and $A^{o}_{L}(k)$ so that the local representations are smoothly continuous across the common boundary of contiguous cells. Indeed, taking $\mathbf r'$ near the origin of cell $i\neq o$, using the expansion (8) (since $\mathbf r$ lies on the cell surfaces), and setting to zero the coefficients of $J_{L}(r'_{i};k)$ by linear independence, one arrives at the MST compatibility equations for the amplitudes $A^{j}_{L}(k)$ and $A^{o}_{L'}(k)$  
+$\sum_{j L'}H^{ij}_{LL'}\,A^{j}_{L'}(k)=\sum_{L'}\bigl[M^{io}_{LL'}\,\tilde A^{o}_{L'}(k)+N^{io}_{LL'}\,A^{o}_{L'}(k)\bigr]$ (15)  
+where  
+$H^{ij}_{LL'}=\int_{S_{j}}\bigl[\tilde H^{+}_{L}(r_{i};k)\,\nabla\phi_{L'}(r_{j};k)-\phi_{L'}(r_{j};k)\,\nabla\tilde H^{+}_{L}(r_{i};k)\bigr]\!\cdot n_{j}\,d\sigma_{j},$  
+$M^{io}_{LL'}=\int_{S_{o}}\bigl[\tilde H^{+}_{L}(r_{i};k)\,\nabla J_{L'}(r_{o};k)-J_{L'}(r_{o};k)\,\nabla\tilde H^{+}_{L}(r_{i};k)\bigr]\!\cdot n_{o}\,d\sigma_{o},$  
+$N^{io}_{LL'}=\int_{S_{o}}\bigl[\tilde H^{+}_{L}(r_{i};k)\,\nabla\phi_{L'}(r_{o};k)-\phi_{L'}(r_{o};k)\,\nabla\tilde H^{+}_{L}(r_{i};k)\bigr]\!\cdot n_{o}\,d\sigma_{o}.$
+
+A further set is obtained by taking $\mathbf r'$ inside the outer region $C_{o}$, using expansion (9) (with $r_{o}<r'_{o}$ since $r_{o}$ lies on $S_{o}$), and setting to zero the coefficients of $\tilde H^{+}_{L}(r'_{o};k)$:  
+$\sum_{j L'}K^{oj}_{LL'}\,A^{j}_{L'}(k)=\sum_{L'}\bigl[\tilde M^{oo}_{LL'}\,\tilde A^{o}_{L'}(k)+\tilde N^{oo}_{LL'}\,A^{o}_{L'}(k)\bigr]$ (16)  
+where  
+$K^{oj}_{LL'}=\int_{S_{j}}\bigl[J_{L}(r_{o};k)\,\nabla\phi_{L'}(r_{j};k)-\phi_{L'}(r_{j};k)\,\nabla J_{L}(r_{o};k)\bigr]\!\cdot n_{j}\,d\sigma_{j},$  
+$\tilde M^{oo}_{LL'}=\delta_{LL'}\int_{S_{o}}\bigl[J_{L}(r_{o};k)\,\nabla J_{L'}(r_{o};k)-J_{L'}(r_{o};k)\,\nabla J_{L}(r_{o};k)\bigr]\!\cdot n_{o}\,d\sigma_{o},$  
+$\tilde N^{oo}_{LL'}=\int_{S_{o}}\bigl[J_{L}(r_{o};k)\,\nabla\phi_{L'}(r_{o};k)-\phi_{L'}(r_{o};k)\,\nabla J_{L}(r_{o};k)\bigr]\!\cdot n_{o}\,d\sigma_{o}.$
+
+Thus (15) and (16) determine $A^{j}_{L}(k)$ and $A^{o}_{L}(k)$ so that the local representations of the global solution are continuous at the boundaries.
+The usual derivation of the MSE re-expands $\tilde H^{+}_{L}(r_{i};k)$ and $J_{L}(r_{o};k)$ around center $j$ using [10, 20]  
+$\tilde H^{+}_{L}(r_{i};k)=\sum_{L'}G^{ij}_{LL'}\,J_{L'}(r_{j};k)\quad(R_{ij}>r_{j})$ (17)  
+$J_{L}(r_{o};k)=\sum_{L'}J^{oj}_{LL'}\,J_{L'}(r_{j};k)\quad(\text{no cond.})$ (18)  
+$\tilde H^{+}_{L}(r_{i};k)=\sum_{L'}J^{io}_{LL'}\,\tilde H^{+}_{L'}(r_{o};k)\quad(r_{o}>R_{io})$ (19)  
+where the free‐electron propagator is  
+$G^{ij}_{LL'}=4\pi\sum_{L''}C(L,L';L'')\,i^{\,l-l'+l''}\,\tilde H^{+}_{L''}(R_{ij};k)$ (20)  
+and the translation operator is  
+$J^{ij}_{LL'}=4\pi\sum_{L''}C(L,L';L'')\,i^{\,l-l'+l''}\,J_{L''}(R_{ij};k)$ (21).  
+Here  
+$C(L,L';L'')=\int Y_{L}(\hat\Omega)\,Y_{L'}(\hat\Omega)\,Y_{L''}(\hat\Omega)\,d\hat\Omega$ (22)  
+and  
+$N^{ij}_{LL'}=4\pi\sum_{L''}C(L,L';L'')\,i^{\,l-l'+l''}\,N_{L''}(R_{ij};k)$ (23).
+
+These series (17)–(19) converge absolutely but introduce extra expansion parameters. Instead, one observes that surface integrals over each cell boundary $S_{j}$ can be evaluated on the bounding sphere of radius $R^{j}_{b}$ by Green’s theorem, since both $\tilde H^{+}_{L}(r;k)$ and $\phi_{L}(r;k)$ satisfy $(\nabla^{2}+k^{2})F(r)=0$ outside the cell. One then uses  
+$\int_{S_{j}}Y_{L'}(\hat r_{j})\,\tilde H^{+}_{L}(r_{i};k)\,d\sigma_{j}=(R^{j}_{b})^{2}G^{ij}_{LL'}\,j_{l'}(kR^{j}_{b})$ (24)  
+$\int_{S_{j}}Y_{L'}(\hat r_{j})\,\nabla\tilde H^{+}_{L}(r_{i})\cdot n_{j}\,d\sigma_{j}=(R^{j}_{b})^{2}G^{ij}_{LL'}\,\frac{d}{dR^{j}_{b}}j_{l'}(kR^{j}_{b})$ (25),  
+which hold for all $L$ provided $|r_{i}-r_{j}|=R_{ij}>r_{j}$. By analogous replacements for (18) and (19), and inserting into (15) the expansion  
+$\phi_{L}(r;k)=\sum_{L'}R_{L'L}(r)\,Y_{L'}(\hat r)$ (26)  
+one obtains  
+$\sum_{L'}E^{i}_{LL'}\,A^{i}_{L'}(k)+\sum_{j\neq i}\sum_{L'L''}G^{ij}_{LL''}\,S^{j}_{L''L'}\,A^{j}_{L'}(k)-\sum_{L'L''}J^{io}_{LL'}\,E^{o}_{L'L''}\,A^{o}_{L''}(k)=-I^{i}_{L}(k)$ (27)  
+$\sum_{j\neq o}\sum_{L'}J^{oj}_{LL'}\,A^{j}_{L'}(k)-\sum_{L'}S^{o}_{LL'}\,A^{o}_{L'}(k)=0$ (28),  
+with  
+$E^{j}_{LL'}=(R^{j}_{b})^{2}W[-ik\,h^{+}_{l},R^{j}_{LL'}]$ (29)  
+$S^{j}_{LL'}=(R^{j}_{b})^{2}W[j_{l},R^{j}_{LL'}]$ (30)  
+the Wronskians $W[f,g]=f\,g'-g\,f'$ at $R^{j}_{b}$ (or $R^{o}_{b}$), which are diagonal for MT potentials. In deriving these equations one uses  
+$\int_{S_{o}}[\tilde H^{+}_{L'}(r_{o};k)\,\nabla J_{L}(r_{o};k)-J_{L}(r_{o};k)\,\nabla\tilde H^{+}_{L'}(r_{o};k)]\!\cdot n_{o}\,d\sigma_{o}=-\delta_{LL'}$ (31)  
+and  
+$\sum_{L'}\tilde A^{o}_{L'}(k)\,J^{io}_{LL'}=i^{l}Y_{L}(\hat k)\,e^{ik\cdot R_{io}}/\pi=I^{i}_{L}(k)$ (32).
+
+Equations (27) and (28) formally resemble the usual MSE but involve only two expansion parameters (the AM components of $R_{L'L}$ in each cell and in $C_{o}$), with no re‐expansion convergence issues. The truncation for both indices is $l_{\max}=kR^{j}_{b}$ (or $k\tilde R^{o}_{b}$), since for $l\gg kR^{j}_{b}$ the basis function $\phi_{L}$ decays like $[(2l+1)!!]^{-1}$ and likewise the scattering matrix elements. Thus $E^{j}$ and $S^{j}$ can be treated as square matrices. In the outer region $C_{o}$, the roles of the indices $L$ and $L'$ are interchanged but share the same $l_{\max}$.
+
+Finally, if $\det S\neq0$, one defines new amplitudes  
+$B_{L}(k)=\sum_{L'}S_{LL'}\,A_{L'}(k)$ (33)  
+equivalent to new basis functions  
+$\phi_{L}=\sum_{L'}(\tilde S^{-1})_{LL'}\,\phi_{L'}$ (34)  
+(with $\tilde S$ the transpose of $S$), and sets  
+$(T^{i})^{-1}=-E^{i}(S^{i})^{-1},\quad T^{o}=-E^{o}(S^{o})^{-1}$ (35),(36)  
+to rewrite (27),(28) as  
+$\sum_{L'}(T^{i})^{-1}_{LL'}\,B^{i}_{L'}(k)-\sum_{j\neq i}\sum_{L'}G^{ij}_{LL'}\,B^{j}_{L'}(k)-\sum_{L'L''}J^{io}_{LL'}\,T^{o}_{L'L''}\,B^{o}_{L''}(k)=I^{i}_{L}(k)$ (37)  
+$\sum_{j\neq o}\sum_{L'}J^{oj}_{LL'}\,B^{j}_{L'}(k)-B^{o}_{L}(k)=0.$ (38)The meaning of the amplitudes \(B_L(k)\) is immediately found from these equations if we consider only a single truncated potential at center \(i\), i.e. if we put \(G^i_j{}_{LL'}\equiv0\). It is the scattering amplitude of angular momentum \(L\) in response to an exciting plane wave of wavevector \(k\).
+
+In the case of many cells, it is expedient to work only in terms of the cell amplitudes \(B^i_{L'}(k)\). Inserting into equation (37) the expression for \(B^o_{L'}(k)\) given by equation (38) we obtain  
+\((T^i)^{-1}_{LL'}\,B^i_{L'}(k)\;-\;\sum_{j\ne i}\sum_{L'}G^i_j{}_{LL'}\,B^j_{L'}(k)\;-\;\sum_{j,L'}\sum_{L''}J^{io}_{LL'}\,T^o_{L'L''}\,J^{oj}_{L''L'}\,B^j_{L'}(k)\;=\;I^i_L(k).\)  
+
+Introducing \(\tau\), the inverse of the multiple‐scattering matrix  
+\[
+M\equiv T^{-1}-G - J\,T^o\,J,
+\qquad
+\tau = (T^{-1}-G - J\,T^o\,J)^{-1},
+\]
+known as the scattering‐path operator [10], we derive from the above that  
+\[
+B^i_L(k) \;=\; \sum_{jL'} \tau_{ij}{}_{LL'}\,I^j_{L'}(k).
+\]
+If we insert this expression in equation (38) and use \(B^o_L(k)=\sum_{L'}T^o_{LL'}\tilde A^o_{L'}\), we obtain for the cluster \(T\)‐matrix  
+\[
+T^o_{LL'}
+=\sum_{ij}\sum_{L''L'''} J^{oi}_{L L''}\;\tau_{ij}{}_{L''L'''}\;J^{jo}_{L'''L'}.
+\]
+Since \(G\) and \(J\) are symmetric (see definitions (20),(21)), \(\tau\) is symmetric and so is \(T^o\), in agreement with scattering theory.
+
+This cluster \(T\)‐matrix represents the scattering amplitude into a spherical wave of angular momentum \(L\) in response to an incident wave of angular momentum \(L'\) and is used, e.g., in electron–molecule scattering [22]. Finally, the generalized optical theorem holds (for real potentials) [20,22]  
+\[
+\int d\hat k\;B^i_L(k)\;B^j_{L'}(k)^*
+=-\frac1\pi\,\Im\,\tau_{ij}{}_{LL'}.
+\]
+This important relation connects photo‐emission and photo‐absorption cross sections. In particular, \(-\Im\,\tau_{ii}{}_{LL}\) is proportional to the \(L\)‐projected density of states at site \(i\).
+
+3.2. Bound states
+
+The MSE for bound states follows from that for scattering states by eliminating the exciting plane wave in equation (5) and analytically continuing to negative energies in the free Green’s function \(G^+_0\), so as to impose decaying‐wave boundary conditions at infinity. The Lippmann–Schwinger equation becomes the eigenvalue problem  
+\[
+\psi(r') = \int G^+_0(r'-r;k)\,V(r)\,\psi(r)\,d^3r,
+\]
+with \(k=\sqrt E=i\gamma\), so \(\psi(r')\sim e^{-\gamma r'}/r'\) as \(r'\to\infty\). Under this continuation the expansions in (8),(9) and the re‐expansions in (17)–(19) remain valid. In the outer region \(C_o\) the wavefunction is  
+\[
+\psi(r_o)
+=\sum_L A^o_L\,\phi^o_L(r_o)
+=\sum_{LL'}A^o_L\,R^o_{L'L}(r_o)\,Y_{L'}(\hat r_o),
+\]
+where \(\phi^o_L\) are real functions found by inward integration from a WKB‐normalized asymptotic form.
+
+Working with the \(B_L\) amplitudes yields the secular condition  
+\[
+\sum_{jL'}\Bigl[(T^i)^{-1}_{LL'}\delta_{ij} - (1-\delta_{ij})\,G^i_j{}_{LL'}
+-\sum_{L''}J^{io}_{LL'}\,T^o_{L'L''}\,J^{oj}_{L''L'}\Bigr]\,B^j_{L'} = 0,
+\]
+identical to the scattering‐state case except for the absence of \(I^i_L(k)\). Keeping the free‐Green’s function offset \(V_0\) lets us verify that the eigenvalues are independent of \(V_0\).
+
+Defining  
+\[
+C_{LL'}=(R_b)^2\,W[n_\ell,R_{LL'}],
+\]
+and using (36),  
+\[
+k^{-1}(T^j)^{-1}=(K^j)^{-1}+i=-C^j\,(S^j)^{-1}+i,
+\quad
+k^{-1}T^o=K^o+i=-C^o\,(S^o)^{-1}+i,
+\]
+along with  
+\[
+k^{-1}G^i_j{}_{LL'}=N^i_j{}_{LL'}-i\,J^i_j{}_{LL'},
+\]
+and \(\sum_{L''}R^{io}_{LL''}J^{oj}_{L''L'}=J^i_j{}_{LL'}\), we recast the bound‐state condition as  
+\[
+\sum_{jL'}\Bigl[(K^i)^{-1}_{LL'}\delta_{ij} - (1-\delta_{ij})\,N^i_j{}_{LL'}
+-\sum_{L''}J^{io}_{LL'}\,K^o_{L'L''}\,J^{oj}_{L''L'}\Bigr]\,B^j_{L'}=0.
+\]
+Each matrix element is real for \(E>0\) or proportional to \(i^{\ell-\ell'+1}\) for \(E<0\). Introducing \(K_\ell=[(-1)^{\ell+1}K^1_\ell+K^2_\ell]/2\), one finds  
+\[
+N_{LL'}=4\pi\,i^{\ell-\ell'+1}\sum_{L''}C(L,L';L'')(-1)^{\ell''}\,K_{\ell''}(|k|R_{ij})\,Y_{L''}(\hat R_{ij}), 
+\]
+\((K^i)^{-1}_{LL'}=-i^{\ell-\ell'+1}[C^i(S^i)^{-1}]_{LL'}\), \(K^o_{LL'}=-i^{\ell-\ell'+1}[C^o(S^o)^{-1}]_{LL'}\). The secular determinant \(\det M=0\) (after a unitary remove of the \(i\)‐factors) yields the bound‐state energies.
+
+We applied this theory to the hydrogen molecular ion. Space was partitioned into three regions (see figure 2): two truncated spheres of radius 1.72 au around the protons (cells I and II) and the exterior region III (domain \(C_o\)), bounded by a sphere of radius 1.4 au. Outside this sphere (\(C_b\)) the potential is set to zero (or constant) within its intersections with cells I, II and to the true potential in \(C_o\). We also performed a calculation with two atomic cells plus 22 empty cells and an external region. Our eigenvalues are listed in table 1 and compared to the exact results. The last two columns show values for \(V_0=-1.90\) Ryd and \(0\), demonstrating independence from \(V_0\). Columns labeled “22 EC” refer to the partition with 22 empty cells; “Smith & Johnson” [23] and “Foulis” [24] quote results in MT and distorted‐wave approximations, respectively.
+
+Table 1. Eigenvalues of the hydrogen molecular ion (in Ryd) [19].
+
+| Mol. orb. | n | ℓ | m |   Exact   | Smith & Johnson [23] |   Foulis [24]   | 22 EC \(V_0=-1.90\) | 22 EC \(V_0=0\) | No EC \(V_0=-1.90\) | No EC \(V_0=0\) |
+|-----------|---|---|---|-----------|----------------------|-----------------|--------------------|----------------|---------------------|----------------|
+| 1a₁g      | 1 | 0 | 0 | −2.20525  | −2.0716              | −2.18973        | −2.20522           | −2.2055        | −2.2050             | −2.2048        |
+| 2a₁g      | 2 | 0 | 0 | −0.72173  | −0.70738             | −0.72093        | −0.723             | −0.724         | −0.731              | −0.726         |
+| 3a₁g      | 3 | 2 | 0 | −0.47155  | −0.45574             | −0.47102        | −0.4727            | −0.478         | −0.476              | −0.474         |
+| 4a₁g      | 3 | 0 | 0 | −0.35536  | −0.34859             | −0.35525        | −0.356             | −0.3550        | −0.357              | −0.356         |
+| 1a₂u      | 2 | 1 | 0 | −1.33507  | −1.2868              | −1.33426        | −1.3348            | −1.3348        | −1.3342             | −1.3343        |
+| 2a₂u      | 3 | 1 | 0 | −0.51083  | −0.49722             | −0.51085        | −0.51072           | −0.5105        | −0.5104             | −0.5104        |
+| 3a₂u      | 4 | 1 | 0 | −0.27463  | −0.26979             | −0.27466        | −0.27469           | −0.2742        | −0.2745             | −0.2745        |
+| 4a₂u      | 4 | 3 | 0 | −0.25329  | −0.24997             | −0.25329        | −0.254             | −0.2536        | −0.2541             | −0.25301       |
+| 1e₁g      | 3 | 2 | 1 | −0.45340  | −0.44646             | −0.45333        | −0.4545            | −0.45332       | −0.455              | −0.455         |
+| 1e₁u      | 2 | 1 | 1 | −0.85755  | −0.88866             | −0.85585        | −0.85754           | −0.8561        | −0.870              | −0.858         |
+
+4. Spectroscopic response functions
+Having found an expression for the scattering states, we can write down response functions for various spectroscopies (detailed in [25]). In the independent‐electron approximation, the core‐level photo‐electron diffraction (PED) cross section for ejecting a photo‐electron along direction \(\hat k\) with energy \(E=k^2\) from an atom at site \(i\) is  
+\[
+\frac{d\sigma}{d\hat k}
+=8\pi^2\alpha\hbar\omega\;\Bigl|\langle\,\Theta\,\psi(\mathbf r_i;k)\mid\hat\epsilon\cdot\mathbf r_i\mid\phi^c_{L_c}(\mathbf r_i)\rangle\Bigr|^2,
+\]
+where \(\Theta\) is the time‐reversal operator, \(\hat\epsilon\) the photon polarization, and \(\phi^c_{L_c}(r_i)\) the initial core state of angular momentum \(L_c\) (spin–orbit coupling is neglected for simplicity).localization of the core state, we need only the expression of the continuum scattering state in the cell of the photoabsorber, given by  
+$ψ(r_i; k)=\sum_L B_i^L(k)\,\phi_L(r_i)$ (54)  
+so that  
+$\displaystyle\frac{dσ}{d\hat k}
+=8π^2\frac{α\hbarω}{mc}\Bigl[\sum_L M_{Lc}^L(E)\,B_i^L(k)\Bigr]^2$ (55)  
+where $B_i^L(k)$ is given by equation (41) and we have defined the atomic transition matrix element  
+$\displaystyle M_{Lc}^L(E)=\int dr\;\phi_{cLc}(r)\,\hat ε\cdot r\,\phi_L(r)\,. (56)$  
+
+The total absorption cross section, in the case of real potentials, is obtained by integrating the PED cross section over all directions of photo‐emission:  
+$\displaystyle\int d\hat k\frac{dσ}{d\hat k}
+=8π^2\frac{α\hbarω}{mc}
+\int d\hat k\Bigl[\sum_L M_{Lc}^L(E)\,B_i^L(k)\Bigr]^2
+=-8πα\frac{\hbarω}{mc}\sum_{LL'}M_{Lc}^L(E)\,\Im τ^{ii}_{LL'}\,M_{Lc}^{L'}(E)\,$(57)  
+by application of the optical theorem (43).  
+
+This is the form of the absorption cross section that one would obtain starting from its expression in terms of the Green’s function (GF)  
+$\displaystyle σ_{\rm tot}(ω)=-8πα\frac{\hbarω}{mc}\Im\int dr\,dr'\,\langle\phi_{cLc}(r)\mid\hat ε\!\cdot r\mid G(r,r';E)\mid\hat ε\!\cdot r'\mid\phi_{cLc}(r')\rangle\,$(58)  
+Indeed, for general (possibly complex) potentials, the GF of the cluster can be written as [10, 26]  
+$\displaystyle G(r_i,r'_j;E)
+=\langleϕ(r_i)\mid\bigl(τ^{ij}-δ^{ij}T^i\bigr)\midϕ(r'_j)\rangle
++δ^{ij}\langleϕ(r_<)\mid T^i\mid H^+(r_>)\rangle\,$(59)  
+where $r_<$ ($r_>$) indicates the lesser (greater) of $r_i$ and $r'_i$. The function $H(r)$ is the irregular solution in cell $i$ that matches smoothly to $\tilde H^+_{L'}(r)$ at $R_i^b$. We have used bra–ket notation to represent sums over angular‐momentum indices, e.g.  
+$\langleϕ(r_i)\mid τ^{ij}\midϕ(r'_j)\rangle=\sum_{LL'}ϕ_L(r_i)\,τ^{ij}_{LL'}\,ϕ_{L'}(r'_j)\,$(60)  
+
+Moreover, assuming no contribution from the outer‐region potential ($T^o\equiv0$) and covering the outer volume by empty cells, one obtains from  
+$\displaystyle ϕ_L(r_i)=\sum_{L'}\Bigl[J_{L'}(r_o;k)\,(T^{-1})^{i}_{L'L}+\tilde H^+_{L'}(r_o;k)\Bigr]$ (61)  
+by continuity inside cell $i$  
+$\displaystyleϕ_L(r_i)=\sum_{L'}\Bigl[\mathcal H_{L'}(r_i;k)\,(T^{-1})^{i}_{L'L}+H_{L'}(r_i;k)\Bigr]\,$(62)  
+where $\mathcal H_{L'}(r_i)$ joins smoothly to $J_{L'}(r_o;k)$ at $R_i^b$. Therefore the Green’s function takes the form  
+$\displaystyle G(r_i,r'_j;E)
+=\langleϕ(r_i)\mid τ^{ij}\midϕ(r'_j)\rangle
+-δ^{ij}\langleϕ(r_<)\mid\mathcal H(r_>)\rangle\,$(63)  
+For real potentials, both $ϕ_L$ and $\mathcal H_L$ are real, so that (58) reduces to (57). In this case the quantity  
+$\displaystyle\int_i G(r,r;E)\,d^3r
+=-\frac1π\sum_L\Im\,τ^{ii}_{LL}\int_iϕ_L^2\,d^3r$  
+is the projected density of states on site $i$ at energy $E$, expressed as a sum of the partial densities of type $L$.  
+
+## 5. Applications  
+We have tested the present FP-MS scheme against the analytical solution of the absorption cross section for hydrogen‐like atoms [27]  
+$\displaystyle σ(k)
+=4π^2α\frac{27}{3}\frac1{Z^2}\Bigl[\frac1{1+(k/Z)^2}\Bigr]^4
+\frac{e^{-4\frac Zk\tan^{-1}(k/Z)}}{1-e^{-2πZ/k}}$  
+in the case of the Li$^{2+}$ atom ($Z=3$). Even though the potential is spherically symmetric in the whole space with respect to the atomic center so that it is easy to reproduce numerically the cross section, this is not obvious in the MS scheme.  
+
+To this purpose we partitioned the space inside a sphere of radius $R=8.6\,$au into an atomic sphere of $4.15\,$au and 14 other empty spheres, all truncated so that the resulting polyhedra do not overlap and their bounding spheres overlap by at most 40%. To calculate the contribution of the outer sphere we integrated inwardly the Coulomb potential. Figure 3 shows the almost exact agreement between the analytical and the numerical result, indicating that the partitioning procedure for solving the SE is able to reconstruct the global solution. Moreover, the oscillations due to the truncation of the potential inside each cell (shown by the solution for a truncated central sphere with radius 4.15 au) cancel each other, showing that at a common boundary the overall solutions inside two adjacent cells are continuously smooth. For this test a value of $l_{\max}=4.15\sqrt3\sim8$ was taken at the end of the energy interval $E_{\max}=3\,$Ryd.  
+
+Figure 4(a) shows an application of the method to the calculation of the Ge K‐edge absorption spectrum of the tetrahedral molecule GeCl$_4$ [28]. The MT approximation could never reproduce the first bump after the main transition. Its appearance is due to the introduction of the anisotropy of the potential inside the atoms and the presence of four empty Voronoi cells completing the BCC unit cell. An $l_{\max}=4$ was sufficient to reach convergence of the spectrum, as verified by using higher $\ell$ values up to $l_{\max}=10$ (figure 4(b)).  
+
+Then we show the application of the present FP-MS theory to two cases which, according to our experience, need significant non‐MT corrections for a good reproduction of the absorption data: diatomic (and in general linear) molecules and tetrahedrally coordinated compounds.  
+
+The first example is illustrated in figure 5, showing the experimental unpolarized K‐edge absorption cross section of the diatomic molecule Se$_2$ [29, 30] together with an NMT and an MT calculation. For the NMT case we partitioned the space with 24 Voronoi polyhedra arranged on a BCC lattice: two of them around the physical atoms and 22 empty cells to cover the rest of the space where the density (and the potential) are significantly different from zero. We gave a finite imaginary part to the energy of the order of the experimental resolution (1.0 eV) in order to be able to use the same Green’s function expression for the cross section (58) both for bound and continuum states. The energy zero in the figure corresponds to the onset of the continuum. Below it there are two unoccupied empty states, at energies approximately –5 and –7 eV. To calculate the absorption spectrum, we used the real part of a Hedin–Lundqvist (HL) potential and then convolved the result with a Lorentzian whose width equals that of the core hole (2.33 eV). A similar calculation without empty cells gave substantially the same result. We see that the agreement with experiment is reasonably good, apart from the intensity of the first bound state that is higher than the second. Using an Xα potential corrects for this discrepancy but worsens the agreement around the minimum, which turns out to be much shallower. This is a typical case in which the NMT approach is useful for the study of the effective optical potential, since there are no other approximations in the theory. In contrast, the MT approximation of the potential turns out to be rather poor, since in this case the second bound state is pushed up toward the continuum threshold.  
+
+The second example concerns the L$_{2,3}$ edge of crystalline SiO$_2$ (α‐quartz). The MT approximation in tetrahedrally coordinated materials is usually not satisfactory, due to the...J. Phys.: Condens. Matter 21 (2009) 104206  
+K Hatada et al.
+
+bad representation of the anisotropy of the potential in the interstitial region, as already found in the case of GeCl₄. Figure 6 shows the comparison between the MT and NMT calculations against the experimental data, obtained by an electron energy loss technique. We used a complex HL potential and a 5 Å cluster, composed of 49 atomic cells (19 Si + 30 O) and 22 empty cells (EC), in total 71 cells. In order to obtain the first peak it was essential to include four EC in the first coordination shell, a feature already observed in GeCl₄, although better details were obtained with further inclusions of EC. We also checked the convergence of the calculated spectrum with the size of the cluster, up to 10 Å, obtaining the splitting of the first peak, as observed experimentally, and rather similar features for the rest of the spectrum. This finding confirms the fairly localized nature of the final 3d states in this compound. No experimental resolution (0.5 eV) was taken into account beyond the damping due to the imaginary part of the HL potential. More details will be given elsewhere.
+
+## 6. Conclusions
+We have developed an FP-MS scheme which is a straightforward generalization of the usual theory with MT potentials and implemented the code to calculate cross sections for several spectroscopies, such as absorption, photo-electron diffraction and anomalous scattering, as well as bound states by a simple analytical continuation. The key point in this approach is the generation of the cell solutions `Ψ_L(r)` for a general truncated potential free of the well known convergence problems of AM expansion together with an alternative derivation of the MSE which allows us to treat the matrices S and E as square, with only one truncation parameter, given by the classical relation `l_max ∼ kRb`. The fact that the theory can work with square S and E matrices is of the utmost importance, since this feature allows the definition of the cell T matrix and its inverse, reviving in such a way the possibility to define the Green’s function and to treat a host of problems, ranging from solids with reduced symmetry to randomly disordered alloys in the context of the CPA, as mentioned in the introduction.
+
+In this way one can also show that the wavefunction and the Green’s function approach provide the same expression for the absorption cross section for continuum states and real potentials, through the application of the generalized optical theorem. For transitions to bound states the two methods are not equivalent, due to the different normalization of continuum and bound states, unless one normalizes the wavefunctions for these to one. However, this procedure, although feasible, is rather cumbersome (this was one of the reasons for abandoning the MS method in favor of the simpler linearized methods in band-structure calculations). In this case the Green’s function expression for the cross section can be used, since it gives the correct normalization in both cases simply by analytical continuation. We have exploited this fact when calculating the cross section for the Se₂ diatomic molecule.
+
+Moreover, we have shown that the FP-MST converges absolutely in the `l_max → ∞` limit. We have thus given a firm ground to its use as a viable method for electronic structure calculation and at the same time have provided a straightforward extension of MST in the muffin-tin (MT) approximation for the calculation of x-ray spectroscopies. Also Quantum Chemistry calculations might benefit from this method in that it avoids the use of basis function sets.
+
+Finally, in giving a new scheme to generate local basis functions for truncated potential cells, we have provided an efficient and fast method for solving numerically a partial differential equation of the elliptic type in polar coordinates, which can also be used to solve the Poisson equation in the whole space by the partitioning method.
+
+## Acknowledgments
+We are grateful to Dr Peter Krüger for long and illuminating discussions. We also acknowledge Professor Isao Tanaka and Dr Teruyasu Mizoguchi for drawing our attention to the problem of α-quartz (SiO₂).
