@@ -9,6 +9,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain.docstore.document import Document
 from langchain_core.embeddings import Embeddings
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
 
 logger = logging.getLogger()
@@ -25,14 +26,16 @@ MODEL_CACHE_PATH = os.path.join(CURRENT_DIR, "embeddings_model.pkl")
 
 def timing_decorator(func):
     """Декоратор для измерения времени выполнения функции"""
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start = time.time()
         print(f"Начинаем выполнение: {func.__name__}...")
         result = func(*args, **kwargs)
         end = time.time()
-        print(f"Завершено: {func.__name__} за {end-start:.2f} s\n")
+        print(f"Завершено: {func.__name__} за {end - start:.2f} s\n")
         return result
+
     return wrapper
 
 
@@ -54,7 +57,7 @@ def get_embeddings_model(embedding_type: str = "HuggingFace"):
                 # Если не удалось загрузить, создаем новую
 
         print("Инициализация новой модели...")
-        model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+        model = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-large")
 
         # Сохраняем модель в кэш
         try:
@@ -72,30 +75,29 @@ def get_embeddings_model(embedding_type: str = "HuggingFace"):
     return model
 
 
-def convert_data_into_document() -> list:
-    # Папка с текстовыми файлами
+def convert_data_into_document() -> list[Document]:
     DATA_DIR = "data"
+    documents = []
 
-    all_splits = []
-
-    # Проходим по всем .txt файлам в папке
     for filename in os.listdir(DATA_DIR):
         if filename.endswith(".txt"):
-            file_path = os.path.join(DATA_DIR, filename)
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(os.path.join(DATA_DIR, filename), "r", encoding="utf-8") as f:
                 text = f.read()
 
-            # Разбиваем по \n\n (параграфы)
-            paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+            # Создаем Document
+            documents.append(Document(
+                page_content=text,
+                metadata={"source": filename}
+            ))
 
-            # Создаём Document для каждого параграфа
-            for i, paragraph in enumerate(paragraphs):
-                doc = Document(
-                    page_content=paragraph,
-                    metadata={"source": filename, "paragraph": i}
-                )
-                all_splits.append(doc)
-    return all_splits
+    # Разбиваем на чанки
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1500,
+        chunk_overlap=250,
+        separators=["\n\n", ".", "\n", " "]
+    )
+    split_docs = text_splitter.split_documents(documents)
+    return split_docs
 
 
 def clean_chroma_directory():
@@ -125,7 +127,8 @@ def create_chroma_db(embedding: Embeddings):
     Chroma.from_documents(
         all_splits,
         embedding=embedding,
-        persist_directory="./chroma_db"
+        persist_directory="./chroma_db",
+        collection_metadata={"hnsw:space": "l2"}
     )
     print("Закончили строить векторное хранилище!")
 
