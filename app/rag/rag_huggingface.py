@@ -1,6 +1,5 @@
 import os
 from langchain_chroma import Chroma
-from langchain.docstore.document import Document
 from app.utils import get_embeddings_model, timing_decorator
 
 # Получаем абсолютный путь к директории текущего файла
@@ -16,7 +15,7 @@ def rag_huggingface(question: str) -> list:
         persist_directory=CHROMA_CACHE_PATH,
         embedding_function=embedding
     )
-    docs = vectorstore.similarity_search_with_relevance_scores(question, k=6)
+    docs = vectorstore.similarity_search_with_relevance_scores(f"query: {question}", k=6)
     content = []
     for text, score in docs:
         print(score)

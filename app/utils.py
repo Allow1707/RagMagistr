@@ -10,6 +10,7 @@ from langchain.docstore.document import Document
 from langchain_core.embeddings import Embeddings
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from transformers import AutoTokenizer
 from dotenv import load_dotenv
 
 logger = logging.getLogger()
@@ -75,29 +76,50 @@ def get_embeddings_model(embedding_type: str = "HuggingFace"):
     return model
 
 
-def convert_data_into_document() -> list[Document]:
+def convert_data_into_documents(max_tokens: int = 1024) -> list[Document]:
+    """
+    Загружает .txt-файлы, разбивает их на чанки и добавляет префикс 'passage:',
+    при этом выводит количество токенов в каждом чанке.
+    Можно указать лимит `max_tokens` — чанки с превышением будут отфильтрованы.
+    """
     DATA_DIR = "data"
     documents = []
+
+    # Инициализация токенизатора от модели
+    tokenizer = AutoTokenizer.from_pretrained("intfloat/multilingual-e5-large")
 
     for filename in os.listdir(DATA_DIR):
         if filename.endswith(".txt"):
             with open(os.path.join(DATA_DIR, filename), "r", encoding="utf-8") as f:
                 text = f.read()
 
-            # Создаем Document
             documents.append(Document(
                 page_content=text,
                 metadata={"source": filename}
             ))
 
-    # Разбиваем на чанки
+    # Разделение на чанки
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1500,
         chunk_overlap=250,
         separators=["\n\n", ".", "\n", " "]
     )
     split_docs = text_splitter.split_documents(documents)
-    return split_docs
+
+    final_docs = []
+    for idx, doc in enumerate(split_docs):
+        text_with_prefix = f"passage: {doc.page_content.strip()}"
+        num_tokens = len(tokenizer.tokenize(text_with_prefix))
+
+        print(f"Чанк #{idx+1}: {num_tokens} токенов")
+        if num_tokens <= max_tokens:
+            doc.page_content = text_with_prefix
+            final_docs.append(doc)
+        else:
+            print(f"⚠️ Пропущен — превышает {max_tokens} токенов")
+
+    print(f"\nИтого: {len(final_docs)} чанков использовано (лимит: {max_tokens} токенов)")
+    return final_docs
 
 
 def clean_chroma_directory():
@@ -119,7 +141,7 @@ def clean_chroma_directory():
 
 @timing_decorator
 def create_chroma_db(embedding: Embeddings):
-    all_splits = convert_data_into_document()
+    all_splits = convert_data_into_documents()
 
     # Очищаем директорию перед созданием нового хранилища
     clean_chroma_directory()
