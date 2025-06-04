@@ -1,0 +1,168 @@
+
+## 5.8.1 Introduction  
+X-rays are absorbed by matter and their intensity is attenuated. The degree of absorption (absorbance) depends on the wavelength of the X-rays as well as the thickness, density, atomic number and local structure of the absorber. Typical X-ray fluorescence spectra measured by an energy-dispersive X-ray fluorescence (EDXRF) spectrometer (Shimadzu EDX-700 desktop spectrometer) show the effect of various filters (e.g. Zr, Al, Ti, Ni, polymer) used to absorb parts of the primary X-rays. For example, a 1000 ppm cadmium standard solution in a Mylar-windowed cell will not show the Cd Kα peak (23.2 keV) without a Zr filter, because the Rh Kβ peak (23.1 keV) overlaps. Introducing a Zr filter (K edge at 18.0 keV) suppresses the unwanted Rh lines while allowing high-energy continuum X-rays to excite Cd fluorescence.  
+
+Modern automatic spectrometers include quantitative analysis software that accounts for filter absorption (including automatic filter changes), Mylar window absorption (6 µm thickness) and air absorption along the X-ray path. This filter technique is also widely used in PIXE (particle-induced X-ray emission), radioisotope X-ray analysis, and X-ray absorption spectroscopy via the X-ray fluorescence yield method.  
+
+The interaction between X-rays and matter can be classified into absorption, elastic scattering and inelastic scattering. Basic physical formulae for X-ray absorption, as well as physical constants such as absorption coefficients or the imaginary part of the atomic scattering factor, are described elsewhere. The relationships among the imaginary part of the atomic scattering factor, the imaginary part of the refractive index, the linear absorption coefficient and the mass absorption coefficient are concisely summarized in the literature. Measurement and interpretation of absorption coefficients as a function of X-ray energy are known as X-ray absorption spectrometry or spectroscopy. Since most material-analysis techniques using X-ray absorption phenomena are already described in the Encyclopedia of Analytical Chemistry, the present subchapter provides a concise summary and addenda to that work.  
+
+X-ray absorption spectroscopy comprises XANES (X-ray absorption near-edge structure) and EXAFS (extended X-ray absorption fine structure). XANES covers the fine structure within roughly 50 eV around the absorption edge, while EXAFS refers to oscillations from about 50 to 1000 eV above the edge. A Fourier transform of the EXAFS oscillation yields a radial distribution function of the absorbing atom. XANES spectra reflect the electronic structure of the conduction band. Collectively, XANES and EXAFS are often called XAFS (X-ray absorption fine structure). The term XAS (X-ray absorption spectroscopy) is less common but used similarly.  
+
+## 5.8.2 Basics for XAFS  
+XAFS has a long history dating back to de Broglie, and its development has been summarized by Lytle. The 10th International Conference on XAFS was held in Chicago (1998), the 11th at Ako, Japan (2000), and the 12th at Malmö, Sweden (2003).The Swedish synchrotron radiation facility MAX-lab. Other earlier international conferences and their proceedings are listed elsewhere. We can obtain information on the activity of the XAFS Society as well as analysis programs and other scientific issues through The International XAFS Society web page.
+
+The XAFS Publications Database is freely accessible. The fundamental review of X-ray spectrometry is published in even years, and X-ray absorption spectroscopy is included.
+
+XAFS is classified into two different spectroscopies, XANES and EXAFS, as described above. EXAFS is a structural analysis method, and thus it has similarities to X-ray diffraction data analysis, such as the requirement for standardization methods. The multiple scattering method is the major method of EXAFS analysis. XANES, which is also called NEXAFS (near edge X-ray absorption fine structure), is analysed by molecular orbital or band-structure calculations and is similar to the soft X-ray emission/fluorescence line-shape analysis. The basic measurement method is common to these two spectroscopies, EXAFS and XANES: the monochromatized incident X-ray intensity \(I_0\) is measured, and the X-ray intensity transmitted through a specimen \(I\) is measured. The value \(-\log(I/I_0)\) is plotted versus the incident X-ray photon energy.
+
+## 5.8.3 EXTREME CONDITIONS
+The measurement of XAFS is now a routine experiment for local‐structure or electronic‐structure characterizations. Therefore, techniques to measure the XAFS spectra under extreme conditions, such as high pressure and/or high temperature, have been developed.
+
+With a combination of an atomic absorption spectrometer and XAFS spectrometer, Nakai et al. measured a 2000 °C flame nebulized from Cu(NO₃)₂ solution at various heights of the flame. The spectra showed that the chemical state of Cu was different with the change of the position in the flame (Figure 5.8.4): it went from divalent to atomic-like, according to the height in the flame. High‐temperature solid phase (3000 K), high‐temperature liquid phase (3000 K), and both high‐temperature (1650 °C) and high‐pressure (2000 bar) supercritical fluids have been measured.
+
+The effect of temperature was interpreted through the Debye–Waller factor and anharmonic vibration. Isotope effect, though not measured under an extreme condition, was observable for the line broadening of the absorption peak as shown in Figure 5.8.5, which was an effect due to molecular vibration.
+
+## 5.8.4 COMBINATION WITH SCANNING TUNNELING MICROSCOPES
+When the X-rays are absorbed, secondary quanta will be created by the energetic X-ray photons. Probing these secondary quanta using a scanning tunneling microscope (STM) or scanning capacitance microscope, high‐spatial‐resolution microscopes will be realized in the near future, though the present spatial resolution is only 1 μm or less. Figure 5.8.6 shows a schematic diagram of the experimental set‐up for STM-XAFS. Capacitance measurements can be performed both with scanning and without scanning mode as shown in Figure 5.8.7. We can change the bias potential in these tunneling or capacitance probe methods. Though the details of the physical processes have not yet been clarified, the change of bias potential will change the probing site on the surface or position in the valence band, and we will obtain novel information.### Combination with Optical Luminescence
+
+When X-rays are absorbed, visible light is emitted from the sample. This is called X-ray excited optical luminescence (XEOL). Its intensity depends on the absorbance but does not directly track it, owing to very complicated relaxation processes. The emission wavelength depends on the analyte. For example, the decay spectrum of Y₃Al₅O₁₂:Ce measured with single-bunch synchrotron radiation can be regarded as a delta function in time. By selecting a narrow time window in this decay curve, one probes optical relaxation processes with specific lifetimes. Similarly, selecting a narrow wavelength window in the luminescence spectrum allows one to target a particular chemical species. Combining both time and wavelength selection yields a novel characterization method.
+
+Porous materials, nanoparticles and optically active materials are especially suitable for the XEOL approach. The line shape measured via luminescence yield is generally broader than that of total-electron-yield XAFS spectra. XEOL-XAFS can be performed using a conventional grating optical spectrometer—either a step-scan type or a position-sensitive-detector type—at a synchrotron beamline. Its detection limit is lower than that of transmission XAFS, and unlike transmission measurements, XEOL can be applied even to bulk samples without special thickness or concentration adjustments.
+
+### Combination with X-ray Fluorescence
+When incident X-ray intensity is high, the resulting X-ray fluorescence yield (XFY) increases. Since fluorescence intensity is proportional to absorbance, XFY-XAFS provides an alternative measurement mode. Typically, a photodiode or proportional counter without wavelength selection is placed close to the sample to record total fluorescence. Early work demonstrated sensitivity down to 10¹⁹ atoms/cm², and modern improvements have lowered this limit by several orders of magnitude.
+
+Using a wavelength-dispersive X-ray fluorescence spectrometer enables spin-state selective XAFS: the Kβ′ and Kβ₁,₃ fluorescence lines of early transition-metal compounds correspond to minority- and majority-spin XAFS spectra, respectively. By recording XAFS signals from distinct parts of the fluorescence spectrum—e.g., by masking portions of a position-sensitive detector in a grating spectrometer—one can separately analyze these spin states, offering deeper insight into the electronic structure of the sample.### Chemical-Shifted X-ray Fluorescence Yields and Resonant Raman Scattering
+
+Total X-ray fluorescence yield (XFY), Ni Lα and Lβ partial fluorescence yields, their difference, and the total electron yield (TEY) can all be measured simultaneously. X-ray fluorescence spectra exhibit chemical shifts that reflect changes in effective charge; by selecting the fluorescence peaks shifted by these chemical effects, one obtains site-selective XAFS spectra. For example, Izumi et al. measured site-selective Cu K-edge XANES by exploiting the chemical shift of Cu Kα₁ between Cu on ZnO and metallic Cu. In practice, a position-sensitive X-ray detector outputs a voltage proportional to the photon-hit position. By routing these pulses through simple electronic discrimination (rather than a mechanical mask), one can isolate partial fluorescence yields corresponding to different emission lines.
+
+When the incident X-ray energy sits just below an absorption edge, a resonant Raman scattering peak appears. This feature is narrower than normal fluorescence—even though the spectrum evolves continuously from Raman scattering into fluorescence—so that XAFS spectra free from core-hole lifetime broadening can be recorded.
+
+### 5.8.7 Photoconductive and Electrochemical Measurements
+When a solid is irradiated with X-rays, valence electrons are excited into the conduction band and core-ionized atoms act like impurities; either effect can increase or decrease its electrical conductance. In liquids, conductivity changes with incident X-ray wavelength can be measured more straightforwardly. Sham and Holroyd used a liquid cell with electrodes to track the conductivity of (CH₃)₄Sn in trimethylpentane near the Sn K edge. At low solute concentration (0.07 M) conductivity rose under resonance, but at higher concentration (0.10 M) it fell—behavior that also depended on cell geometry.
+
+A variety of electrochemical or in situ cells for EXAFS has been developed. Yamaguchi et al. used an in situ cell (originally designed by Heineman’s group) to generate and stabilize transient redox species; they recorded Mn K-edge XAFS spectra at multiple points along a cyclic voltammogram. Nakai et al. adapted a transmission-mode in situ cell to monitor a lithium‐ion battery electrode during charge–discharge. They observed shifts in the white-line peak, emergence of pre-edge features (indicative of coordination changes), and variations in interatomic distances from the Fourier transform of the EXAFS data. Stainless‐steel corrosion processes have also been probed by coupling EXAFS to an electrochemical cell.
+
+### 5.8.8 Total Reflection XAFS
+By setting the incident beam at a glancing angle, Heald et al. were able to enhance the XAFS signal from a buried CuAl₂ layer within an Al/CuAl₂/Cu multilayer, exploiting interference between incident and reflected X-rays. More recently, total‐reflection XAFS techniques have been refined: by operating below the critical angle, one achieves extreme surface sensitivity. Using polarized incident X-rays in total‐reflection mode allows determination of adsorbate orientation on substrates. Specialized sample holders and detectors for polarized total‐reflection XAFS have been developed, and the method has been applied to study structural transformations—for example, of Pt clusters on surfaces.# Total Reflection XAFS
+
+This technique has been applied, for example, to studies of Al₂O₃ substrates and molybdenum oxide on a single crystal.
+
+The X-rays emitted from a bending magnet of a synchrotron light source are polarized such that the electric vector lies in the horizontal plane. This orientation readily excites the electric dipole moment in that plane, so X-rays are strongly absorbed when a column of atoms is aligned in this direction. By adjusting a crystal axis to the electric vector of the incident X-rays, π and σ orbital components can be separated in Cu K XANES spectra of an oxide superconductor single crystal. Although this experiment was not a total-reflection measurement, it shares with the total-reflection method the use of X-ray polarization.  
+
+When the L₃ edge spectra are measured with polarized X-rays, the orientation of the empty d-band can be determined, because the 2p–3d electric dipole transition dominates over the 2p–4s transition. Polarization-dependent XANES spectra of the L₂,₃ edge have also been observed for TiO₂ single crystals.
+
+Different thermal treatments of a Nb/Al interface have been studied by total-reflection EXAFS, and total electron-yield XANES under total-reflection conditions has been measured for Cr thin films on Fe. By making small changes to the incident glancing angle, the probing depth can be tuned—offering a powerful tool for depth-selective analysis of multilayer samples.
+
+The total-reflection X-ray method is also suitable for characterizing liquid surfaces, for example, metal-stearate Langmuir monolayers on metal-ion aqueous solutions. In such studies the conversion electron-yield method (using He gas) is typically employed to record the spectra. Applications of XANES spectroscopy to solutions have been reviewed in the literature.
+
+X-ray reflectivity offers an alternative way to obtain XAFS spectra: when absorption increases, reflectivity decreases, and vice versa, so the reflectivity curve mirrors the XAFS signal. This approach has been used to study anodic silver-oxide films prepared in situ under electrochemical control.
+
+Moreover, total-reflection geometries reduce the self-absorption effect common in fluorescence-yield measurements, leading to cleaner XAFS spectra.
+
+## Electron and Other Secondary Yield Methods and Their Surface Sensitivity
+When X-rays impinge on a surface and are absorbed, they generate photoelectrons (and subsequent Auger electrons), X-ray fluorescence, and secondary electrons. These electrons arise both from deep within the material—where the incident X-rays penetrate—and from the near-surface region. Detection of these electrons, or measurement of the resulting sample current (the total-electron-yield, TEY, method), was traditionally considered bulk sensitive. Recently, however, it has been shown that surface sensitivity can be enhanced under certain conditions.## Surface-Sensitive Electron Yield Methods
+
+It has, however, been clarified that the electrons emitted from the sample surface or the sample electric current are both surface sensitive. This evidence has been independently found by several researchers. The mechanisms and differences of the TEY (total electron yield, i.e., sample electric current), secondary electrons, and Auger electrons are described in Kawai, and a detailed analysis is reported by Erbil et al. The signal-to-background ratio of the total reflection X-ray TEY method was estimated by Zheng and Gohshi. The conversion electron yield method under atmospheric conditions was compared with the TEY method using total reflection X-rays to vary the probing depth. The surface sensitivity of the TEY method—where the majority of detected electrons are so-called secondary electrons (kinetic energy less than 50 eV)—is approximately 2 nm, comparable to the photoelectron inelastic mean free path. The ion-yield method is no longer a difficult technique because a channeltron electron multiplier can be used.
+
+Energy-dispersive incident X-rays on the surface serve as the excitation source. The emitted Auger electrons are detected by a position-sensitive electron detector after energy selection by a hemispherical electron energy analyzer. An Auger electron yield XANES spectrum can be obtained in a single shot, allowing rapid acquisition of surface-sensitive XANES data. These electron yield methods are not suitable for measuring insulators. However, with an electron flood gun, an Ar ion gun, and an electron yield detector equipped with an electron energy filter (to avoid low-energy electrons from the flood gun), electron yield XAFS spectra for insulators become observable.
+
+The coincidence spectra—for example, combining Auger electron yield and XFY—can clarify the electron transition process in a single atom. This approach also enables separate chemical information on both surface and bulk in environmental samples (e.g., aerosol or fly ash), where electron yield (surface sensitive) and XFY (bulk sensitive) are measured in one scan.
+
+### 5.8.10 STRONG FIELD EFFECTS
+XAFS can be measured for a sample under a strong external field, such as laser light or a magnetic field. By combining XAFS with an external stimulus, one obtains new chemical information on the sample.
+
+Using strong laser irradiation, most of the valence electrons are excited, and X-ray absorption spectra of the optically activated state can be recorded. EXAFS measurements on a glassy sample during laser irradiation have shown that its structure can change temporarily or permanently under the laser field.
+
+Magnetic properties of a sample can be probed by measuring XAFS spectra in a strong magnetic field.## X-ray Magnetic Circular Dichroism (XMCD)
+
+The radiation facility can be polarized in such a way that the electric vector of the incident X-rays is circulated clockwise or counter-clockwise with respect to the magnetic field applied to the sample. This is also achieved by a phase retarder, such as a λ/4 wavelength slab. The absorption coefficient is slightly different for these two polarizations of the incident X-rays. The transmitted X-ray intensity as well as the X-ray fluorescence intensity show the X-ray magnetic circular dichroism (XMCD).
+
+One of the most important fundamentals of the interpretation of the change in absorption spectra due to the magnetic field is a sum rule proved by Thole et al.; general expressions are given by van der Laan and Ankudinov et al.; how to use the sum rule is given in Tobin et al. Recently a monoatomic wire was characterized using XMCD.
+
+Yokoyama et al. studied carbon monoxide adsorbed on nickel and cobalt thin layers using XMCD and clarified the interaction between the magnetization film and the CO unoccupied π* orbital, which carried orbital magnetic moments.
+
+The XMCD experiment will be useful, when combined with the grazing-incidence technique, for the characterization of thin multilayer films fabricated by varying parameters such as temperature, pressure and concentration.### 5.8.11 Microscopy
+
+Microscopy and imaging of various samples using X-ray absorption techniques are summarized in Figure 5.8.22 [105]. The techniques used include:
+- Microbeam scanning (the sample is moved in the real experiment)  
+- Tomography  
+
+Transmission-type microimaging without an X-ray optical lens has been widely used. Microscopes employing a soft X-ray lens have also seen extensive application [107,108]. The scanning microbeam method is often combined with μ-X-ray diffraction [109–112] or X-ray fluorescence [113,114] beamlines at synchrotron radiation facilities.
+
+The principle of X-ray microtomography, which also exploits the X-ray absorption effect, is shown in Figure 5.8.22(b). X-ray absorption spectra can be obtained by a synchrotron microtomography setup [115]. For example, μ-X-ray absorption spectroscopic tomography of a uranium fuel particle from Chernobyl soils allows numerical reconstruction of the particle’s cross-section. Oxidation states are determined from chemical shifts in the XANES spectra. Although laboratory microtomography spatial resolution is generally not as good as that of synchrotron radiation, it can now reach below 0.1 μm [116]. Desktop and laboratory microtomography systems have also been developed [117,118].
+
+XANES microscopes have been applied to studies of geological and environmental samples [119–122], bio- and organic materials showing phase separation [123–125], and adsorbates via X-ray linear dichroism microscopy [126]. The microbeam analysis method also holds potential as a screening tool in combinatorial chemistry using integrated microchemical chips [127].
+
+### 5.8.12 EELS, ELNES and EXELFS
+Electron energy loss spectroscopy (EELS) is a technique in transmission electron microscopy (TEM) where electrons transmit through a thin film and the energy absorbed by the film is measured by an electron energy analyzer. EELS is classified into:
+
+- Energy Loss Near Edge Structure (ELNES)  
+- Extended Energy Loss Fine Structure (EXELFS)  
+
+This classification parallels that of XANES and EXAFS. When electron energy is measured in the forward direction, the electric-dipole selection rule for electron transitions in atoms is analogous to that for optical (X-ray) transitions. Thus, EELS spectra can be interpreted similarly to X-ray absorption spectra [128–130].
+
+The presence of extended fine structure in EELS was first reported by Leapman et al. [131], who coined the term “EXELFS.” EELS is particularly suitable for low energy losses—light elements (B, C, N, O) and soft X-ray lines (L edges of Si and transition metals) [132–134]—because spectral overlap among different elements is minimal at low losses. With TEM spatial resolution reaching the atomic level, EELS has the potential to detect single-atom spectra even in biological structures [135].
+
+### 5.8.13 EXEFS
+Very weak fine structures, typically less than 1% of the Kα main line intensity, are often observed on the low-energy side of strong characteristic X-ray fluorescence or X-ray emission lines. These are known as “radiative Auger satellites.” Kawai et al. [136,137] noted that the overall line shape of these satellites resembles XAFS spectra and that their Fourier transform yields a radial distribution function. They introduced the term “EXEFS” for using radiative Auger satellites to measure XAFS spectra.
+
+The EXEFS method is occasionally employed with an electron probe microanalyzer (EPMA) [138–140] for chemical-state mapping, imaging, and micro-area chemical-state analysis.These aluminum oxides (α- and γ-Al₂O₃, bayerite and gibbsite) contain similar elements, so discrimination among these different phases is not achieved by elemental mapping using characteristic X-ray lines alone. However, with EXEFS we can obtain an image reflecting differences in phase. Recently, a wavelength-dispersive X-ray fluorescence spectrometer was equipped with an EXEFS analysis program. Basic studies on radiative Auger spectra compared with Auger electron spectra have become active since the emergence of the EXEFS method. Initially, it was unclear why EXEFS spectra coincide with XAFS spectra, but an exact theory based on a T-matrix expansion has shown that the phase shift is slightly different from that in true EXAFS analysis. EXEFS in X-ray fluorescence spectrometry is also used for environmental samples, which can be difficult to insert into an ultrahigh-vacuum chamber at a synchrotron facility.
+
+#### 5.8.14 DAFS
+Diffraction anomalous fine structure (DAFS) is an alternative method for measuring XAFS spectra, proposed by Stragier et al. The imaginary part of the X-ray scattering factor is closely related to the X-ray absorption coefficient, so measuring the diffraction peak intensity as a function of incident X-ray energy reveals an EXAFS-like oscillation. This method offers diffraction-peak selectivity, providing site- or phase-specific information. For example, the measurement of Ti K-edge XAFS in BaTiO₃ is often interfered with by the nearby Ba L₃ edge; this interference can be avoided by using DAFS.
+
+#### 5.8.15 Theory and Interpretation of XAFS Spectra
+Although the contribution of many-electron excitations in XAFS spectra was suggested over 20 years ago, this effect was not seriously considered until recently. Multiple-excitation phenomena have been studied by Ito et al. for Br⁻ in organic solvents and by Magnuson et al. for nickel metal. These more-than-one-electron excitation signals introduce spurious noise in XAFS analysis. “Atomic XAFS” has also been proposed as another origin of step-like structures in EXAFS spectra. Usually EXAFS...## 5.8.16 Standardization
+
+The oscillation observed in EXAFS is due to a condensed‐matter effect: the outgoing photoelectron wave interferes with waves backscattered by neighboring atoms. In an isolated atom, EXAFS oscillations cannot be observed because there are no neighbors to scatter from. Nevertheless, the single‐atom potential itself can backscatter the electron wave, producing an interference pattern with a longer period than EXAFS. Structures seen in single‐atom EXAFS have been interpreted both as double‐electron excitations and as “atomic XAFS,” although the existence of atomic XAFS remains controversial.^151,152
+
+The relativistic effect is also crucial for interpreting XAFS spectra. A longstanding problem—the absence of a sharp white line in the L₂ XANES of Pt metal despite its presence in L₃—was resolved only after including relativistic corrections.^153
+
+All major XAFS calculation programs are accessible through the International XAFS Society (http://ixs.csrri.iit.edu/). The most widely used is the FEFF series; the latest version, FEFF8, performs ab initio multiple‐scattering calculations of EXAFS and XANES for clusters. FEFF8 includes relativistic Dirac–Fock atomic calculations, self‐energies, a fully relativistic cross section, polarization dependence, and more.^154
+
+Another class of codes uses molecular‐orbital (MO) methods expressed via a linear combination of atomic orbitals (LCAO). In this category, the discrete variational Xα (DV-Xα) method is especially convenient, while the multiple‐scattering Xα (MS-Xα) method underpins FEFF and similar programs. The DV-Xα approach handles core‐hole relaxation easily, which is why it is widely used for XANES (below 50 eV above the edge). MS methods, by contrast, can treat both XANES and EXAFS. For example, Jiang and Ellis^155 computed XANES of various Co compounds with DV-Xα, and the SF₆ molecule has served for decades both as an experimental reference and as a benchmark for code validation.^156–159 Transition‐metal complexes,^160,161 silicon oxides,^129 and oxyanions^162 have all been successfully interpreted using DV-Xα.
+
+The core‐hole effect is vital when interpreting mixed‐valence compounds. Suzuki et al.^163 calculated that, upon creating a 1s hole, late transition‐metal compounds gain one 3d electron, whereas early transition metals show no change (see Figure 5.8.28). This makes assigning oxidation states—especially for Co compounds—highly controversial.^164
+
+“White lines” are the strongest sharp features in XANES (they appear white on photographic film). Their intensity ratio closely reflects valence‐orbital occupancy (Figure 5.8.29).^165 The oxygen K‐edge white lines of transition‐metal oxides (Figure 5.8.30)^166 follow a similar interpretation, although charge–transfer and other effects must also be considered.^163,167
+
+Pre‐edge structures are sensitive indicators of the absorbing atom’s chemical environment: they are strong for tetragonal coordination but weak for octahedral coordination. While often assigned to the 1s–3d electric‐quadrupole transition, their relation to Kβ lines^168–170 requires further study.
+
+The standardization of EXAFS spectra and their numerical processing are important in practical applications.## Standardization
+
+The EXAFS spectra measured at many synchrotron beamlines and in laboratory spectrometers should be compared with each other. The white line intensity is related to the coherence of the incident X-rays. The problem of standardization of EXAFS spectra has been discussed with comparisons of calculation codes and standard spectra. The International XAFS Society has a committee for the standardization of EXAFS measurements and data analysis. The committee report (http://ixs.csrri.iit.edu/) includes:
+1. User-controlled parameters at beamlines  
+2. Data collection methods such as transmission, fluorescence, or electron yield  
+3. Detectors used  
+4. Data analysis programs  
+5. Error assessment  
+6. Standardized error reporting procedure  
+7. Sample preparation  
+8. Data processing  
+9. Modeling  
+
+Taguchi and White proposed using a crystal structure database to simplify the modeling problem in EXAFS analysis. A rapid calculation method using parallel computation has also been developed. The second derivative of the XANES spectra can reveal a doublet structure when the raw spectra themselves look similar. Cross-correlation analysis of binary mixtures (e.g., Co₃O₄ and CoAl₂O₄) of EXAFS spectra is used to obtain a quantitative analysis of each component. EXAFS analysis of Co₃O₄ and CoAl₂O₄ is straightforward, but XANES analysis must include charge-transfer effects and spin-flip phenomena due to core-hole creation. Many empirical parameters have been proposed to classify the complicated Cu and Co XANES spectra.
+
+Diffraction peaks can contaminate EXAFS spectra. Using numerical methods, diffraction-free EXAFS spectra can be synthesized.
+
+## 5.8.17 Instrumentation and Spectrometer
+A typical synchrotron beamline for XAFS measurements features a double-crystal monochromator (step-scanned to vary incident energy), a mirror to exclude higher-order reflections, and two ion chambers with the sample inserted between them. Energy-dispersive geometry has been developed to measure XAFS spectra in a single shot.
+
+Laboratory EXAFS spectrometers—commercially available and resembling X-ray diffractometers—use rotating-anode high-power X-ray tubes and sometimes parabolic cylinder mirrors. In these machines the specimen moves with changing incident energy while the X-ray tube is fixed, making experiments with cryogenic coolers or high-temperature furnaces difficult. To address this, spectrometers with a fixed sample and a moving X-ray tube have been developed.
+
+Soft X-ray synchrotron beamlines for XAFS (below 1 keV) require windowless systems due to strong absorption by windows. The sample chamber is directly connected to the synchrotron ring under ultra-high vacuum. Recently, using thin films (e.g., BN), liquid samples have also been measured at ALS (Advanced Light Source).
+
+## 5.8.18 Summary
+X-ray absorption techniques are used in commercially available film-thickness process monitors for plating, printed-circuit, and magnetic-disk processes. Though these process monitors are not spectrometers—because only thin films are measured—they demonstrate the practical applications of XAFS-based methods.
+
+## Summary
+On the other hand, X-ray absorption spectrometers are used in both laboratories and synchrotron facilities for basic science, such as surface science, cluster chemistry and electron correlation in transition metal oxides. Other applications include electrodes, biological samples, catalysts (especially under in situ reaction conditions), industrial materials (e.g., flat panel displays), geological samples and environmental analysis. An unknown chemical called “manganese blue” was characterized by Mn L XANES and concluded to be a mixture of Mn4+:Mn6+ = 1:1, whereas it was previously believed to be Mn5+. A simple method for fabricating uniform, large-area X-ray absorption filters from powder materials has also been reported.
+The X-ray absorption techniques described here can be summarized by three key words: **probe**, **signal** and **field**.  
+– Probes: X-rays and electrons; X-rays may be polarized or totally reflected.  
+– Signals: transmitted X-rays, X-ray fluorescence, electrons, electric currents, ions, reflectivity, energy-selected X-rays or electrons.  
+– Fields: high temperature, high pressure, low temperature, in situ chemical reactions, strong magnetic fields, applied electric potentials, short measurement times, plasma states, coincidence or delay time-scale selection.
+
+After X-ray absorption, de-excitation processes usually involve X-ray fluorescence and Auger emission, but nuclear excitation by electron transition (NEET)—in effect a “nuclear Auger” process—has been actively studied. In NEET, a nuclear energy level is excited by an inner-shell electron transition. It was recently found that γ-radiation rates can be accelerated by X-ray absorption above an absorption edge, suggesting a route to shortening the lifetimes of radioisotopes.
+
+One shortcoming of X-ray absorption spectroscopy has been that absorption spectra of all elements could not be measured using a single beamline.This shortcoming has been overcome in many beamlines at many synchrotron facilities, and X-ray absorption spectroscopy has become a powerful tool for the analysis of practical samples.
