@@ -17,7 +17,12 @@ def rag_openai(question: str) -> list[Document]:
     os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
     vectorstore = Chroma(
         persist_directory=CHROMA_CACHE_PATH,
-        embedding_function=OpenAIEmbeddings()
+        embedding_function=OpenAIEmbeddings(model="text-embedding-3-large")
     )
-    docs: list[Document] = vectorstore.similarity_search(question)
-    return docs
+    docs = vectorstore.similarity_search_with_relevance_scores(f"query: {question}", k=6)
+    content = []
+    for text, score in docs:
+        print(score)
+        if score >= 0.77:
+            content.append(text)
+    return content
